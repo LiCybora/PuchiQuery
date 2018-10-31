@@ -250,7 +250,7 @@ $(function () {
                     let rst;
                     if (Array.isArray(text)) {
                         rst = `<td class="info"><div class="desciText">${formatter(text[0])} (未進化)</td></div>`;
-                        rst += `<td class="info"><div class="desciText">${formatter(text[1])} (進化濟)</td></div>`;
+                        rst += `<td class="info"><div class="desciText">${formatter(text[1])} (進化済)</td></div>`;
                     } else {
                         rst = `<td colspan="2"><div class="desciText">${formatter(text)}</div></td>`;
                     }
@@ -337,3 +337,4 @@ $(function () {
         filterGenerator(cardFilterable, data);
     });
 });
+

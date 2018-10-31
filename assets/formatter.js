@@ -6,7 +6,7 @@ let generalLvDependent = (value, row, func) => { return Array.isArray(value) ? e
 
 let lvLimitFormatter = (value, row) => Math.min(value, parseInt(row["rarity"]) * 10);
 
-let cardScoreFormatter = (value) => `${value}<br/><text class="blinking">${parseInt(value*1.2)}🞁</text>`;
+let cardScoreFormatter = (value) => `${value}<br/><text class="blinking">${parseInt(value*1.2)}${makeLogo("match")}</text>`;
 
 let CTFormatter = (value) => value ? value + '秒' : '-';
 
@@ -17,7 +17,9 @@ let rangeFormatter = function(value) {
 
 
 let scoreFormatter = function(value) {
-    return `${value}<br/><text class="blinking">${parseInt(value*1.1)}🞁</text><br/><text class="blinking">${parseInt(value * 1.2)}⏫&#xFE0E;</text>`;
+    let up = makeLogo("up"),
+        Dup = makeLogo("Dup");
+    return `${value}<br/><text class="blinking">${parseInt(value*1.1)}${up}</text><br/><text class="blinking">${parseInt(value*1.2)}${Dup}</text>`;
 };
 
 let passiveFormatter = function(params) {
@@ -115,10 +117,9 @@ let paramsFormatter = (params) => {
 
 let paramsFormatterGraphical = (params) => {
     let rst = paramsFormatter(params).split(' / ');
-    let imgHolder = `<img class="logo" src="${generalImg}HOLDER.png">`;
     for (let i = bombName.length - 1; i > -1; --i) {
         rst.forEach((elem, idx, array)=> {
-        let img = imgHolder.replace('HOLDER', bombName[i] + "ボム");
+        let img = makeLogo(bombName[i] + "ボム");
             if (elem.includes(`${bombName[i]}ボム`)) {
                 if (elem.includes("大きな")) {
                     elem = elem.replace("大きな", '');

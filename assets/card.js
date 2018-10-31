@@ -28,6 +28,7 @@ let cardScoreDependent = (value, row) => {
     value = evolveDependent(value, row);
     let targetLv = Math.min(parseInt(row["lv"]), parseInt(row["rarity"]) * 10);
     const record = LvData.find(entry => entry["level"] === targetLv);
+    if (LvData === undefined) {return value;}   // handle unknown error fail load at 1st time
     return ~~(value * record["scoreGrowthRate"] / 1000);
 };
 
@@ -38,9 +39,9 @@ let evolveEvent = function(self) {
 };
 
 let drawstar = (value, classes="")=> {
-    if (!value) {return ''};
+    if (!value) {return ''}
     if (!classes) { classes = rarityList[value]; }
-    let img = `<img class="logo" src="${generalImg}${classes}.png">`;
+    let img = makeLogo(classes);
     return img.repeat(value);
 };
 
@@ -168,7 +169,6 @@ $(function () {
                     column.formatter = rangeFormatter;
                     column.title = "Range";
                     column.width = '60px';
-                    column.cellStyle = () => ({css: {"line-height": "0.8"}});
                     break;
                 case "evolve":
                     column.width = "1px";
@@ -277,14 +277,15 @@ $(function () {
                     Description += write("effect", row["effect"]);
                     Description += `</table>`;
                 }
-                $('#detailContent').html(Description);
+                let $detailContent = $('#detailContent');
+                $detailContent.html(Description);
                 let makeTable = '';
                 for (let i = 0; i < parseInt(row["maxRarity"]); ++i) {
                     makeTable += `<div class="col-md-4"><table id="detailTable${i}"></table></div>`;
                 }
                 let btnAttr = `data-toggle="collapse" data-target="#levelTable" aria-expanded="false" aria-controls="levelTable"`;
                 let btn = `<button class="btn btn-info btn-block menu" ${btnAttr}>${"Show Level table"}</button>`;
-                $('#detailContent').append(`${btn}<br/><div class="collapse" id="levelTable">${makeTable}</div>`);
+                $detailContent.append(`${btn}<br/><div class="collapse" id="levelTable">${makeTable}</div>`);
                 let keys = Object.keys(LvData[0]);
                 let columns = [];
                 for (let key of keys) {

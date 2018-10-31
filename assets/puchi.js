@@ -196,7 +196,6 @@ $(function () {
                     column.formatter = rangeFormatter;
                     column.width = "60px";
                     column.sortable = false;
-                    column.cellStyle = () => ({css: {"line-height": "0.8"}});
                     column.dependency = ALvDependent;
                     break;
             }

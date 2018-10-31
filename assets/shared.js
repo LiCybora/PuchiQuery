@@ -26,6 +26,8 @@ let capitalize = function(word) {
     return word.charAt(0).toUpperCase()+word.substr(1);
 };
 
+let makeLogo = (imgName, extra="") => `<img src="${generalImg}${imgName}.png" class="logo ${extra}">`;
+
 let cropImgByID = function(ID, iconClass="") {
     let img = `<div class="crop-container"><img src="${memberImg}${uniform[ID.slice(0, 1)] + ID}.png"></div>`;
     return `<div class="${iconClass}">${img}</div>`;

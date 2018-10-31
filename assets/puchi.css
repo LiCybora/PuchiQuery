@@ -94,11 +94,11 @@
 
 .bmp {
     font-size:4px;
-    line-height: 0.8;
+    line-height: 3px;
 }
 
 .logo {
-    width: 16px;
+    height: 16px;
 }
 
 .logo-lg {

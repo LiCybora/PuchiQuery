@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Puchiguru - Puchi</title>
+    <title>PuchiQuery - Puchi</title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/bootstrap-table/src/bootstrap-table.css">
@@ -86,11 +86,11 @@
                                 <div id="scoreContent"></div>
                                     <form autocomplete="off" action="">
                                         <input type="radio" id="noBonus" name="bonus" value="100" onclick="changeBonus()" checked>
-                                            +0%
+                                        <label for="noBonus"> +0%</label>
                                         <input type="radio" id="oneBonus" name="bonus" value="110" onclick="changeBonus()">
-                                            <text class="blinking">+10%🞁</text>
+                                        <label class="blinking" for="oneBonus">+10%<img class="logo" src="assets/img/up.png"></label>
                                         <input type="radio" id="twoBonus" name="bonus" value="120" onclick="changeBonus()">
-                                            <text class="blinking">+20%⏫&#xFE0E;</text>
+                                        <label class="blinking" for="twoBonus">+20%<img class="logo" src="assets/img/Dup.png"></label>
                                     </form>
                                 <div class="detailPTableContainer">
                                     <table id="scoreTable"></table>

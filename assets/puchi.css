@@ -1,0 +1,106 @@
+.centerModal .modal-dialog {
+    top: 25% !important;
+    width: 300px;
+    line-height: 0.8;
+    text-align: center;
+}
+.desciText {
+    font-size: 150%;
+}
+
+.lefter {
+    font-size: 150%;
+    float: left;
+}
+.righter {
+    font-size: 150%;
+    float: right;
+}
+.modal-body .row-container {
+    text-align: center;
+    margin: auto;
+}
+.lefter2{
+    float: left;
+    width: 54%;
+    margin-left: 0.5%;
+}
+.righter2{
+    float: right;
+    width: 41%;
+    margin-right: 2%;
+}
+.detailATableContainer/*, .detailPTableContainer*/ {
+    width: 85%;
+    margin: auto;
+}
+.autoBr {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.blinking{
+    font-weight: bold;
+    animation:blinkingText 0.5s infinite alternate;
+}
+
+@keyframes blinkingText{
+    0%{		color: orangered;	}
+    100%{	color: gold;	}
+}
+
+.imgButton {
+    min-width: 11%;
+}
+
+.imgButton input[type=checkbox] {
+    display:none;
+}
+
+.imgButton input[type=checkbox] + label img{
+    filter: grayscale(100%);
+    opacity: 0.5;
+}
+
+.imgButton input[type=checkbox]:checked + label img{
+    filter:none;
+    opacity: 1;
+}
+
+.crop-container {
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+}
+
+.mini .crop-container {
+    width: 24px;
+    height: 24px;
+    overflow: hidden;
+}
+.crop-container img {
+    width: 200%;
+}
+
+.flexer {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.star:hover{
+    transform: scale(1.5);
+}
+
+.bmp {
+    font-size:4px;
+    line-height: 0.8;
+}
+
+.logo {
+    width: 16px;
+}
+
+.logo-lg {
+    width: 40px;
+}

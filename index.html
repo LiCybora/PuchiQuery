@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Puchiguru - Puchi</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/bootstrap-table/src/bootstrap-table.css">
+    <link rel="stylesheet" href="assets/x-editable/bootstrap3-editable/css/bootstrap-editable.css">
+    <link rel="stylesheet" href="assets/bootstrap-table/src/extensions/sticky-header/bootstrap-table-sticky-header.css">
+    <link rel="stylesheet" href="assets/bootstrap3-dialog/dist/css/bootstrap-dialog.min.css">
+    <link rel="stylesheet" href="assets/puchi.css">
+    <script src="assets/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/bootstrap-table/src/bootstrap-table.js"></script>
+    <script src="assets/bootstrap-table/src/extensions/editable/bootstrap-table-editable.js"></script>
+    <script src="assets/x-editable/bootstrap3-editable/js/bootstrap-editable.js"></script>
+    <script src="assets/bootstrap-table/src/extensions/sticky-header/bootstrap-table-sticky-header.js"></script>
+    <script src="assets/bootstrap3-dialog/dist/js/bootstrap-dialog.min.js"></script>
+    <script src="assets/underscore-min.js"></script>
+</head>
+<body>
+<div class="container">
+    <a type="button"  href="index.html" class="btn btn-primary .btn-lg disabled" role="button">Puchi</a>
+    <a type="button"  href="card.html" class="btn btn-primary .btn-lg" role="button">Card</a>
+    <h1>Puchi</h1>
+    <div id="filter-bar">
+        <p>
+            <button type="button" class="btn btn-success"  onclick="setAllLv('lv', 50)">Set All Lv</button>
+            <button type="button" class="btn btn-warning"  onclick="setAllLv('S.Lv', 10)">Set All Skill Lv</button>
+        </p>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#filter">
+            <span class="glyphicon glyphicon-filter"></span> Filter
+        </button>
+    </div>
+    Click Image to view further details. Click range figure can enlarge.
+    <div class="modal fade" id="filter" tabindex="-1" role="dialog" aria-labelledby="filterLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title" id="filterLabel">Filter</h2>
+                </div>
+                <div class="modal-body" id="filterContent">
+                    <p>
+                        <button class="btn btn-default" id="collapseAll">
+                            <span class="glyphicon glyphicon-collapse-up"></span> Collapse All
+                        </button>
+                        <button class="btn btn-default" id="expandAll">
+                            <span class="glyphicon glyphicon-collapse-down"></span> Expand All
+                        </button>
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" onclick="filterApply()">
+                        <span class="glyphicon glyphicon-ok"></span> Apply
+                    </button>
+                    <button type="button" class="btn btn-warning" onclick="resetFilter()">
+                        <span class="glyphicon glyphicon glyphicon-repeat"></span> Reset
+                    </button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">
+                        <span class="glyphicon glyphicon-remove"></span> Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="detail" tabindex="-1" role="dialog" aria-labelledby="detailLabel" aria-hidden="true">
+        <div class="modal-dialog" style="width:75%;" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="detailLabel"></h3>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="row-container">
+                            <div class="lefter2">
+                                <div id="detailContentA"></div>
+                                <div class="detailATableContainer">
+                                    <table id="detailATable"></table>
+                                </div>
+                            </div>
+                            <div class="righter2">
+                                <div id="detailContentP"></div>
+                                <div class="detailPTableContainer">
+                                    <table id="detailPTable"></table>
+                                </div>
+                                <div id="scoreContent"></div>
+                                    <form autocomplete="off" action="">
+                                        <input type="radio" id="noBonus" name="bonus" value="100" onclick="changeBonus()" checked>
+                                            +0%
+                                        <input type="radio" id="oneBonus" name="bonus" value="110" onclick="changeBonus()">
+                                            <text class="blinking">+10%🞁</text>
+                                        <input type="radio" id="twoBonus" name="bonus" value="120" onclick="changeBonus()">
+                                            <text class="blinking">+20%⏫&#xFE0E;</text>
+                                    </form>
+                                <div class="detailPTableContainer">
+                                    <table id="scoreTable"></table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">
+                        <span class="glyphicon glyphicon-remove"></span> Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <table id="table" data-show-columns="true" data-show-toggle="true"></table>
+</div>
+<script src="assets/shared.js"></script>
+<script src="assets/formatter.js"></script>
+<script src="assets/puchi.js"></script>
+</body>
+</html>

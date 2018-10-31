@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Puchiguru - Card</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/bootstrap-table/src/bootstrap-table.css">
+    <link rel="stylesheet" href="assets/x-editable/bootstrap3-editable/css/bootstrap-editable.css">
+    <link rel="stylesheet" href="assets/bootstrap-table/src/extensions/sticky-header/bootstrap-table-sticky-header.css">
+    <link rel="stylesheet" href="assets/bootstrap3-dialog/dist/css/bootstrap-dialog.min.css">
+    <link rel="stylesheet" href="assets/puchi.css">
+    <link rel="stylesheet" href="assets/card.css">
+    <script src="assets/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/bootstrap-table/src/bootstrap-table.js"></script>
+    <script src="assets/bootstrap-table/src/extensions/editable/bootstrap-table-editable.js"></script>
+    <script src="assets/x-editable/bootstrap3-editable/js/bootstrap-editable.js"></script>
+    <script src="assets/bootstrap-table/src/extensions/sticky-header/bootstrap-table-sticky-header.js"></script>
+    <script src="assets/bootstrap3-dialog/dist/js/bootstrap-dialog.min.js"></script>
+    <script src="assets/underscore-min.js"></script>
+</head>
+<body>
+<div class="container">
+    <a type="button"  href="index.html" class="btn btn-primary .btn-lg" role="button">Puchi</a>
+    <a type="button"  href="card.html" class="btn btn-primary .btn-lg disabled" role="button">Card</a>
+    <h1>Card</h1>
+    <div id="filter-bar">
+        <p>
+            <button type="button" class="btn btn-success"  onclick="setAllLv('lv', 60)">Set All Lv</button>
+            <button type="button" class="btn btn-warning"  onclick="evolveAll(true)">Evolve All</button>
+            <button type="button" class="btn btn-danger"  onclick="evolveAll(false)">Devolve All</button>
+        </p>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#filter">
+            <span class="glyphicon glyphicon-filter"></span> Filter
+        </button>
+    </div>
+    Click empty empty star to evolve, click again to devolve.<br/>
+    Click Image to view further details. Click range figure can enlarge.
+    <div class="modal fade" id="filter" tabindex="-1" role="dialog" aria-labelledby="filterLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title" id="filterLabel">Filter</h2>
+                </div>
+                <div class="modal-body" id="filterContent">
+                    <p>
+                        <button class="btn btn-default" id="collapseAll">
+                            <span class="glyphicon glyphicon-collapse-up"></span> Collapse All
+                        </button>
+                        <button class="btn btn-default" id="expandAll">
+                            <span class="glyphicon glyphicon-collapse-down"></span> Expand All
+                        </button>
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" onclick="filterApply()">
+                        <span class="glyphicon glyphicon-ok"></span> Apply
+                    </button>
+                    <button type="button" class="btn btn-warning" onclick="resetFilter()">
+                        <span class="glyphicon glyphicon glyphicon-repeat"></span> Reset
+                    </button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">
+                        <span class="glyphicon glyphicon-remove"></span> Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="detail" tabindex="-1" role="dialog" aria-labelledby="detailLabel" aria-hidden="true">
+        <div class="modal-dialog" style="width:55%;" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title" id="detailLabel"></h2>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="row-container">
+                            <div id="detailContent"></div>
+                            <div class="detailTableContainer">
+                                <table id="detailTable"></table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">
+                        <span class="glyphicon glyphicon-remove"></span> Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <table id="table" data-show-columns="true" data-show-toggle="true"></table>
+</div>
+<script src="assets/shared.js"></script>
+<script src="assets/formatter.js"></script>
+<script src="assets/card.js"></script>
+</body>
+</html>

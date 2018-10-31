@@ -1,7 +1,7 @@
 .centerModal .modal-dialog {
     top: 25% !important;
     width: 300px;
-    line-height: 0.8;
+    line-height: 0.65em;
     text-align: center;
 }
 .desciText {
@@ -94,7 +94,7 @@
 
 .bmp {
     font-size:4px;
-    line-height: 3px;
+    line-height: 0.65em;
 }
 
 .logo {

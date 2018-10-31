@@ -1,5 +1,8 @@
 # PuchiQuery
-A table for easy query of game Puchiguru data
+A table for easy query of Puchiguru game data
+
+Project site: [http://puchiquery.dynu.net](http://puchiquery.dynu.net). Still 
+under construction. 
 
 Inspried by [ieb project](https://puchi-next.loveliv.es/), with filter/sorting 
 for easy data query.

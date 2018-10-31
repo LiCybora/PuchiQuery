@@ -28,7 +28,7 @@ let cardScoreDependent = (value, row) => {
     value = evolveDependent(value, row);
     let targetLv = Math.min(parseInt(row["lv"]), parseInt(row["rarity"]) * 10);
     const record = LvData.find(entry => entry["level"] === targetLv);
-    if (LvData === undefined) {return value;}   // handle unknown error fail load at 1st time
+    if (LvData === undefined || record === undefined) {return value;}   // handle unknown error fail load at 1st time
     return ~~(value * record["scoreGrowthRate"] / 1000);
 };
 

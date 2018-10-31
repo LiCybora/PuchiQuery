@@ -11,7 +11,7 @@ const puchiFilterable = [
     'costume', 'name', 'class', 'group', 'unit',
     'passiveSkill', 'condition', 'skillType', 'activeSkill'
 ];
-const imageSrc = "http://puchi-xet.loveliv.es/sprawlpict/sprawlpictHOLDER.png";
+const imageSrc = "https://puchi-xet.loveliv.es/sprawlpict/sprawlpictHOLDER.png";
 const formatter = {
     "range": rangeFormatter,
     "effect value": paramsFormatter,

@@ -1,7 +1,7 @@
 const cardFilterable = [
     'minRarity', 'maxRarity', 'rarity', 'skill', 'trigger', 'match', 'SpecialSkillType', 'SpecialSkill', 'category'
 ];
-const cardimageSrc = "http://puchi-xet.loveliv.es/cardsmall/cardsmallHOLDER.png";
+const cardimageSrc = "https://puchi-xet.loveliv.es/cardsmall/cardsmallHOLDER.png";
 const rarityList = {
     '1': 'N',
     '2': 'N',
@@ -335,4 +335,3 @@ $(function () {
         filterGenerator(cardFilterable, data);
     });
 });
-

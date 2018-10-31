@@ -278,7 +278,6 @@ let setAllLv = function(field, LvMax) {
 };
 
 let showRange = (self) => {
-    console.log(self.id);
     BootstrapDialog.show({
         size: BootstrapDialog.SIZE_LARGE,
         title: 'Range',

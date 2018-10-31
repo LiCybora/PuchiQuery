@@ -73,7 +73,7 @@ let rarityFormatter = (value, row) => {
 
 $(function () {
     $.getJSON("json/cardDetail.json", function (data) {
-        LvData = [];
+        let tmpData = [];
         data.forEach((row, index, array) => {
             let currLv = {};
             currLv["level"] = row["level"];
@@ -83,8 +83,9 @@ $(function () {
                 currLv["total"] += array[i]["experience"];
             }
             currLv["scoreGrowthRate"] = row["scoreGrowthRate"];
-            LvData.push(currLv);
+            tmpData.push(currLv);
         });
+        LvData = tmpData;
     });
     $.getJSON("json/cardTable.json", function (data) {
         // Make columns
@@ -187,7 +188,6 @@ $(function () {
             }
             columns.push(column);
         }
-        // console.log(size);
         $table.bootstrapTable({
             data: data,
             columns: columns,
@@ -225,10 +225,10 @@ $(function () {
                 let logo = `${logoFormatter(row["match"])}`;
                 $detailLabel.html(`<div class="flexer">${titleText}${logo}</div>`);
                 const words = {
-                    target: "條件",
+                    target: "条件",
                     CT: "CT",
-                    effect: "效果",
-                    SSEffect: "效果",
+                    effect: "効果",
+                    SSEffect: "効果",
                     binaryMap: "Range",
                     SpecialSkill: "SS",
                     skill: "Skill",
@@ -320,8 +320,6 @@ $(function () {
                         case "level":
                             column.title = 'lv';
                             break;
-                        default:
-                            console.log(key.valueOf());
                     }
                     columns.push(column);
                 }

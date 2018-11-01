@@ -13,9 +13,8 @@
 
 .centerModal .modal-dialog {
     top: 25% !important;
-    font-family: Arial, Helvetica, sans-serif;;
     width: 25em;
-    line-height: 1em;
+    max-width: 100%;
     text-align: center;
 }
 
@@ -113,12 +112,6 @@
     transform: scale(2);
 }
 
-.bmp {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size:0.25em;
-    line-height: 0.875em;
-}
-
 .logo {
     height: 1em;
 }
@@ -173,4 +166,41 @@
     text-align: left;
     margin: auto;
     font-size: 150%;
+}
+
+.bmp {
+    text-align: center;
+}
+
+.bmpt {
+    table-layout: fixed !important;
+    width: 50px !important;
+    margin: auto !important;
+    border: 1px solid black;
+}
+
+.bmpt > tbody > tr > td {
+    width: 3px;
+    height: 3px;
+    border: none;
+}
+
+.centerModal .bmpt {
+    table-layout: fixed !important;
+    width: 16em !important;
+    margin: auto !important;
+    border: 1px solid black;
+}
+
+.centerModal .bmpt > tbody > tr > td {
+    width: 1em !important;
+    height: 1em !important;
+}
+
+.dark {
+    background-color: red;
+}
+
+.white {
+    background-color: white;
 }

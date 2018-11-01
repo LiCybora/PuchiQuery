@@ -164,19 +164,9 @@ $(function () {
                     column.formatter = CTFormatter;
                     break;
                 case "binaryMap":
-                    column.sortable = false;
-                    column.formatter = rangeFormatter;
-                    column.width = '60px';
-                    break;
-                case "evolve":
                     column.width = "1px";
                     column.sortable = false;
-                    column.visible = false;
-                    column.formatter = function(value, row) {
-                        let disable = (row["minRarity"] === row["maxRarity"] ? "disabled" : "");
-                        let status = `name="${sanitize(row["ID"])}" ${value ? "checked" : ""} ${disable}`;
-                        return `<input type="checkbox" onclick="evolveEvent(this)" ${status}>`;
-                    };
+                    column.formatter = rangeFormatter;
                     break;
                     // hidden
                 case "cardName": case "category":

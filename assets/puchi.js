@@ -193,7 +193,7 @@ $(function () {
                     break;
                 case "range":
                     column.formatter = rangeFormatter;
-                    column.width = "60px";
+                    column.width = "1px";
                     column.sortable = false;
                     column.dependency = ALvDependent;
                     break;

@@ -52,11 +52,16 @@ let sanitize =function(obj) {
 };
 
 let hex2binMap = function(hex) {
-    let bin = '';
+    let bin = '<table class="bmpt">';
     for (let i = 0, l = hex.length, step = 4; i < l; i+=step) {
-        bin += parseInt(hex.slice(i, i+step), 16).toString(2).padStart(16, '0') + '<br/>';
+        bin += '<tr>';
+        let cur = parseInt(hex.slice(i, i+step), 16).toString(2).padStart(16, '0');
+        cur.split('').forEach((c) => {
+            bin += `<td class="${c === '0' ? "white" : "dark"}"></td>`;
+        });
+        bin += '<tr/>'
     }
-    return bin.replace(/0/g, '◻').replace(/1/g, '◼');
+    return bin + '</table>';
 };
 
 // Sorting

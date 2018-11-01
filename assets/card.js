@@ -155,6 +155,9 @@ $(function () {
                         }});
                     column.formatter = logoFormatter;
                     column.dependency = undefined;
+                    if (typeof window.orientation !== 'undefined') {
+                        column.visible = false;     // disable this column for mobile by default for better view.
+                    }
                     break;
                 case "SSEffect":
                     column.width = "1px";

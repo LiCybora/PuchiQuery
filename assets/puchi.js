@@ -58,8 +58,9 @@ let renderScoreTable = (base, rise) =>  {
     let scoreInfo = `<div class="desciText">Score: ${base} (at Lv 1 no bonus) `;
     scoreInfo += `(+${rise} per Lv)</div>`;
     $('#scoreContent').html(scoreInfo);
-    $('#scoreTable').bootstrapTable('destroy');
-    $('#scoreTable').bootstrapTable({
+    let $scoreTable =  $('#scoreTable');
+    $scoreTable.bootstrapTable('destroy');
+    $scoreTable.bootstrapTable({
         columns: scol,
         data: sdata,
     });
@@ -103,16 +104,11 @@ let renderActiveTable = (row, detailCol, lvDependent, table)=> {
         }
         data.push(thisEntry);
     }
-    table.bootstrapTable('destroy')
+    table.bootstrapTable('destroy');
     table.bootstrapTable({
         columns: col,
         data: data,
         uniqueId: detailCol[0],
-        rowStyle: function() {
-            return {
-                css: {"line-height": "0.8",}
-            };
-        },
     });
 };
 
@@ -183,6 +179,7 @@ $(function () {
                     column.dependency = ALvDependent;
                     column.width = '1px';
                     break;
+                // No break below is by design
                 case "skillType":
                     column.visible = false;
                 case "effect value":
@@ -211,7 +208,7 @@ $(function () {
             pageSize: 9,
             uniqueId: "ID",
             paginationVAlign: "both",
-        }).on('editable-save.bs.table', function(e, field, row, old, $el) {
+        }).on('editable-save.bs.table', function(e, field, row, old) {
             // update only if level make change
             if (row[field] !== old) {
                 $table.bootstrapTable('updateByUniqueId', {id: 0});    // refresh

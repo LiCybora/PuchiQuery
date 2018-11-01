@@ -101,7 +101,7 @@ $(function () {
                 dependency: evolveDependent,
             };
 
-            switch(column.field.valueOf()) {
+            switch(key.valueOf()) {
                 case "ID":
                     column.title = "Image";
                     column.formatter = function() {
@@ -124,18 +124,18 @@ $(function () {
                     column.sortable = false;
                     column.formatter = lvLimitFormatter;
                     column.editable = {
-                        tpl: `<input type='number' min=1 max=70 style='width:70px'>`,
+                        tpl: makeLvInput(60),   // not important: maxLv overwrite at runtime
                         mode: "inline",
                         showbuttons: "bottom",
                     };
                     break;
                 case "minRarity":
                 case "maxRarity":
-                    column.formatter = column.field.valueOf() === "minRarity" ? minRarityFormatter : maxRarityFormatter;
+                    column.formatter = key.valueOf() === "minRarity" ? minRarityFormatter : maxRarityFormatter;
                     column.visible = false;
                     break;
                 case "rarity":
-                    column.width = "50px";
+                    column.width = "2.5em";
                     column.formatter = rarityFormatter;
                     break;
                 case "scoreBase":
@@ -154,6 +154,7 @@ $(function () {
                     column.dependency = undefined;
                     break;
                 case "SSEffect":
+                    column.width = "1px";
                     column.formatter = paramsFormatterGraphical;
                     column.sortFormatter = paramsFormatter;
                     break;

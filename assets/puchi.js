@@ -144,7 +144,7 @@ $(function () {
                 sorter: regexSorter,
 
             };
-            switch (column.field.valueOf()) {
+            switch (key.valueOf()) {
                 case "ID":
                     column.formatter = imageFormatter;
                     column.sortable = false;
@@ -154,7 +154,7 @@ $(function () {
                     break;
                 case "lv": case "S.Lv":
                     column.editable = {
-                        tpl: `<input type='number' min=1 max=${(column.field.valueOf()==="lv"?50:10)} style='width:70px'>`,
+                        tpl: makeLvInput(key.valueOf()==="lv"?50:10),
                         mode: "inline",
                         showbuttons: "bottom",
                     };

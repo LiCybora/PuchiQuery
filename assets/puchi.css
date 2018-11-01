@@ -204,3 +204,7 @@
 .white {
     background-color: white;
 }
+
+.editor {
+    width: 6.25em !important;
+}

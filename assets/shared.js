@@ -43,6 +43,9 @@ let fillTitle = (field) => field in fieldTitle ? fieldTitle[field] : capitalize(
 
 let makeLogo = (imgName, extra="") => `<img src="${generalImg}${imgName}.png" class="logo ${extra}">`;
 
+let makeLvInput = (maxLv, df = "", extra="") =>
+    `<input type="number" ${df?"value='" + df + "'" : ""} min="1" max="${maxLv}" class="editor ${extra}">`;
+
 let cropImgByID = function(ID, iconClass="") {
     let img = `<div class="crop-container"><img src="${memberImg}${uniform[ID.slice(0, 1)] + ID}.png"></div>`;
     return `<div class="${iconClass}">${img}</div>`;
@@ -265,7 +268,7 @@ let setAllLv = function(field, LvMax) {
     let discard = true;
     BootstrapDialog.show({
         title: 'Set All' + (field === 'lv' ? ' ' : ' Skill ') + 'Level',
-        message: `Level: <input type="number" value="1" min="1" max="${LvMax}">`,
+        message: `Level: ${makeLvInput(LvMax, 1)}`,
         cssClass: 'centerModal',
         autodestroy: false,
         onhide: function(dialogRef){

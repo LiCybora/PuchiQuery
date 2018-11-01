@@ -18,5 +18,13 @@
 <a type="button" href="https://github.com/LiCybora/PuchiQuery/" target="_parent" class="btn btn-info .btn-lg" role="button">
     <img class="logo" src="assets/img/github.png"> Feedback
 </a>
+<script>
+$(function () {
+    if (/Edge\/\d./i.test(navigator.userAgent) || /Trident\/\d./i.test(navigator.userAgent)){
+        // This is Microsoft Edge
+        window.alert('Microsoft Edge or IE is not currently supported! Please use Firefox or Chromium and come back again!');
+    }
+});
+</script>
 </body>
 </html>

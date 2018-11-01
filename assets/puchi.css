@@ -177,6 +177,7 @@
     width: 50px !important;
     margin: auto !important;
     border: 1px solid black;
+    border-collapse: separate;
 }
 
 .bmpt > tbody > tr > td {
@@ -189,7 +190,6 @@
     table-layout: fixed !important;
     width: 16em !important;
     margin: auto !important;
-    border: 1px solid black;
 }
 
 .centerModal .bmpt > tbody > tr > td {

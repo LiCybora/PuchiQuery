@@ -23,6 +23,8 @@ const fieldTitle = {
     scoreGrowthRate: "Score",
     "next exp.": "Next",
     "total exp.": "Total",
+    passiveSkill: "P.Skill",
+    "effect value": "A.Effect",
 };
 
 let $table = $('#table');

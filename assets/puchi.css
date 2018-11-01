@@ -208,3 +208,14 @@
 .editor {
     width: 6.25em !important;
 }
+
+.bottom-right {
+    position: absolute;
+    bottom: -8px;
+    right: -4px;
+}
+
+.cell-container {
+    height: 100%;
+    position: relative;
+}

@@ -104,19 +104,21 @@ $(function () {
             switch(key.valueOf()) {
                 case "ID":
                     column.title = "Image";
-                    column.formatter = function() {
-                        return '';
+                    column.formatter = function(value, row) {
+                        let rarity = rarityFormatter(row["rarity"], row);
+                        return `<div class="cell-container"><div class="bottom-right">${rarity}</div></div>`;
                     };
-                    column.sortable = false;
+                    column.sortFormatter = (value, row)=> (row["rarity"]);
                     column.cellStyle = (value, row) => ({
                         css: {
-                            "height": "72px",
+                            "height": "76px",
                             "width": "128px",
                             "background-image":
                                 `url(${cardImageSrc.replace("HOLDER", evolveDependent(value, row))})`,
-                            "background-position": "28.125%",
+                            "background-position": "0px -28px",
                             "background-size": "100%",
                             "background-repeat": "no-repeat",
+                            "vertical-align": "bottom",
                         }});
                     break;
                 case "lv":
@@ -137,6 +139,7 @@ $(function () {
                 case "rarity":
                     column.width = "2.5em";
                     column.formatter = rarityFormatter;
+                    column.visible = false;
                     break;
                 case "scoreBase":
                 case "score":

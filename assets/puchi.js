@@ -40,7 +40,7 @@ let renderScoreTable = (base, rise) =>  {
             if (i === 0) {
                 scol.push({
                     field: field,
-                    title: capitalize(fieldTitle),
+                    title: fillTitle(fieldTitle),
                     formatter: (($('input[name=bonus]:checked').val() > 100 && (fieldTitle.valueOf() === "score")) ?
                         (function(value) { return `<text class="blinking">${value}</text>`;}) : idleFormatter),
                 });
@@ -89,7 +89,7 @@ let renderActiveTable = (row, detailCol, lvDependent, table)=> {
                 // init col
                 col.push({
                     field: field,
-                    title: capitalize(field),
+                    title: fillTitle(field),
                     formatter: formatter[field],
                     dependency: lvDependent,
                 });
@@ -139,7 +139,7 @@ $(function () {
         for (let key of keys) {
             let column = {
                 field: key,
-                title: capitalize(key),
+                title: fillTitle(key),
                 sortable: true,
                 sorter: regexSorter,
 
@@ -147,7 +147,6 @@ $(function () {
             switch (column.field.valueOf()) {
                 case "ID":
                     column.formatter = imageFormatter;
-                    column.title = "Image";
                     column.sortable = false;
                     break;
                 case "group": case "unit": case "class": case "costume": case "name": case "score/lv":

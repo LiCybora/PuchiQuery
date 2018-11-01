@@ -1,7 +1,7 @@
 const cardFilterable = [
     'minRarity', 'maxRarity', 'rarity', 'skill', 'trigger', 'match', 'SpecialSkillType', 'SpecialSkill', 'category'
 ];
-const cardimageSrc = "https://puchi-xet.loveliv.es/cardsmall/cardsmallHOLDER.png";
+const cardImageSrc = "https://puchi-xet.loveliv.es/cardsmall/cardsmallHOLDER.png";
 const rarityList = {
     '1': 'N',
     '2': 'N',
@@ -38,23 +38,23 @@ let evolveEvent = function(self) {
     $table.bootstrapTable('updateByUniqueId', {id: 0});     // force refresh
 };
 
-let drawstar = (value, classes="")=> {
+let drawStar = (value, classes="")=> {
     if (!value) {return ''}
     if (!classes) { classes = rarityList[value]; }
     let img = makeLogo(classes);
     return img.repeat(value);
 };
 
-let maxRarityFormatter = (value) => drawstar(value);
+let maxRarityFormatter = (value) => drawStar(value);
 
 let evolvableRarityFormatter = (value, row, evolved, event, css, evolvability) => {
     let color = rarityList[value];
     let extraStarClass = evolved ? color : "empty";
-    if (evolvability !== undefined) { return drawstar(value) + drawstar(evolvability, "empty");}
+    if (evolvability !== undefined) { return drawStar(value) + drawStar(evolvability, "empty");}
     let extraStar = evolvable(row) ?
         `<img class="logo ${css}" id="${sanitize(row["ID"])}" src="${generalImg}${extraStarClass}.png" onclick="${event}(this)">`
         : '';
-    return drawstar(value - evolved, color) + extraStar;
+    return drawStar(value - evolved, color) + extraStar;
 };
 
 let forceEvolvableFormatter = (value) => {
@@ -95,7 +95,7 @@ $(function () {
         for (let key of keys) {
             let column = {
                 field: key,
-                title: capitalize(key),
+                title: fillTitle(key),
                 sortable: true,
                 sorter: regexSorter,
                 dependency: evolveDependent,
@@ -113,7 +113,7 @@ $(function () {
                             "height": "72px",
                             "width": "128px",
                             "background-image":
-                                `url(${cardimageSrc.replace("HOLDER", evolveDependent(value, row))})`,
+                                `url(${cardImageSrc.replace("HOLDER", evolveDependent(value, row))})`,
                             "background-position": "28.125%",
                             "background-size": "100%",
                             "background-repeat": "no-repeat",
@@ -146,7 +146,10 @@ $(function () {
                     column.visible = column.field.valueOf() === "score";
                     break;
                 case "match":
-                    column.width = "90px";
+                    column.cellStyle = () => ({
+                        css: {
+                            "width": "3em",
+                        }});
                     column.formatter = logoFormatter;
                     column.dependency = undefined;
                     break;
@@ -155,11 +158,7 @@ $(function () {
                     column.sortFormatter = paramsFormatter;
                     break;
                 case "SpecialSkillType":
-                    column.title = 'SSType';
                     column.visible = false;
-                    break;
-                case "SpecialSkill":
-                    column.title = 'SS';
                     break;
                 case "CT":
                     column.formatter = CTFormatter;
@@ -167,7 +166,6 @@ $(function () {
                 case "binaryMap":
                     column.sortable = false;
                     column.formatter = rangeFormatter;
-                    column.title = "Range";
                     column.width = '60px';
                     break;
                 case "evolve":
@@ -256,11 +254,11 @@ $(function () {
                     }
                     return `<tr><td><div class="desciText">${textType}:</div></td>${rst}</tr>`;
                 };
-                let Description = `<img class="cut" src="${cardimageSrc.replace("HOLDER", Array.isArray(value) ? value[0] : value)}">`;
+                let Description = `<img class="cut" src="${cardImageSrc.replace("HOLDER", Array.isArray(value) ? value[0] : value)}">`;
                 Description += `<br/>${minRarityFormatter(row["minRarity"], row)}`;
                 if (evolvable(row)) {
                     Description = `<table class="bordlessTable"><tr><td>${Description}</td>`;
-                    Description += `<td><img class="cut" src="${cardimageSrc.replace("HOLDER", value[1])}">`;
+                    Description += `<td><img class="cut" src="${cardImageSrc.replace("HOLDER", value[1])}">`;
                     Description += `<br/>${maxRarityFormatter(row["maxRarity"], row)}</td></tr></table>`;
 
                 }
@@ -291,7 +289,7 @@ $(function () {
                 for (let key of keys) {
                     let column = {
                         field: key,
-                        title: capitalize(key),
+                        title: fillTitle(key),
                         width: "1px",
                         formatter: (value, curRow) => {
                             if (curRow["level"] > parseInt(row["minRarity"]) * 10) {
@@ -302,7 +300,6 @@ $(function () {
                     };
                     switch (key.valueOf()) {
                         case "scoreGrowthRate":
-                            column.title = "Score";
                             column.formatter = (value, curRow) => {
                                 if (evolvable(row)) {
                                     let score = cardScoreFormatter(~~(value * row["score"][0] / 1000));
@@ -318,18 +315,18 @@ $(function () {
                                 }
                             };
                             break;
-                        case "level":
-                            column.title = 'lv';
-                            break;
                     }
                     columns.push(column);
                 }
                 for (let i = 0; i < parseInt(row["maxRarity"]); ++i) {
                     $(`#detailTable${i}`).bootstrapTable({
                         columns: columns,
-                        data: LvData.slice(i * 10, (i + 1) * 10),
+                        data: LvData.slice(i * 10, ((i + 1) * 10) + (i < parseInt(row["maxRarity"]) - 1 ? 0 : -1)),
                     });
                 }
+                let last = LvData[parseInt(row["maxRarity"]) * 10 - 1];
+                last["next"] = "MAX";
+                $(`#detailTable${parseInt(row["maxRarity"]) - 1}`).bootstrapTable('append', last);
                 $('#detail').modal('show');
             }
         });

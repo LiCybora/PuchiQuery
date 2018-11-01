@@ -5,13 +5,24 @@ const generalImg = "assets/img/";
 const enumSize = [
     "SS-", "SS", "SS+", "S-", "S", "S+", "M-", "M", "M+", "L-", "L", "L+", "LL-", "LL", "LL+"
 ];
-const noSort = ["costume", "name", "unit", "group", "category"];
+const noSort = ["costume", "name", "unit", "group", "category", "class"];
 const nameDict = {};
 const uniform = {
     '1': '10001',
     '2': '20001',
     '4': '40002',
     '9': '90002',
+};
+const fieldTitle = {
+    level: "Lv",
+    skillLevel: "S.Lv",
+    ID: "Image",
+    SpecialSkillType: "SSType",
+    SpecialSkill: "SS",
+    binaryMap: "Range",
+    scoreGrowthRate: "Score",
+    "next exp.": "Next",
+    "total exp.": "Total",
 };
 
 let $table = $('#table');
@@ -25,6 +36,8 @@ let LvData;
 let capitalize = function(word) {
     return word.charAt(0).toUpperCase()+word.substr(1);
 };
+
+let fillTitle = (field) => field in fieldTitle ? fieldTitle[field] : capitalize(field);
 
 let makeLogo = (imgName, extra="") => `<img src="${generalImg}${imgName}.png" class="logo ${extra}">`;
 

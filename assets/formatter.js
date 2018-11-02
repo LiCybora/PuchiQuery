@@ -15,7 +15,6 @@ let rangeFormatter = function(value) {
         `<div class="bmp" data-bmp="${value}" onclick="showRange(this)">${hex2binMap(value)}</div>`;
 };
 
-
 let scoreFormatter = function(value) {
     let up = makeLogo("up"),
         Dup = makeLogo("Dup");

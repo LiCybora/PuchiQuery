@@ -99,7 +99,6 @@ $(function () {
                 sorter: regexSorter,
                 dependency: evolveDependent,
             };
-
             switch(key.valueOf()) {
                 case "ID":
                     column.title = "Image";
@@ -108,6 +107,7 @@ $(function () {
                         return `<div class="cell-container"><div class="bottom-right">${rarity}</div></div>`;
                     };
                     column.sorter = (valueA, valueB, rowA, rowB)=> {
+                        // Sort by rarity, then card ID.
                         let raritySort = regexSort(rowA["rarity"], rowB["rarity"]);
                         return raritySort ? raritySort : regexSort(valueA, valueB);
                     };
@@ -149,7 +149,7 @@ $(function () {
                     column.width = "1px";
                     column.dependency = cardScoreDependent;
                     column.formatter = cardScoreFormatter;
-                    column.visible = column.field.valueOf() === "score";
+                    column.visible = key.valueOf() === "score";
                     break;
                 case "match":
                     column.cellStyle = () => ({

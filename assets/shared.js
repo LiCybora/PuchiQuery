@@ -172,9 +172,9 @@ let filterApply = function() {
 };
 
 let filterGenerator = function(filterableList, data) {
-    // Render filter option
     filterable = filterableList;
     filterableList.forEach(function(field) {
+        // Render filter option
         if (field.valueOf() === "rarity") {
             // FIXME: Rarity hardcoded
             filterOption[field] = _.union(filterOption["maxRarity"], filterOption["minRarity"]);
@@ -217,36 +217,27 @@ let filterGenerator = function(filterableList, data) {
         $('#filterContent').append(catalog);
         // Spawn checkbox
         filterOption[field].forEach(function(value) {
-            let chkbxObj;
-            let chkbx =
-                `<input name="${field}" value="${value}" type="checkbox" onclick="filterEvent(this)" id="${field+value}"/>`;
+            let pict = '';
             switch (field.valueOf()) {
-                case "match":
-                case "name": {
-                    // ImageButton
-                    // Determine which image
-                    let pict = cropImgByID(field.valueOf() === "name" ? nameDict[value] : value);
-                    // Gen Img button
-                    chkbxObj = `<div class="imgButton">${chkbx}<label for="${field + value}">${pict}</label></div>`;
+                case "match": case "name":
+                    pict = cropImgByID(field.valueOf() === "name" ? nameDict[value] : value);
                     break;
-                }
-                case "unit": case "group": {
-                    let pict = `<img src="${generalImg}${value}.png" class="icon">`;
-                    chkbxObj = `<div class="imgButton">${chkbx}<label for="${field+value}">${pict}</label></div>`;
+                case "unit": case "group":
+                    pict = `<img src="${generalImg}${value}.png" class="icon">`;
                     break;
-                }
                 case "rarity":
                     let evolved = !(value.valueOf().includes('+'));
-                    let pict = (evolved ? maxRarityFormatter : forceEvolvableFormatter)(value.split('+')[0]);
-                    chkbxObj = `<div class="imgButton">${chkbx}<label for="${field + value}">${pict}</label> </div>`;
+                    pict = (evolved ? maxRarityFormatter : forceEvolvableFormatter)(value.split('+')[0]);
                     break;
-                default:
-                    chkbxObj = `<div>${chkbx} ${value}</div>`;
             }
-            $('#' + field + 'Container').append(chkbxObj);
+            let checkbox =
+                `<input name="${field}" value="${value}" type="checkbox" onclick="filterEvent(this)" id="${field+value}"/>`;
+            let checkboxObj = pict ? `<div class="imgButton">${checkbox}<label for="${field + value}">${pict}</label></div>`
+                : `<div>${checkbox}<label for="${field + value}">${value}</label></div>`;
+            $('#' + field + 'Container').append(checkboxObj);
             $(`input[id="${field + value}"]`).trigger('click');
-
         });
+        // Make buttons
         let makeBtn = function(btnClass, func, name, flag, logo) {
             let disp = `<span class="glyphicon glyphicon-${logo}"></span> ${name}`;
             return `<button type="button" class="btn ${btnClass}" name="${field}"` +
@@ -257,6 +248,7 @@ let filterGenerator = function(filterableList, data) {
         formBtn += `${makeBtn('btn-warning', "changeAll", 'Toggle All', -1, "edit")}</p>`;
         $('#' + field).append(formBtn);
     });
+    // function register
     let $collapseAll = $('#collapseAll');
     // button for collapse/expand filter catalog
     $collapseAll.on('click', function() {

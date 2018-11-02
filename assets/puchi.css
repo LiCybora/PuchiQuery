@@ -44,10 +44,16 @@
     width: 85%;
     margin: auto;
 }
+
 .autoBr {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+}
+
+.autoBr > div{
+    padding-left: 0.25em;
+    padding-right: 0.25em;
 }
 
 .blinking{
@@ -218,4 +224,8 @@
 .cell-container {
     height: 100%;
     position: relative;
+}
+
+.icon {
+    height: 3em;
 }

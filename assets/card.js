@@ -71,7 +71,6 @@ let rarityFormatter = (value, row) => {
     return evolvableRarityFormatter(value, row, evolved(row), "evolveEvent", "star");
 };
 
-
 $(function () {
     $.getJSON("json/cardDetail.json", function (data) {
         let tmpData = [];
@@ -108,7 +107,10 @@ $(function () {
                         let rarity = rarityFormatter(row["rarity"], row);
                         return `<div class="cell-container"><div class="bottom-right">${rarity}</div></div>`;
                     };
-                    column.sortFormatter = (value, row)=> (row["rarity"]);
+                    column.sorter = (valueA, valueB, rowA, rowB)=> {
+                        let raritySort = regexSort(rowA["rarity"], rowB["rarity"]);
+                        return raritySort ? raritySort : regexSort(valueA, valueB);
+                    };
                     column.cellStyle = (value, row) => ({
                         css: {
                             "height": "76px",
@@ -140,6 +142,7 @@ $(function () {
                     column.width = "2.5em";
                     column.formatter = rarityFormatter;
                     column.visible = false;
+                    column.filterFormatter = rarityFilterFormatter;
                     break;
                 case "scoreBase":
                 case "score":
@@ -155,7 +158,7 @@ $(function () {
                         }});
                     column.formatter = logoFormatter;
                     column.dependency = undefined;
-                    if (typeof window.orientation !== 'undefined') {
+                    if (/Mobile|Opera Mini/i.test(navigator.userAgent)) {
                         column.visible = false;     // disable this column for mobile by default for better view.
                     }
                     break;

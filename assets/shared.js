@@ -146,11 +146,9 @@ let addFilter = function(field, value) {
 let changeAll = function(self, flag) {
     const field = self.name;
     filterOption[field].forEach(function(value) {
-        if (flag === -1) {
-            $(`input[id="${field+value}"]`).trigger('click');
-        } else {
-            $(`input[id="${field+value}"]`).prop('checked', flag);
-            filterEvent({name: field, value: value, checked: flag});
+        let $target = $(`input[id="${field+value}"]`);
+        if (flag === -1 || $target.prop('checked') !== flag) {
+            $target.trigger('click');
         }
     });
 };
@@ -178,7 +176,15 @@ let filterGenerator = function(filterableList, data) {
     filterable = filterableList;
     filterableList.forEach(function(field) {
         if (field.valueOf() === "rarity") {
+            // FIXME: Rarity hardcoded
             filterOption[field] = _.union(filterOption["maxRarity"], filterOption["minRarity"]);
+            (filterOption["minRarity"]).forEach((elem) => {
+                if (parseInt(elem) < 3) return;
+                if (!filterOption["maxRarity"].includes(elem)) {
+                    remove(filterOption[field], elem);
+                }
+                filterOption[field].push(elem + '+');
+            });
         } else {
             filterOption[field] = [];
             data.forEach(function(row) {
@@ -199,6 +205,8 @@ let filterGenerator = function(filterableList, data) {
         if (!noSort.includes(field)) {
             filterOption[field].sort();
         }
+        // These two just extract possible value, no need to spawn filter in this moment.
+        if (field.valueOf() === "minRarity" || field.valueOf() === "maxRarity") return;
         // Spawn catalog dropdown
         let fieldName = `<div class="lefter">${capitalize(field)}</div>`;
         let menuSym = `<div class="righter"><span class="glyphicon glyphicon-chevron-down"></span></div>`;
@@ -227,9 +235,10 @@ let filterGenerator = function(filterableList, data) {
                     chkbxObj = `<div class="imgButton">${chkbx}<label for="${field+value}">${pict}</label></div>`;
                     break;
                 }
-                case "rarity": case "maxRarity": case "minRarity":
-                    let pict = (field.valueOf() === "minRarity" ? forceEvolvableFormatter : maxRarityFormatter)(value);
-                    chkbxObj = `<div class="imgButton">${chkbx}<label for="${field+value}">${pict}</label></div>`;
+                case "rarity":
+                    let evolved = !(value.valueOf().includes('+'));
+                    let pict = (evolved ? maxRarityFormatter : forceEvolvableFormatter)(value.split('+')[0]);
+                    chkbxObj = `<div class="imgButton">${chkbx}<label for="${field + value}">${pict}</label> </div>`;
                     break;
                 default:
                     chkbxObj = `<div>${chkbx} ${value}</div>`;
@@ -306,7 +315,7 @@ let showRange = (self) => {
     BootstrapDialog.show({
         size: BootstrapDialog.SIZE_LARGE,
         title: 'Range',
-        message: hex2binMap(self.id),
+        message: hex2binMap(self.getAttribute("data-bmp")),
         cssClass: 'centerModal',
         buttons: [{
             label: 'Close',

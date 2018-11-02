@@ -1298,27 +1298,29 @@
         // Check filter
         this.data = f ? this.options.data.filter((item, i) => {
           for (const key in f) {
-              let index = this.header.fields.indexOf(key);
-              let matcher = item[key]
-              if (this.header.dependencies[index] !== undefined) {
-                  matcher = this.header.dependencies[index](item[key], item);
-              }
-              if (this.header.filterFormatters[index] !== undefined &&
-                  this.header.filterFormatters[index]) {
-                  matcher = (this.header.formatters[index])(item[key], item);
-              }
-              let negChecker =
-                  (itemKey) =>(Array.isArray(itemKey) &&
-                      Array.isArray(f[key]) &&
-                      [...new Set(f[key])].filter(x => new Set(itemKey).has(x)).length === 0) ||
-
-                      (!Array.isArray(itemKey) &&
-                          ((Array.isArray(f[key]) &&
-                              !f[key].includes(itemKey)) ||
-                              (!Array.isArray(f[key]) &&
-                                  itemKey !== f[key])));
-            // MOD!
-            if (negChecker(matcher)
+            // MOD: Add filterFormatter and dependencies.
+            let index = this.header.fields.indexOf(key);
+            let matcher = item[key]
+            if (this.header.dependencies[index] !== undefined) {
+              matcher = this.header.dependencies[index](item[key], item);
+            }
+            let negChecker =
+              // Array value case: find if difference set is empty
+              (itemKey, item, fk) => (
+                Array.isArray(itemKey) &&
+                Array.isArray(fk) &&
+                [...new Set(fk)].filter(x => new Set(itemKey).has(x)).length === 0) ||
+              // Value case: find if it is inside filter
+                (!Array.isArray(itemKey) &&
+                  ((Array.isArray(fk) &&
+                    !fk.includes(itemKey)) ||
+                    (!Array.isArray(fk) &&
+                      itemKey !== fk)));
+            // self defined formatter for filter
+            if (this.header.filterFormatters[index] !== undefined) {
+              negChecker = (this.header.filterFormatters[index]);
+            }
+            if (negChecker(matcher, item, f[key])
             ) {
               return false
             }

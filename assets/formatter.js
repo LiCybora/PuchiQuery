@@ -12,7 +12,7 @@ let CTFormatter = (value) => value ? value + '秒' : '-';
 
 let rangeFormatter = function(value) {
     return value.valueOf() === '-' || !value ? '-' :
-        `<div class="bmp" id="${value}" onclick="showRange(this)">${hex2binMap(value)}</div>`;
+        `<div class="bmp" data-bmp="${value}" onclick="showRange(this)">${hex2binMap(value)}</div>`;
 };
 
 
@@ -130,4 +130,24 @@ let paramsFormatterGraphical = (params) => {
         });
     }
     return rst.join(' / ');
+};
+
+let rarityFilterFormatter = (value, row, filter) => {
+    const matcher = [true];
+    for (const each of filter) {
+        if (parseInt(each.split('+')[0]) === parseInt(value)) {
+            // rarity matched
+            if (each.indexOf('+') !== -1) {
+                // filter for only non evolved
+                matcher.push(evolved(row));
+            } else if (parseInt(each) > 3) {
+                // filter for only evolved
+                matcher.push(!evolved(row));
+            } else {
+                // unevolvalbe
+                matcher.push(false);
+            }
+        }
+    }
+    return matcher.reduce((accumulator, current) => accumulator && current);
 };

@@ -11,6 +11,7 @@ const rarityList = {
     '6': 'UR',
 };
 
+// evolve related
 let evolvable = (row)=> row["maxRarity"] > row["minRarity"];
 
 let evolved = (row)=> evolvable(row) && row["rarity"] === row["maxRarity"];
@@ -24,20 +25,13 @@ let evolveAll = function (value) {
 
 let evolveDependent = (value, row) => ( generalLvDependent(value, row, (row) => evolved(row) ? 1: 0) );
 
-let cardScoreDependent = (value, row) => {
-    value = evolveDependent(value, row);
-    let targetLv = Math.min(parseInt(row["lv"]), parseInt(row["rarity"]) * 10);
-    if (LvData === undefined) {return value;}   // handle unknown error fail load at 1st time
-    const record = LvData.find(entry => entry["level"] === targetLv);
-    return ~~(value * record["scoreGrowthRate"] / 1000);
-};
-
 let evolveEvent = function(self) {
     const record = $table.bootstrapTable('getData', false).find(entry => sanitize(entry.ID) === self.id);
     record["rarity"] = record[(record["rarity"] === record["minRarity"] ? "maxRarity" : "minRarity")];
     $table.bootstrapTable('updateByUniqueId', {id: 0});     // force refresh
 };
 
+// Rarity related
 let drawStar = (value, classes="")=> {
     if (!value) {return ''}
     if (!classes) { classes = rarityList[value]; }
@@ -70,6 +64,39 @@ let minRarityFormatter = (value, row) => {
 let rarityFormatter = (value, row) => {
     return evolvableRarityFormatter(value, row, evolved(row), "evolveEvent", "star");
 };
+
+let rarityFilterFormatter = (value, row, filter) => {
+    const matcher = [true];
+    for (const each of filter) {
+        if (parseInt(each.split('+')[0]) === parseInt(value)) {
+            // rarity matched
+            if (each.indexOf('+') !== -1) {
+                // filter for only non evolved
+                matcher.push(evolved(row));
+            } else if (parseInt(each) > 3) {
+                // filter for only evolved
+                matcher.push(!evolved(row));
+            } else {
+                // unevolvalbe
+                matcher.push(false);
+            }
+        }
+    }
+    return matcher.reduce((accumulator, current) => accumulator && current);
+};
+
+// Score related
+let cardScoreDependent = (value, row) => {
+    value = evolveDependent(value, row);
+    let targetLv = Math.min(parseInt(row["lv"]), parseInt(row["rarity"]) * 10);
+    if (LvData === undefined) {return value;}   // handle unknown error fail load at 1st time
+    const record = LvData.find(entry => entry["level"] === targetLv);
+    return ~~(value * record["scoreGrowthRate"] / 1000);
+};
+
+let lvLimitFormatter = (value, row) => Math.min(value, parseInt(row["rarity"]) * 10);
+
+let cardScoreFormatter = (value) => `${value}<br/><text class="blinking">${parseInt(value*1.2)}${makeLogo("match")}</text>`;
 
 $(function () {
     $.getJSON("json/cardDetail.json", function (data) {

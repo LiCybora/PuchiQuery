@@ -4,10 +4,6 @@ let idleFormatter = (value) => value;
 
 let generalLvDependent = (value, row, func) => { return Array.isArray(value) ? eval(value)[func(row)] : value };
 
-let lvLimitFormatter = (value, row) => Math.min(value, parseInt(row["rarity"]) * 10);
-
-let cardScoreFormatter = (value) => `${value}<br/><text class="blinking">${parseInt(value*1.2)}${makeLogo("match")}</text>`;
-
 let CTFormatter = (value) => value ? value + '秒' : '-';
 
 let rangeFormatter = function(value) {
@@ -129,24 +125,4 @@ let paramsFormatterGraphical = (params) => {
         });
     }
     return rst.join(' / ');
-};
-
-let rarityFilterFormatter = (value, row, filter) => {
-    const matcher = [true];
-    for (const each of filter) {
-        if (parseInt(each.split('+')[0]) === parseInt(value)) {
-            // rarity matched
-            if (each.indexOf('+') !== -1) {
-                // filter for only non evolved
-                matcher.push(evolved(row));
-            } else if (parseInt(each) > 3) {
-                // filter for only evolved
-                matcher.push(!evolved(row));
-            } else {
-                // unevolvalbe
-                matcher.push(false);
-            }
-        }
-    }
-    return matcher.reduce((accumulator, current) => accumulator && current);
 };

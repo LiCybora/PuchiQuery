@@ -117,17 +117,8 @@
     width: 2.5em;
 }
 
-#detailLabel .crop-container {
-    width: 1.5em !important;
-}
-
 .star:hover{
     transform: scale(1.5);
-}
-
-.cut {
-    margin-top: -56px;
-    margin-bottom: -56px;
 }
 
 .bordlessTable {

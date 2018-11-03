@@ -84,8 +84,6 @@ let paramsFormatter = (params, img = false) => {
             }
             curText += imgFunc(bombName[params["forceBombType" in params ? "forceBombType" : 'makeBombType']] + "ボム",
             "words");
-            console.log(bombName[params["forceBombType" in params ? "forceBombType" : 'makeBombType']] + "ボム");
-            console.log("ランダムな種類のボム");
         }
         text.push(curText);
     }

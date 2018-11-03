@@ -1,7 +1,8 @@
 const cardFilterable = [
     'minRarity', 'maxRarity', 'rarity', 'skill', 'trigger', 'match', 'SpecialSkillType', 'SpecialSkill', 'category'
 ];
-const cardImageSrc = "https://images.weserv.nl/?url=puchi-xet.loveliv.es/cardsmall/cardsmallHOLDER.png&w=128&h=128&crop=128,76,0,26";
+const cardImageSrc = "https://images.weserv.nl/?url=puchi-xet.loveliv.es/cardsmall/cardsmallHOLDER.png&w=128&h=128&crop=128,72,0,28";
+const cardImageSrcL = "https://images.weserv.nl/?url=puchi-xet.loveliv.es/cardsmall/cardsmallHOLDER.png&crop=256,144,0,56";
 const rarityList = {
     '1': 'N',
     '2': 'N',
@@ -276,11 +277,11 @@ $(function () {
                     }
                     return `<tr><td><div class="desciText">${textType}:</div></td>${rst}</tr>`;
                 };
-                let Description = `<img class="cut" src="${cardImageSrc.replace("HOLDER", Array.isArray(value) ? value[0] : value)}">`;
+                let Description = `<img class="cut" src="${cardImageSrcL.replace("HOLDER", Array.isArray(value) ? value[0] : value)}">`;
                 Description += `<br/>${minRarityFormatter(row["minRarity"], row)}`;
                 if (evolvable(row)) {
                     Description = `<table class="bordlessTable"><tr><td>${Description}</td>`;
-                    Description += `<td><img class="cut" src="${cardImageSrc.replace("HOLDER", value[1])}">`;
+                    Description += `<td><img class="cut" src="${cardImageSrcL.replace("HOLDER", value[1])}">`;
                     Description += `<br/>${maxRarityFormatter(row["maxRarity"], row)}</td></tr></table>`;
                 }
                 Description += `<table class="bordlessTable">`;

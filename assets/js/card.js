@@ -121,7 +121,7 @@ $(function () {
         for (let key of keys) {
             let column = {
                 field: key,
-                title: fillTitle(key),
+                title: loadHeaderLocale(fillTitle(key)),
                 sortable: true,
                 sorter: regexSorter,
                 dependency: evolveDependent,
@@ -189,6 +189,9 @@ $(function () {
                         column.visible = false;     // disable this column for mobile by default for better view.
                     }
                     break;
+                case "effect": case "target":
+                    column.formatter = loadLocaleQuan;
+                    break;
                 case "SSEffect":
                     column.width = "1px";
                     column.formatter = paramsFormatterGraphical;
@@ -249,16 +252,6 @@ $(function () {
                 let titleText = row['category'] + ' - ' + row['cardName'];
                 let logo = `${logoFormatter(row["match"])}`;
                 $detailLabel.html(`<div class="flexer">${titleText}${logo}</div>`);
-                const words = {
-                    target: "条件",
-                    CT: "CT",
-                    effect: "効果",
-                    SSEffect: "効果",
-                    binaryMap: "Range",
-                    SpecialSkill: "SS",
-                    skill: "Skill",
-                    rarity: "Rarity",
-                };
                 let write = (which, text, formatter = undefined) => {
                     if (text.valueOf() === '-' || !text) {
                         return '';
@@ -268,14 +261,16 @@ $(function () {
                     } else if (which.valueOf() === 'CT') {
                         // text = `<div class="flexer">${text} </div>`;
                     }
-                    let textType = words[which];
+                    let textType = fillTitle(which);
                     if (formatter === undefined) {
                         formatter = (sth) => sth;
                     }
                     let rst;
                     if (Array.isArray(text)) {
-                        rst = `<td class="info"><div class="desciText">${translateFormatter(formatter(text[0]))} (未進化)</td></div>`;
-                        rst += `<td class="info"><div class="desciText">${translateFormatter(formatter(text[1]))} (進化済)</td></div>`;
+                        let txt1 = `${translateFormatter(formatter(text[0]))} (${loadLocaleGeneral("未進化", "words")})</td>`,
+                            txt2 = `${translateFormatter(formatter(text[1]))} (${loadLocaleGeneral("進化済", "words")})</td>`;
+                        rst = `<td class="info"><div class="desciText">${txt1}</td></div>`;
+                        rst += `<td class="info"><div class="desciText">${txt2}</td></div>`;
                     } else {
                         rst = `<td colspan="2"><div class="desciText">${translateFormatter(formatter(text))}</div></td>`;
                     }
@@ -287,7 +282,6 @@ $(function () {
                     Description = `<table class="bordlessTable"><tr><td>${Description}</td>`;
                     Description += `<td><img class="cut" src="${cardImageSrc.replace("HOLDER", value[1])}">`;
                     Description += `<br/>${maxRarityFormatter(row["maxRarity"], row)}</td></tr></table>`;
-
                 }
                 Description += `<table class="bordlessTable">`;
                 if (row["SpecialSkill"].valueOf() !== '-') {
@@ -298,8 +292,8 @@ $(function () {
                 }
                 if (row["skill"].valueOf() !== '-') {
                     Description += write("skill", row["skill"]);
-                    Description += write("target", row["target"]);
-                    Description += write("effect", row["effect"]);
+                    Description += write("target", row["target"], loadLocaleQuan);
+                    Description += write("effect", row["effect"], loadLocaleQuan);
                     Description += `</table>`;
                 }
                 let $detailContent = $('#detailContent');

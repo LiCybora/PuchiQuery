@@ -1,7 +1,5 @@
 let locale = {};
 
-let $table = $('#table');
-
 let readLocale = (file) => {
     $.getJSON(file, (data) => {
         locale = data;
@@ -25,6 +23,7 @@ let applyLocale = (lang) => {
     } else {
         return lang === 'ja'
     }
+
     return true;
 };
 
@@ -66,6 +65,9 @@ let setLocale = (lang) => {
     if (rst) {
         // locale found. record cookie
         setCookie('lang', lang, 30);
+    } else {
+        // Use English if none of locale match. This is to avoid client lack of font display japanese character.
+        applyLocale('en');
     }
 };
 
@@ -83,4 +85,6 @@ $(function () {
         // use last setting if exist
         setLocale(lastLang);
     }
+    $('#intro').html(locale["msg"]["text"]);
+
 });

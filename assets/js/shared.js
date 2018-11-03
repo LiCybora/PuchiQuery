@@ -32,21 +32,23 @@ let stickyHeaderOffsetY = 0;
 let filter_string = {};
 let filterable;
 let LvData;
+let $table = $('#table');
 
 // general function
-let refreshLocale = (locale, filterable)=> {
-    setLocale(locale);
+let refreshLocale = (lang, filterable)=> {
+    setLocale(lang);
     $table.bootstrapTable('updateByUniqueId', {id: 0});    // refresh table
     // update filter
     for (const field of filterable) {
         filterOption[field].forEach(function(value) {
             let $label = $(`label[for="${field+value}"]`);
             if ($label.text()) {
-                console.log(JSON.stringify($label.text()));
+                // console.log(JSON.stringify($label.text()));
                 $label.text(loadLocale(value));
             }
         });
     }
+    $('#intro').html(locale["msg"]["text"]);
 };
 
 
@@ -66,7 +68,47 @@ let cropImgByID = function(ID, iconClass="") {
     return `<div class="${iconClass}">${img}</div>`;
 };
 
-let loadLocale = (value) => (value in locale && locale[value] ? locale[value] : value.replace('\n', '<br/>'));
+let loadLocaleQuan = (value) => {
+    if (value !== '-' && value) {
+        let numeric = value.match(/[+-]?[0-9]*[.]?[0-9]+/g);
+        let numPos = value.indexOf(numeric[0]);
+        let endPos = numPos + numeric[0].length - 1;
+        let leftOver;
+        if (numeric.length >= 2) {
+            // handle a~b
+            endPos = value.indexOf(numeric[1]) + numeric[1].length - 1;
+            numeric = numeric[0] + '~' + numeric[1];
+            leftOver = value.replace(numeric, '').replace('~', '');
+        } else {
+            numeric = numeric[0];
+            leftOver = value.replace(numeric, '');
+        }
+        leftOver = numPos === 0 ? leftOver :
+            [leftOver.slice(0, numPos), '...', leftOver.slice(endPos)].join('');
+        if (leftOver in locale["quantity"] && locale["quantity"][leftOver]) {
+            let quanWord = locale["quantity"][leftOver].split('...');
+            let rst = quanWord.length === 2 ? quanWord[0] + numeric + quanWord[1] : numeric + quanWord;
+            if (rst.indexOf("MISC") !== -1) {
+                let functor = eval(locale["quantity"]["misc"]);
+                rst = rst.replace("MISC", functor(parseInt(numeric.slice(numeric.length - 1)[0])));
+            }
+            return rst;
+        }
+    }
+    return value.replace('\n', '<br/>');
+};
+
+let loadLocale = (value) => (
+    value in locale["data"] && locale["data"][value] ? locale["data"][value] : value.replace('\n', '<br/>')
+);
+
+let loadHeaderLocale = (value) => (
+    value in locale["header"] && locale["header"][value] ? locale["header"][value] : value
+);
+
+let loadLocaleGeneral = (value, area) => (
+    value in locale[area] && locale[area][value] ? locale[area][value] : value
+);
 
 // Without santizer, sth cannot pass through HTML name.
 let sanitize = function(obj) {

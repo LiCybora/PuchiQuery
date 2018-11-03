@@ -4,7 +4,7 @@ let idleFormatter = (value) => value;
 
 let generalLvDependent = (value, row, func) => { return Array.isArray(value) ? eval(value)[func(row)] : value };
 
-let CTFormatter = (value) => value ? value + '秒' : '-';
+let CTFormatter = (value) => value ? loadLocaleQuan(value + '秒') : '-';
 
 let rangeFormatter = function(value) {
     return value.valueOf() === '-' || !value ? '-' :
@@ -34,7 +34,7 @@ let passiveFormatter = function(params) {
     } else {
         effectAmount = `${v1}~${v2}`;
     }
-    return `${effectAmount + postStr} / ${(params["rate"] / 10)}%`;
+    return `${loadLocaleQuan(effectAmount + postStr)} / ${(params["rate"] / 10)}%`;
 };
 
 let passiveEffectFormatter = (params) => passiveFormatter(params).split(' / ')[0];
@@ -52,7 +52,10 @@ let logoFormatter = (value) => {
     return `<div class="flexer">${html}</div>`;
 };
 
-let paramsFormatter = (params) => {
+let paramsFormatter = (params, img = false) => {
+    //not translate bomb name as it will shown as image
+    let imgFunc = img === true ? ((v)=>v) : loadLocaleGeneral;
+    let imgFuncQuan = img === true ? ((v)=>v) : loadLocaleQuan;
     if (params.valueOf() === "-") {return "-";}
     params = JSON.parse(params);
     let text = [];
@@ -70,15 +73,19 @@ let paramsFormatter = (params) => {
             // random exclude center
             if (params["pickupType"] === 6 &&
                 (!("skillTarget" in params) || params["skillTarget"] !== 3)) {
-                curText += "(センター以外)";
+                curText += ` (${loadLocaleGeneral("センター以外", "words")}`;
             }
         }
         if ("forceBombType" in params && (!('makeBombType' in params)) || params["skillType"] === 2) {
             // random bomb generate
+            curText = imgFuncQuan(curText);
             if ("makeWideBomb" in params && params["makeWideBomb"]) {
-                curText += "大きな";
+                curText += imgFunc("大きな", "words");
             }
-            curText += bombName[params["forceBombType" in params ? "forceBombType" : 'makeBombType']] + "ボム";
+            curText += imgFunc(bombName[params["forceBombType" in params ? "forceBombType" : 'makeBombType']] + "ボム",
+            "words");
+            console.log(bombName[params["forceBombType" in params ? "forceBombType" : 'makeBombType']] + "ボム");
+            console.log("ランダムな種類のボム");
         }
         text.push(curText);
     }
@@ -101,17 +108,24 @@ let paramsFormatter = (params) => {
         }
     }
     if ("forceBombNum" in params) {
-        let bomb = `${ params["forceBombNum"]}個`;
+        let bomb = imgFuncQuan(`${ params["forceBombNum"]}個`);
         if ("forceBombType" in params) {
-            bomb += bombName[params["forceBombType"]] + "ボム";
+            bomb += imgFunc(bombName[params["forceBombType"]] + "ボム", "words");
         }
         text.push(bomb);
     }
+
+    text.forEach((e, i, a) => {
+        try {
+            let special = e.split(' (');
+            a[i] = loadLocaleQuan(special[0]) + (special.length > 1 ? `(${special[1]})` : '');
+        } catch {}
+    });
     return text.join(' / ');
 };
 
 let paramsFormatterGraphical = (params) => {
-    let rst = paramsFormatter(params).split(' / ');
+    let rst = paramsFormatter(params, true).split(' / ');
     for (let i = bombName.length - 1; i > -1; --i) {
         rst.forEach((elem, idx, array)=> {
         let img = makeLogo(bombName[i] + "ボム");
@@ -120,7 +134,12 @@ let paramsFormatterGraphical = (params) => {
                     elem = elem.replace("大きな", '');
                     img = img.replace("logo", "logo-lg");
                 }
-                array[idx] = elem.replace(`${bombName[i]}ボム`, img);
+                if (isNaN(parseInt(elem[0]))) {
+                    array[idx] = elem.replace(`${bombName[i]}ボム`, img);
+                } else {
+                    array[idx] = elem.replace(`${bombName[i]}ボム`, '');
+                    array[idx] = img + 'x' + array[idx].slice(0, array[idx].length-1);
+                }
             }
         });
     }

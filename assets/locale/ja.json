@@ -1,1 +1,27 @@
-{}
+{
+  "msg": {
+    "what is this": "Introduction text told user how to use",
+    "text": ""
+  },
+
+  "UI": {
+    "what is this": "This is for localize UI, such as button description, but up to author decide to use or not"
+  },
+
+  "words": {
+    "what is this": "All original data are in japanese and not required, just for placeholder"
+  },
+
+  "header": {
+    "what is this": "This is localization for table header, keep as short as possible"
+  },
+
+  "quantity": {
+    "what is this": "All original data are in japanese and not required, just for placeholder"
+  },
+
+  "data": {
+    "what is this": "All original data are in japanese and not required, just for placeholder"
+  }
+
+}

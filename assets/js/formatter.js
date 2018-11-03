@@ -12,8 +12,8 @@ let rangeFormatter = function(value) {
 };
 
 let scoreFormatter = function(value) {
-    let up = makeLogo("up"),
-        Dup = makeLogo("Dup");
+    let up = makeLogo("up", inTextlogo),
+        Dup = makeLogo("Dup", inTextlogo);
     return `${value}<br/><text class="blinking">${parseInt(value*1.1)}${up}</text><br/><text class="blinking">${parseInt(value*1.2)}${Dup}</text>`;
 };
 
@@ -128,7 +128,7 @@ let paramsFormatterGraphical = (params) => {
     let rst = paramsFormatter(params, true).split(' / ');
     for (let i = bombName.length - 1; i > -1; --i) {
         rst.forEach((elem, idx, array)=> {
-        let img = makeLogo(bombName[i] + "ボム");
+        let img = makeLogo(bombName[i] + "ボム", inTextlogo);
             if (elem.includes(`${bombName[i]}ボム`)) {
                 if (elem.includes("大きな")) {
                     elem = elem.replace("大きな", '');

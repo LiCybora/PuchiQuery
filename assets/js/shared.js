@@ -1,7 +1,7 @@
 // constant
 const bombName = ['ランダムな種類の', '通常', 'ゴールド', 'タイム', 'スコア'];
-const memberImg = "assets/img/puzzlecharafaces";
-const generalImg = "assets/img/";
+const memberImg = "https://images.weserv.nl/?url=puchiquery.dynu.net/assets/img/puzzlecharafaces";
+const generalImg = "https://images.weserv.nl/?url=puchiquery.dynu.net/assets/img/";
 const enumSize = [
     "SS-", "SS", "SS+", "S-", "S", "S+", "M-", "M", "M+", "L-", "L", "L+", "LL-", "LL", "LL+"
 ];
@@ -33,6 +33,9 @@ let filter_string = {};
 let filterable;
 let LvData;
 let $table = $('#table');
+const inTextlogo = {
+    width: 24
+};
 
 // general function
 let refreshLocale = (lang, filterable)=> {
@@ -58,13 +61,27 @@ let capitalize = function(word) {
 
 let fillTitle = (field) => field in fieldTitle ? fieldTitle[field] : capitalize(field);
 
-let makeLogo = (imgName, extra="") => `<img src="${generalImg}${imgName}.png" class="logo ${extra}">`;
+let makeLogo = (imgName, option={}) => {
+    let extra = '';
+    if ("width" in option) {
+        extra += `&w=${option.width}`;
+    }
+    if ("height" in option) {
+        extra += `&h=${option.height}`;
+    }
+    if ("crop" in option) {
+        extra += `&crop=${option.crop}`;
+    }
+
+    return `<img src="${generalImg}${imgName}.png${extra}" class="logo ${extra}">`;
+};
 
 let makeLvInput = (maxLv, df = "", extra="") =>
     `<input type="number" ${df?"value='" + df + "'" : ""} min="1" max="${maxLv}" class="editor ${extra}">`;
 
 let cropImgByID = function(ID, iconClass="") {
-    let img = `<div class="crop-container"><img src="${memberImg}${uniform[ID.slice(0, 1)] + ID}.png"></div>`;
+    const extra = '&w=100&h=100&crop=50,50,0,0';
+    let img = `<img src="${memberImg}${uniform[ID.slice(0, 1)] + ID}.png${extra}">`;
     return `<div class="${iconClass}">${img}</div>`;
 };
 

@@ -94,19 +94,10 @@
     opacity: 1;
 }
 
-.crop-container {
-    width: 4em;
-    height: 4em;
-    overflow: hidden;
-}
-
-.mini .crop-container {
+.mini img {
     width: 1.5em;
     height: 1.5em;
     overflow: hidden;
-}
-.crop-container img {
-    width: 200%;
 }
 
 .flexer {

@@ -1,7 +1,7 @@
 const cardFilterable = [
     'minRarity', 'maxRarity', 'rarity', 'skill', 'trigger', 'match', 'SpecialSkillType', 'SpecialSkill', 'category'
 ];
-const cardImageSrc = "https://puchi-xet.loveliv.es/cardsmall/cardsmallHOLDER.png";
+const cardImageSrc = "https://images.weserv.nl/?url=puchi-xet.loveliv.es/cardsmall/cardsmallHOLDER.png&w=128&h=128&crop=128,76,0,26";
 const rarityList = {
     '1': 'N',
     '2': 'N',
@@ -35,7 +35,7 @@ let evolveEvent = function(self) {
 let drawStar = (value, classes="")=> {
     if (!value) {return ''}
     if (!classes) { classes = rarityList[value]; }
-    let img = makeLogo(classes);
+    let img = makeLogo(classes, inTextlogo);
     return img.repeat(value);
 };
 
@@ -145,8 +145,8 @@ $(function () {
                             "width": "128px",
                             "background-image":
                                 `url(${cardImageSrc.replace("HOLDER", evolveDependent(value, row))})`,
-                            "background-position": "0px -28px",
                             "background-size": "100%",
+                            "background-position": "0px -2px",
                             "background-repeat": "no-repeat",
                             "vertical-align": "bottom",
                         }});

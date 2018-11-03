@@ -72,9 +72,9 @@ let setLocale = (lang) => {
 };
 
 $(function () {
-    if (/Edge\/\d./i.test(navigator.userAgent) || /Trident\/\d./i.test(navigator.userAgent)){
+    if (/Trident\/\d./i.test(navigator.userAgent)){
         // This is Microsoft Edge
-        window.alert('Microsoft Edge or IE is not currently supported! Please use Firefox or Chromium and come back again!');
+        window.alert('IE is not supported! Please use Firefox or Chromium and come back again!');
     }
     $.ajaxSetup({
         async: false

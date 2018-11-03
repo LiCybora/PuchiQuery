@@ -205,7 +205,7 @@ let delFilter = function(field, value) {
         if (filter_string[field].length === 0) {
             delete filter_string[field];
         }
-    } catch {
+    } catch (notImportant) {
         // Do nothing if nothing to delete
     }
 };

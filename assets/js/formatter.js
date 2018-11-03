@@ -119,7 +119,7 @@ let paramsFormatter = (params, img = false) => {
         try {
             let special = e.split(' (');
             a[i] = loadLocaleQuan(special[0]) + (special.length > 1 ? `(${special[1]})` : '');
-        } catch {}
+        } catch (notImportant) {}
     });
     return text.join(' / ');
 };
@@ -150,7 +150,7 @@ let paramsFormatterGraphical = (params) => {
 let translateFormatter = (value) => {
     try {
         return loadLocale(value);
-    } catch {
+    } catch (notImportant) {
         return value;
     }
 };

@@ -73,12 +73,12 @@ let paramsFormatter = (params) => {
                 curText += "(センター以外)";
             }
         }
-        if ("forceBombType" in params && !('makeBombType' in params)) {
+        if ("forceBombType" in params && (!('makeBombType' in params)) || params["skillType"] === 2) {
             // random bomb generate
             if ("makeWideBomb" in params && params["makeWideBomb"]) {
                 curText += "大きな";
             }
-            curText += bombName[params["forceBombType"]] + "ボム";
+            curText += bombName[params["forceBombType" in params ? "forceBombType" : 'makeBombType']] + "ボム";
         }
         text.push(curText);
     }
@@ -125,4 +125,13 @@ let paramsFormatterGraphical = (params) => {
         });
     }
     return rst.join(' / ');
+};
+
+
+let translateFormatter = (value) => {
+    try {
+        return loadLocale(value);
+    } catch {
+        return value;
+    }
 };

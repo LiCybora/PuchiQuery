@@ -27,7 +27,6 @@ const fieldTitle = {
     "effect value": "A.Effect",
 };
 
-let $table = $('#table');
 let filterOption = {};
 let stickyHeaderOffsetY = 0;
 let filter_string = {};
@@ -35,6 +34,22 @@ let filterable;
 let LvData;
 
 // general function
+let refreshLocale = (locale, filterable)=> {
+    setLocale(locale);
+    $table.bootstrapTable('updateByUniqueId', {id: 0});    // refresh table
+    // update filter
+    for (const field of filterable) {
+        filterOption[field].forEach(function(value) {
+            let $label = $(`label[for="${field+value}"]`);
+            if ($label.text()) {
+                console.log(JSON.stringify($label.text()));
+                $label.text(loadLocale(value));
+            }
+        });
+    }
+};
+
+
 let capitalize = function(word) {
     return word.charAt(0).toUpperCase()+word.substr(1);
 };
@@ -51,8 +66,10 @@ let cropImgByID = function(ID, iconClass="") {
     return `<div class="${iconClass}">${img}</div>`;
 };
 
+let loadLocale = (value) => (value in locale && locale[value] ? locale[value] : value.replace('\n', '<br/>'));
+
 // Without santizer, sth cannot pass through HTML name.
-let sanitize =function(obj) {
+let sanitize = function(obj) {
     return encodeURI(JSON.stringify(obj));
 };
 
@@ -173,6 +190,7 @@ let filterApply = function() {
 
 let filterGenerator = function(filterableList, data) {
     filterable = filterableList;
+    filterOption = {};
     filterableList.forEach(function(field) {
         // Render filter option
         if (field.valueOf() === "rarity") {
@@ -233,7 +251,7 @@ let filterGenerator = function(filterableList, data) {
             let checkbox =
                 `<input name="${field}" value="${value}" type="checkbox" onclick="filterEvent(this)" id="${field+value}"/>`;
             let checkboxObj = pict ? `<div class="imgButton">${checkbox}<label for="${field + value}">${pict}</label></div>`
-                : `<div>${checkbox}<label for="${field + value}">${value}</label></div>`;
+                : `<div>${checkbox}<label for="${field + value}">${loadLocale(value)}</label></div>`;
             $('#' + field + 'Container').append(checkboxObj);
             $(`input[id="${field + value}"]`).trigger('click');
         });

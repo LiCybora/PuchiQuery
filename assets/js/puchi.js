@@ -138,7 +138,7 @@ $(function () {
                 title: fillTitle(key),
                 sortable: true,
                 sorter: regexSorter,
-
+                formatter: translateFormatter,
             };
             switch (key.valueOf()) {
                 case "ID":
@@ -161,9 +161,10 @@ $(function () {
                     column.dependency = scoreDependent;
                     column.formatter = scoreFormatter;
                     break;
-                case "passiveSkil":
+                case "passiveSkill":
                 case "condition":
                     column.dependency = PLvDependent;
+                    column.formatter = (value) => loadLocale(value);
                     break;
                 case "rate":
                     column.dependency = PLvDependent;
@@ -179,12 +180,14 @@ $(function () {
                     column.dependency = ALvDependent;
                     column.width = '1px';
                     break;
-                // No break below is by design
                 case "skillType":
+                    column.dependency = ALvDependent;
                     column.visible = false;
+                    break;
                 case "effect value":
                     column.formatter = paramsFormatterGraphical;
                     column.sortFormatter = paramsFormatter;
+                    // No break below is by design
                 case "activeSkill":
                     column.dependency = ALvDependent;
                     break;
@@ -221,13 +224,13 @@ $(function () {
                 $detailLabel.text(row['costume'] + ' - ' + row['name']);
                 $detailLabel.append(`<img class="righter" src="${memberImg}${row.ID}.png" width="100px">`);
                 // Render Active skill table
-                let Description = `<div class="desciText">Active Skill: ${row['activeSkill']}</div>`;
-                Description += `<div class="desciText">Skill Type: ${row['skillType']}</div>`;
+                let Description = `<div class="desciText">Active Skill: ${translateFormatter(row['activeSkill'])}</div>`;
+                Description += `<div class="desciText">Skill Type: ${translateFormatter(row['skillType'])}</div>`;
                 $('#detailContentA').html(Description);
                 renderActiveTable(row, detailACol, ALvDependent, $detailATable);
                 // Render Passive Skill table
-                Description = `<div class="lefter">Passive Skill: ${row['passiveSkill']}</div>`;
-                Description += `<div class="righter">Trigger Condition: ${row['condition']}</div>`;
+                Description = `<div class="lefter">Passive Skill: ${translateFormatter(row['passiveSkill'])}</div>`;
+                Description += `<div class="righter">Trigger Condition: ${translateFormatter(row['condition'])}</div>`;
                 $('#detailContentP').html(Description);
                 renderActiveTable(row, detailPCol, PLvDependent, $detailPTable);
                 selectedScoreBase = row["score"];

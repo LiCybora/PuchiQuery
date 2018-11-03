@@ -125,6 +125,7 @@ $(function () {
                 sortable: true,
                 sorter: regexSorter,
                 dependency: evolveDependent,
+                formatter: translateFormatter,
             };
             switch(key.valueOf()) {
                 case "ID":
@@ -171,7 +172,6 @@ $(function () {
                     column.visible = false;
                     column.filterFormatter = rarityFilterFormatter;
                     break;
-                case "scoreBase":
                 case "score":
                     column.width = "1px";
                     column.dependency = cardScoreDependent;
@@ -264,7 +264,7 @@ $(function () {
                         return '';
                     }
                     if (which.valueOf() === 'skill') {
-                        text = row["trigger"] + text;
+                        text = translateFormatter(row["trigger"]) + translateFormatter(text);
                     } else if (which.valueOf() === 'CT') {
                         // text = `<div class="flexer">${text} </div>`;
                     }
@@ -274,10 +274,10 @@ $(function () {
                     }
                     let rst;
                     if (Array.isArray(text)) {
-                        rst = `<td class="info"><div class="desciText">${formatter(text[0])} (未進化)</td></div>`;
-                        rst += `<td class="info"><div class="desciText">${formatter(text[1])} (進化済)</td></div>`;
+                        rst = `<td class="info"><div class="desciText">${translateFormatter(formatter(text[0]))} (未進化)</td></div>`;
+                        rst += `<td class="info"><div class="desciText">${translateFormatter(formatter(text[1]))} (進化済)</td></div>`;
                     } else {
-                        rst = `<td colspan="2"><div class="desciText">${formatter(text)}</div></td>`;
+                        rst = `<td colspan="2"><div class="desciText">${translateFormatter(formatter(text))}</div></td>`;
                     }
                     return `<tr><td><div class="desciText">${textType}:</div></td>${rst}</tr>`;
                 };

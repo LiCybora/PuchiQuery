@@ -86,5 +86,4 @@ $(function () {
         setLocale(lastLang);
     }
     $('#intro').html(locale["msg"]["text"]);
-
 });

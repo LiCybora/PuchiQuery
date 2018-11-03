@@ -3,7 +3,9 @@ A table for easy query of Puchiguru game data
 
 Project site: [https://puchiquery.dynu.net](https://puchiquery.dynu.net). Still 
 under construction. Neither IE nor Edge works. Best view on Firefox, but also 
-functioning on Chromium and Safari (and iOS). Other are not tested.  
+functioning on Chromium and Safari (and iOS). Android default browsers are 
+unlikely to work, so mobile Firefox/Chrome is preferred.
+
 
 Inspired by [ieb project](https://puchi-next.loveliv.es/), with filter/sorting 
 for easy data query.

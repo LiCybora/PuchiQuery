@@ -318,7 +318,7 @@ $(function () {
                     let column = {
                         field: key,
                         title: loadHeaderLocale(fillTitle(key)),
-                        width: key === "scoreGrowthRate" ? undefined : "1px",
+                        width: key === "scoreGrowthRate" ? "40%" : "1px",
                         formatter: (value, curRow) => {
                             if (curRow["level"] > parseInt(row["minRarity"]) * 10) {
                                 return `<div class="evolved">${value}</div>`

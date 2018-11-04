@@ -186,6 +186,7 @@ $(function () {
                 case "cost":
                     column.dependency = ALvDependent;
                     column.width = '1px';
+                    column.formatter = (value) => loadLocaleQuan(value + '個');
                     break;
                 case "skillType":
                     column.dependency = ALvDependent;

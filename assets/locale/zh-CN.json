@@ -19,7 +19,10 @@
     "Apply": "提交",
     "Close": "关闭",
     "Collapse All": "全部摺叠",
-    "Expand All": "全部展开"
+    "Expand All": "全部展开",
+    "Select All": "全选",
+    "Deselect All": "全不选",
+    "Toggle All": "反选"
   },
 
   "words": {

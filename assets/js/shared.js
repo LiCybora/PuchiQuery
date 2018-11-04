@@ -330,12 +330,12 @@ let filterGenerator = function(filterableList, data) {
         });
         // Make buttons
         let makeBtn = function(btnClass, func, name, flag, logo) {
-            let disp = `<span class="glyphicon glyphicon-${logo}"></span> ${name}`;
+            let disp = `<span class="glyphicon glyphicon-${logo}"></span> <span class="UI" data-v="${name}">${loadLocaleGeneral(name, "UI")}</span>`;
             return `<button type="button" class="btn ${btnClass}" name="${field}"` +
                 ` onclick="${func}(this,${flag})">${disp}</button>`;
         };
-        let formBtn = `<p>${makeBtn('btn-success', "changeAll", 'Checked All', true, "check")} `;
-        formBtn += `${makeBtn('btn-danger', "changeAll", 'Unchecked All', false, "unchecked")} `;
+        let formBtn = `<p>${makeBtn('btn-success', "changeAll", 'Select All', true, "check")} `;
+        formBtn += `${makeBtn('btn-danger', "changeAll", 'Deselect All', false, "unchecked")} `;
         formBtn += `${makeBtn('btn-warning', "changeAll", 'Toggle All', -1, "edit")}</p>`;
         $('#' + field).append(formBtn);
     });

@@ -104,10 +104,10 @@ $(function () {
         data.forEach((row, index, array) => {
             let currLv = {};
             currLv["level"] = row["level"];
-            currLv["next"] = index < data.length - 1 ? array[index + 1]["experience"] : 'MAX';
-            currLv["total"] = 0;
+            currLv["next exp."] = index < data.length - 1 ? array[index + 1]["experience"] : 'MAX';
+            currLv["total exp."] = 0;
             for (let i = 0; i <= index; ++i) {
-                currLv["total"] += array[i]["experience"];
+                currLv["total exp."] += array[i]["experience"];
             }
             currLv["scoreGrowthRate"] = row["scoreGrowthRate"];
             tmpData.push(currLv);
@@ -310,8 +310,8 @@ $(function () {
                 for (let key of keys) {
                     let column = {
                         field: key,
-                        title: fillTitle(key),
-                        width: "1px",
+                        title: loadHeaderLocale(fillTitle(key)),
+                        width: key === "scoreGrowthRate" ? undefined : "1px",
                         formatter: (value, curRow) => {
                             if (curRow["level"] > parseInt(row["minRarity"]) * 10) {
                                 return `<div class="evolved">${value}</div>`

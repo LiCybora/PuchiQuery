@@ -40,7 +40,7 @@ let renderScoreTable = (base, rise) =>  {
             if (i === 0) {
                 scol.push({
                     field: field,
-                    title: fillTitle(fieldTitle),
+                    title: loadHeaderLocale(fillTitle(fieldTitle)),
                     formatter: (($('input[name=bonus]:checked').val() > 100 && (fieldTitle.valueOf() === "score")) ?
                         (function(value) { return `<text class="blinking">${value}</text>`;}) : idleFormatter),
                 });
@@ -55,8 +55,8 @@ let renderScoreTable = (base, rise) =>  {
         });
         sdata.push(entry);
     }
-    let scoreInfo = `<div class="desciText">Score: ${base} (at Lv 1 no bonus) `;
-    scoreInfo += `(+${rise} per Lv)</div>`;
+    let scoreInfo = `<div class="desciText">${loadHeaderLocale("Score")}: ${base} (Lv 1, +0%) `;
+    scoreInfo += `(+${rise} / Lv)</div>`;
     $('#scoreContent').html(scoreInfo);
     let $scoreTable =  $('#scoreTable');
     $scoreTable.bootstrapTable('destroy');
@@ -222,7 +222,7 @@ $(function () {
             if (field.valueOf() === "ID") {
                 let $detailLabel = $('#detailLabel');
                 // Pop-up heading
-                $detailLabel.text(row['costume'] + ' - ' + row['name']);
+                $detailLabel.text(translateFormatter(row['costume']) + ' - ' + translateFormatter(row['name']));
                 $detailLabel.append(`<img class="righter" src="${memberImg.replace('...', 't_media_lib_thumb')}${row.ID}.png" width="100px">`);
                 // Render Active skill table
                 let Description = `<div class="desciText">Active Skill: ${translateFormatter(row['activeSkill'])}</div>`;

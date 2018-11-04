@@ -232,13 +232,13 @@ $(function () {
                 $detailLabel.text(translateFormatter(row['costume']) + ' - ' + translateFormatter(row['name']));
                 $detailLabel.append(`<img class="righter" src="${memberImg.replace('...', 't_media_lib_thumb')}${row.ID}.png" width="100px">`);
                 // Render Active skill table
-                let Description = `<div class="desciText">Active Skill: ${translateFormatter(row['activeSkill'])}</div>`;
-                Description += `<div class="desciText">Skill Type: ${translateFormatter(row['skillType'])}</div>`;
+                let Description = `<div class="desciText">${loadHeaderLocale('Active Skill')}: ${translateFormatter(row['activeSkill'])}</div>`;
+                Description += `<div class="desciText">${loadHeaderLocale('Skill Type')}: ${translateFormatter(row['skillType'])}</div>`;
                 $('#detailContentA').html(Description);
                 renderActiveTable(row, detailACol, ALvDependent, $detailATable);
                 // Render Passive Skill table
-                Description = `<div class="lefter">Passive Skill: ${translateFormatter(row['passiveSkill'])}</div>`;
-                Description += `<div class="righter">Trigger Condition: ${translateFormatter(row['condition'])}</div>`;
+                Description = `<div class="lefter">${loadHeaderLocale('Passive Skill')}: ${translateFormatter(row['passiveSkill'])}</div>`;
+                Description += `<div class="righter">${loadHeaderLocale('Condition')}: ${translateFormatter(row['condition'])}</div>`;
                 $('#detailContentP').html(Description);
                 renderActiveTable(row, detailPCol, PLvDependent, $detailPTable);
                 selectedScoreBase = row["score"];

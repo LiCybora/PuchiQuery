@@ -145,10 +145,14 @@ $(function () {
             <span class="glyphicon glyphicon glyphicon-repeat"></span> <span data-v="Reset" class="UI">${loadLocaleGeneral('Reset', 'UI')}</span>
         </button>
         <button type="button" class="btn btn-danger" data-dismiss="modal">
-            <span class="glyphicon glyphicon-remove"></span> <span data-v="Close"  class="UI">${loadLocaleGeneral('Close', 'UI')}</span>
+            <span class="glyphicon glyphicon-remove"></span> <span data-v="Close" class="UI">${loadLocaleGeneral('Close', 'UI')}</span>
         </button>`
     );
     $('.modal-header').html(`<h2 class="modal-title UI" data-v="Filter" id="filterLabel">${loadLocaleGeneral('Filter', 'UI')}</h2>`);
-
+    $('#detailBtn').html(`
+        <button type="button" class="btn btn-danger" data-dismiss="modal">
+            <span class="glyphicon glyphicon-remove"></span> <span data-v="Close" class="UI">${loadLocaleGeneral('Close', 'UI')}</span>
+        </button>
+    `);
 
 });

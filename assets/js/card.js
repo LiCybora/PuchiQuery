@@ -256,7 +256,7 @@ $(function () {
             if (field.valueOf() === "ID") {
                 let $detailLabel = $('#detailLabel');
                 // Pop-up heading
-                let titleText = row['category'] + ' - ' + row['cardName'];
+                let titleText = translateFormatter(row['category']) + ' - ' + translateFormatter(row['cardName']);
                 let logo = `${logoFormatter(row["match"])}`;
                 $detailLabel.html(`<div class="flexer">${titleText}${logo}</div>`);
                 let write = (which, text, formatter = undefined) => {
@@ -268,7 +268,7 @@ $(function () {
                     } else if (which.valueOf() === 'CT') {
                         // text = `<div class="flexer">${text} </div>`;
                     }
-                    let textType = fillTitle(which);
+                    let textType = loadHeaderLocale(fillTitle(which));
                     if (formatter === undefined) {
                         formatter = (sth) => sth;
                     }

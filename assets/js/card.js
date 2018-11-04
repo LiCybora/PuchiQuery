@@ -310,7 +310,7 @@ $(function () {
                     makeTable += `<div class="col-md-4"><table id="detailTable${i}"></table></div>`;
                 }
                 let btnAttr = `data-toggle="collapse" data-target="#levelTable" aria-expanded="false" aria-controls="levelTable"`;
-                let btn = `<button class="btn btn-info btn-block menu" ${btnAttr}>${"Show Level table"}</button>`;
+                let btn = `<button class="btn btn-info btn-block menu UI" data-v="Show level exp. table" ${btnAttr}>${loadLocaleGeneral("Show level exp. table", "UI")}</button>`;
                 $detailContent.append(`${btn}<br/><div class="collapse" id="levelTable">${makeTable}</div>`);
                 let keys = Object.keys(LvData[0]);
                 let columns = [];

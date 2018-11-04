@@ -61,7 +61,7 @@ let refreshLocale = (lang, filterable)=> {
                 $label.text(loadLocale(value));
             }
         });
-        $(`div[id="${fillTitle(field).replace('<br/>', ' ')}"]`).text(loadHeaderLocale(fillTitle(field)));
+        $(`div[id="${fillTitle(field).replace('<br/>', ' ')}"]`).text(loadHeaderLocale(fillTitle(field)).replace('<br/>', ' '));
     }
     let obj = {};
     for (const each of fieldList) {

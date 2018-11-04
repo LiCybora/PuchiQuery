@@ -46,9 +46,8 @@ let evolvableRarityFormatter = (value, row, evolved, event, css, evolvability) =
     let color = rarityList[value];
     let extraStarClass = evolved ? color : "empty";
     if (evolvability !== undefined) { return drawStar(value) + drawStar(evolvability, "empty");}
-    let extraStar = evolvable(row) ?
-        `<img class="logo ${css}" id="${sanitize(row["ID"])}" src="${generalImg}${extraStarClass}.png" onclick="${event}(this)">`
-        : '';
+    let extraStar = !evolvable(row) ? '' :
+        `<img class="logo ${css}" id="${sanitize(row["ID"])}" src="${generalImg.replace('...', inTextlogo)}${extraStarClass}.png" onclick="${event}(this)">`;
     return drawStar(value - evolved, color) + extraStar;
 };
 

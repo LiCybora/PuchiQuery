@@ -132,7 +132,7 @@ let paramsFormatterGraphical = (params) => {
             if (elem.includes(`${bombName[i]}ボム`)) {
                 if (elem.includes("大きな")) {
                     elem = elem.replace("大きな", '');
-                    img = img.replace("logo", "logo-lg");
+                    img = img.replace(/logo/g, "logo-lg");
                 }
                 if (isNaN(parseInt(elem[0]))) {
                     array[idx] = elem.replace(`${bombName[i]}ボム`, img);

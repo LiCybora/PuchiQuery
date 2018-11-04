@@ -1,7 +1,7 @@
 // constant
 const bombName = ['ランダムな種類の', '通常', 'ゴールド', 'タイム', 'スコア'];
-const memberImg = "https://images.weserv.nl/?url=puchiquery.dynu.net/assets/img/puzzlecharafaces";
-const generalImg = "https://images.weserv.nl/?url=puchiquery.dynu.net/assets/img/";
+const memberImg = "https://res.cloudinary.com/puchiquery/image/upload/.../v1541309002/puchi/puzzlecharafaces";
+const generalImg = "https://res.cloudinary.com/puchiquery/image/upload/.../v1541309002/puchi/";
 const enumSize = [
     "SS-", "SS", "SS+", "S-", "S", "S+", "M-", "M", "M+", "L-", "L", "L+", "LL-", "LL", "LL+"
 ];
@@ -33,9 +33,8 @@ let filter_string = {};
 let filterable;
 let LvData;
 let $table = $('#table');
-const inTextlogo = {
-    width: 24
-};
+const inTextlogo = 't_logo';
+const UIlogo = 't_logo-lg';
 
 // general function
 let refreshLocale = (lang, filterable)=> {
@@ -61,27 +60,16 @@ let capitalize = function(word) {
 
 let fillTitle = (field) => field in fieldTitle ? fieldTitle[field] : capitalize(field);
 
-let makeLogo = (imgName, option={}) => {
-    let extra = '';
-    if ("width" in option) {
-        extra += `&w=${option.width}`;
-    }
-    if ("height" in option) {
-        extra += `&h=${option.height}`;
-    }
-    if ("crop" in option) {
-        extra += `&crop=${option.crop}`;
-    }
-
-    return `<img src="${generalImg}${imgName}.png${extra}" class="logo ${extra}">`;
+let makeLogo = (imgName, option=inTextlogo) => {
+    return `<img src="${generalImg.replace('...', option)}${imgName}.png" class="logo">`;
 };
 
 let makeLvInput = (maxLv, df = "", extra="") =>
     `<input type="number" ${df?"value='" + df + "'" : ""} min="1" max="${maxLv}" class="editor ${extra}">`;
 
 let cropImgByID = function(ID, iconClass="") {
-    const extra = '&w=100&h=100&crop=50,50,0,0';
-    let img = `<img src="${memberImg}${uniform[ID.slice(0, 1)] + ID}.png${extra}">`;
+    const type = iconClass.valueOf() === "mini" ? inTextlogo : UIlogo;
+    let img = `<img src="${memberImg.replace('...', type)}${uniform[ID.slice(0, 1)] + ID}.png">`;
     return `<div class="${iconClass}">${img}</div>`;
 };
 
@@ -300,7 +288,7 @@ let filterGenerator = function(filterableList, data) {
                     pict = cropImgByID(field.valueOf() === "name" ? nameDict[value] : value);
                     break;
                 case "unit": case "group":
-                    pict = `<img src="${generalImg}${value}.png" class="icon">`;
+                    pict = `<img src="${generalImg.replace('...', UIlogo)}${value}.png" class="icon">`;
                     break;
                 case "rarity":
                     let evolved = !(value.valueOf().includes('+'));

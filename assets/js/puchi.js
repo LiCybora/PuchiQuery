@@ -222,7 +222,7 @@ $(function () {
                 let $detailLabel = $('#detailLabel');
                 // Pop-up heading
                 $detailLabel.text(row['costume'] + ' - ' + row['name']);
-                $detailLabel.append(`<img class="righter" src="${memberImg}${row.ID}.png" width="100px">`);
+                $detailLabel.append(`<img class="righter" src="${memberImg.replace('...', 't_media_lib_thumb')}${row.ID}.png" width="100px">`);
                 // Render Active skill table
                 let Description = `<div class="desciText">Active Skill: ${translateFormatter(row['activeSkill'])}</div>`;
                 Description += `<div class="desciText">Skill Type: ${translateFormatter(row['skillType'])}</div>`;

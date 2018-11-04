@@ -102,7 +102,9 @@ let paramsFormatter = (params, img = false) => {
 
     if ("makeBombType" in params) {
         if (params["makeBombType"]) {
-            text.push("消去数>=11時に" + bombName[params["makeBombType"]] + "ボム出現確定");
+            let curText = loadLocaleGeneral("消去数>=11時に...出現確定", "words");
+            if (curText.indexOf('...') === -1) curText += '...';
+            text.push(curText.replace('...', imgFunc(bombName[params["makeBombType"]] + "ボム", "words")));
         }
     }
     if ("forceBombNum" in params) {

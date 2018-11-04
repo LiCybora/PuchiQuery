@@ -1,7 +1,8 @@
 {
   "msg": {
     "what is this": "Introduction text told user how to use",
-    "text": "<Add your language description on how to use the web page>"
+    "text": "<Add your language description on how to use the web page>",
+    "error": "<what should user see if their browser fail to render page"
   },
 
   "UI": {
@@ -16,7 +17,10 @@
     "タイムボム": "",
     "スコアボム": "",
     "大きな": "",
-    "センター以外": ""
+    "センター以外": "",
+    "未進化": "",
+    "進化済": "",
+    "消去数>=11時に...出現確定": ""
   },
 
   "header": {

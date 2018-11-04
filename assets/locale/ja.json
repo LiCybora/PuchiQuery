@@ -1,7 +1,8 @@
 {
   "msg": {
     "what is this": "Introduction text told user how to use",
-    "text": ""
+    "text": "",
+    "error": "このメッセージが引き続き表示される場合、ブラウザーはサポートされていません。 他のブラウザを使用してください, 例えば: Firefox"
   },
 
   "UI": {
@@ -9,7 +10,9 @@
   },
 
   "words": {
-    "what is this": "All original data are in japanese and not required, just for placeholder"
+    "what is this": "All original data are in japanese and not required, but msg from me may be wrong translated and corrected here",
+      "通常ボム": "ボム",
+      "消去数>=11時に...出現確定": ""
   },
 
   "header": {

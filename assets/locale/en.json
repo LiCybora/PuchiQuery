@@ -1,7 +1,8 @@
 {
   "msg": {
     "what is this": "Introduction text told user how to use",
-    "text": "Click Image to view further details. Click range figure can enlarge. Click empty star to evolve, click again to devolve."
+    "text": "Click Image to view further details. Click range figure can enlarge. Click empty star to evolve, click again to devolve.",
+    "error": "If you keep seeing this message, your browser is not supported, please use other browser, e.g.: Firefox"
   },
 
   "UI": {
@@ -10,15 +11,16 @@
 
   "words": {
     "what is this": "This is localization for item name, such as bomb",
-    "ランダムな種類のボム": "random type bomb",
-    "通常ボム": " bomb",
-    "ゴールドボム": " gold bomb",
-    "タイムボム": " time bomb",
-    "スコアボム": " score bomb",
+    "ランダムな種類のボム": "random type bomb(s)",
+    "通常ボム": " bomb(s)",
+    "ゴールドボム": " gold bomb(s)",
+    "タイムボム": " time bomb(s)",
+    "スコアボム": " score bomb(s)",
     "大きな": "wide ",
     "センター以外": "except center",
     "未進化": "Devolved",
-    "進化済": "Evolved"
+    "進化済": "Evolved",
+    "消去数>=11時に...出現確定": "When clear >= 11, the spawned bomb must be ..."
   },
 
   "header": {

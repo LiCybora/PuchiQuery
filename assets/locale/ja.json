@@ -6,7 +6,20 @@
   },
 
   "UI": {
-    "what is this": "This is for localize UI, such as button description, but up to author decide to use or not"
+    "what is this": "This is for localize UI, such as button description, but up to author decide to use or not",
+    "Puchi": "ぷちグル",
+    "Card": "カード",
+    "Feedback": "フィードバック",
+    "Filter": "フィルタ",
+    "Set All Lv": "全部のLvを設定",
+    "Set All Skill Lv": "全部のスキルLvを設定",
+    "Evolve All": "全部が進化する",
+    "Devolve All": "全部が未進化する",
+    "Reset": "リセット",
+    "Apply": "確認",
+    "Close": "閉じる",
+    "Collapse All": "全部折る",
+    "Expand All": "全部展開"
   },
 
   "words": {

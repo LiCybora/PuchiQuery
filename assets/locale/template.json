@@ -6,7 +6,20 @@
   },
 
   "UI": {
-    "what is this": "This is for localize UI, such as button description, but up to author decide to use or not"
+    "what is this": "This is for localize UI, such as button description, but up to author decide to use or not",
+    "Puchi": "",
+    "Card": "",
+    "Feedback": "",
+    "Filter": "",
+    "Set All Lv": "",
+    "Set All Skill Lv": "",
+    "Evolve All": "",
+    "Devolve All": "",
+    "Reset": "",
+    "Apply": "",
+    "Close": "",
+    "Collapse All": "",
+    "Expand All": ""
   },
 
   "words": {

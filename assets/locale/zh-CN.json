@@ -7,6 +7,19 @@
 
   "UI": {
     "what is this": "This is for localize UI, such as button description, but up to author decide to use or not"
+    "Puchi": "趴趴",
+    "Card": "卡片",
+    "Feedback": "回馈",
+    "Filter": "筛选",
+    "Set All Lv": "设定所有等级",
+    "Set All Skill Lv": "设定所有技能等级",
+    "Evolve All": "全部进化",
+    "Devolve All": "全部退化",
+    "Reset": "重置",
+    "Apply": "提交",
+    "Close": "关闭",
+    "Collapse All": "全部摺叠",
+    "Expand All": "全部展开"
   },
 
   "words": {
@@ -40,7 +53,7 @@
     "Condition":"条件",
     "Rate":"机率",
     "Passive Skill":"被动技",
-    "Skill Lv":"技等",
+    "Skill Lv":"技Lv",
     "Puchi Need":"需求",
     "Skill Type":"技能种类",
     "Active Skill": "主动技",

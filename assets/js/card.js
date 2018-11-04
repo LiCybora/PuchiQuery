@@ -96,9 +96,15 @@ let cardScoreDependent = (value, row) => {
 
 let lvLimitFormatter = (value, row) => Math.min(value, parseInt(row["rarity"]) * 10);
 
-let cardScoreFormatter = (value) => `${value}<br/><text class="blinking">${parseInt(value*1.2)}${makeLogo("match")}</text>`;
+let cardScoreFormatter = (value) => `${value}<br/><span class="blinking">${parseInt(value*1.2)}${makeLogo("match")}</span>`;
 
 $(function () {
+    // FIXME: Hardcoded UI button
+    $('#filter-bar').append(`
+            <button type="button" class="btn btn-success UI" data-v="Set All Lv" onclick="setAllLv('lv', 60)">${loadLocaleGeneral('Set All Lv', "UI")}</button>
+            <button type="button" class="btn btn-warning UI" data-v="Evolve All" onclick="evolveAll(true)">${loadLocaleGeneral('Evolve All', "UI")}</button>
+            <button type="button" class="btn btn-danger UI" data-v="Devolve All" onclick="evolveAll(false)">${loadLocaleGeneral('Devolve All', "UI")}</button>`
+    );
     $.getJSON("json/cardDetail.json", function (data) {
         let tmpData = [];
         data.forEach((row, index, array) => {
@@ -181,7 +187,7 @@ $(function () {
                 case "match":
                     column.cellStyle = () => ({
                         css: {
-                            "width": "3em",
+                            "width": "80px",
                         }});
                     column.formatter = logoFormatter;
                     column.dependency = undefined;
@@ -227,6 +233,7 @@ $(function () {
             pageList: [9, 18, 40, 100, 200],
             pageSize: 9,
             paginationVAlign: "both",
+            locale: readLang()
         }).on('editable-save.bs.table', (e, field, row, old) => {
             // update only if level make change
             if (row[field] !== old) {

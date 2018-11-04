@@ -42,7 +42,7 @@ let renderScoreTable = (base, rise) =>  {
                     field: field,
                     title: loadHeaderLocale(fillTitle(fieldTitle)),
                     formatter: (($('input[name=bonus]:checked').val() > 100 && (fieldTitle.valueOf() === "score")) ?
-                        (function(value) { return `<text class="blinking">${value}</text>`;}) : idleFormatter),
+                        (function(value) { return `<span class="blinking">${value}</span>`;}) : idleFormatter),
                 });
             }
             let number = parseInt(field.slice(6,8));
@@ -123,6 +123,12 @@ let imageFormatter = function(value) {
 
 // OnLoad
 $(function () {
+    // FIXME: Hardcoded UI button
+    $('#filter-bar').append(`
+        <button type="button" class="btn btn-success UI" data-v="Set All Lv" onclick="setAllLv('lv', 50)">${loadLocaleGeneral('Set All Lv', "UI")}</button>
+        <button type="button" class="btn btn-warning UI" data-v="Set All Skill Lv" onclick="setAllLv('S.Lv', 10)">${loadLocaleGeneral('Set All Skill Lv', "UI")}</button>
+    `);
+
     // Load lv-dependent data
     $.getJSON("json/puchiDetail.json", function (skillData) {
         LvData = skillData;
@@ -212,6 +218,7 @@ $(function () {
             pageSize: 9,
             uniqueId: "ID",
             paginationVAlign: "both",
+            locale: readLang()
         }).on('editable-save.bs.table', function(e, field, row, old) {
             // update only if level make change
             if (row[field] !== old) {

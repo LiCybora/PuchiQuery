@@ -44,7 +44,6 @@ let stickyHeaderOffsetY = 0;
 let filter_string = {};
 let filterable;
 let LvData;
-let $table = $('#table');
 const inTextlogo = 't_logo';
 const UIlogo = 't_logo-lg';
 
@@ -67,10 +66,15 @@ let refreshLocale = (lang, filterable)=> {
     for (const each of fieldList) {
         obj[each] = loadHeaderLocale(fillTitle(each));
     }
-    if (lang.indexOf('zh') !== -1 && lang.valueOf() !== 'zh-CN') lang = 'zh-TW';
-    $table.bootstrapTable("changeLocale", lang);
+    changeTableLocale(lang);
     $table.bootstrapTable("changeTitle", obj);
+    // update text
     $('#intro').html(locale["msg"]["text"]);
+    // update UI
+    $( ".UI" ).each( function () {
+        let UI = $(this);
+        UI.text(loadLocaleGeneral(UI.data('v'), "UI"));
+    });
 };
 
 
@@ -125,10 +129,6 @@ let loadLocaleQuan = (value) => {
 
 let loadLocale = (value) => (
     value in locale["data"] && locale["data"][value] ? locale["data"][value] : value.replace('\n', '<br/>')
-);
-
-let loadLocaleGeneral = (value, area) => (
-    value in locale[area] && locale[area][value] ? locale[area][value] : value
 );
 
 let loadHeaderLocale = (value) => {
@@ -359,8 +359,8 @@ let setAllLv = function(field, LvMax) {
     let setLv = -1;
     let discard = true;
     BootstrapDialog.show({
-        title: 'Set All' + (field === 'lv' ? ' ' : ' Skill ') + 'Level',
-        message: `Level: ${makeLvInput(LvMax, 1)}`,
+        title: loadLocaleGeneral('Set All' + (field === 'lv' ? ' ' : ' Skill ') + 'Lv', 'UI'),
+        message: `${loadHeaderLocale(fillTitle(field).replace('<br/>', ' '))}: ${makeLvInput(LvMax, 1)}`,
         cssClass: 'centerModal',
         autodestroy: false,
         onhide: function(dialogRef){
@@ -377,14 +377,14 @@ let setAllLv = function(field, LvMax) {
             }
         },
         buttons: [{
-            label: 'Submit',
+            label: loadLocaleGeneral('Apply', "UI"),
             cssClass: 'btn-success',
             action: function(dialog) {
                 discard = false;
                 dialog.close();
             }
         },{
-            label: 'Close',
+            label: loadLocaleGeneral('Close', "UI"),
             cssClass: 'btn-danger',
             action: function(dialog){
                 setLv = -1;
@@ -401,7 +401,7 @@ let showRange = (self) => {
         message: hex2binMap(self.getAttribute("data-bmp")),
         cssClass: 'centerModal',
         buttons: [{
-            label: 'Close',
+            label: loadLocaleGeneral('Close', 'UI'),
             cssClass: 'btn-primary',
             action: function(dialog){
                 dialog.close();

@@ -14,7 +14,7 @@ let rangeFormatter = function(value) {
 let scoreFormatter = function(value) {
     let up = makeLogo("up", inTextlogo),
         Dup = makeLogo("Dup", inTextlogo);
-    return `${value}<br/><text class="blinking">${parseInt(value*1.1)}${up}</text><br/><text class="blinking">${parseInt(value*1.2)}${Dup}</text>`;
+    return `${value}<br/><span class="blinking">${parseInt(value*1.1)}${up}</span><br/><span class="blinking">${parseInt(value*1.2)}${Dup}</span>`;
 };
 
 let passiveFormatter = function(params) {

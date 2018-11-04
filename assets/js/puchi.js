@@ -90,7 +90,7 @@ let renderActiveTable = (row, detailCol, lvDependent, table)=> {
                 // init col
                 col.push({
                     field: field,
-                    title: fillTitle(field),
+                    title: loadHeaderLocale(fillTitle(field)),
                     formatter: formatter[field],
                     dependency: lvDependent,
                 });
@@ -133,9 +133,10 @@ $(function () {
         let keys = Object.keys(data[0]);
         let columns = [];
         for (let key of keys) {
+            fieldList.push(key);
             let column = {
                 field: key,
-                title: fillTitle(key),
+                title: loadHeaderLocale(fillTitle(key)),
                 sortable: true,
                 sorter: regexSorter,
                 formatter: translateFormatter,

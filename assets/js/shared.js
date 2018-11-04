@@ -13,18 +13,30 @@ const uniform = {
     '4': '40002',
     '9': '90002',
 };
+const fieldList = [];
 const fieldTitle = {
-    level: "Lv",
-    skillLevel: "S.Lv",
     ID: "Image",
-    SpecialSkillType: "SSType",
+    level: "Lv",
+    cardName: "Card Name",
+    minRarity: "Min rarity",
+    maxRarity: "Max rarity",
+    activeSkill: "Active Skill",
+    "S.Lv": "Skill<br/>Lv",
+    skillLevel: "Skill<br/>Lv",
+    SpecialSkillType: "SS Type",
     SpecialSkill: "SS",
     binaryMap: "Range",
     scoreGrowthRate: "Score",
-    "next exp.": "Next",
-    "total exp.": "Total",
-    passiveSkill: "P.Skill",
-    "effect value": "A.Effect",
+    cost: "Puchi<br/>Need",
+    "next exp.": "Next<br/>Exp.",
+    "total exp.": "Total<br/>Exp.",
+    passiveSkill: "Passive<br/>Skill",
+    "effect value": "Active<br/>Effect",
+    skillType: "Skill Type",
+    name: "Char",
+    match: "Char",
+    SSEffect: "SS Effect",
+    "score/lv": "Score/Lv"
 };
 
 let filterOption = {};
@@ -49,7 +61,15 @@ let refreshLocale = (lang, filterable)=> {
                 $label.text(loadLocale(value));
             }
         });
+        $(`div[id="${fillTitle(field).replace('<br/>', '')}"]`).text(loadHeaderLocale(fillTitle(field)));
     }
+    let obj = {};
+    for (const each of fieldList) {
+        obj[each] = loadHeaderLocale(fillTitle(each));
+    }
+    if (lang.indexOf('zh') !== -1 && lang.valueOf() !== 'zh-CN') lang = 'zh-TW';
+    $table.bootstrapTable("changeLocale", lang);
+    $table.bootstrapTable("changeTitle", obj);
     $('#intro').html(locale["msg"]["text"]);
 };
 
@@ -107,13 +127,18 @@ let loadLocale = (value) => (
     value in locale["data"] && locale["data"][value] ? locale["data"][value] : value.replace('\n', '<br/>')
 );
 
-let loadHeaderLocale = (value) => (
-    value in locale["header"] && locale["header"][value] ? locale["header"][value] : value
-);
-
 let loadLocaleGeneral = (value, area) => (
     value in locale[area] && locale[area][value] ? locale[area][value] : value
 );
+
+let loadHeaderLocale = (value) => {
+    let rst = loadLocaleGeneral(value, "header");
+    if (rst === value) {
+        rst = loadLocaleGeneral(value.replace('<br/>', ' '), "header");
+    }
+    return rst === value.replace('<br/>', ' ') ? value : rst;
+};
+
 
 // Without santizer, sth cannot pass through HTML name.
 let sanitize = function(obj) {
@@ -273,12 +298,13 @@ let filterGenerator = function(filterableList, data) {
         // These two just extract possible value, no need to spawn filter in this moment.
         if (field.valueOf() === "minRarity" || field.valueOf() === "maxRarity") return;
         // Spawn catalog dropdown
-        let fieldName = `<div class="lefter">${capitalize(field)}</div>`;
+        let titleName = fillTitle(field).replace('<br/>',' ');
+        let fieldName = `<div class="lefter" id="${titleName}">${loadHeaderLocale(titleName)}</div>`;
         let menuSym = `<div class="righter"><span class="glyphicon glyphicon-chevron-down"></span></div>`;
         let collapse = `<div class="collapse" id="${field}"><div id="${field}Container" class="autoBr"></div></div>`;
         let btnAttr = `data-toggle="collapse" data-target="#${field}" aria-expanded="false" aria-controls="${field}"`;
         let btn = `<button class="btn btn-info btn-block" ${btnAttr}>${fieldName}${menuSym}</button>`;
-        let catalog = `<div id="filterBox"><p>${btn}${collapse}</p></div>`;
+        let catalog = `<div class="filterBox"><p>${btn}${collapse}</p></div>`;
         $('#filterContent').append(catalog);
         // Spawn checkbox
         filterOption[field].forEach(function(value) {
@@ -317,10 +343,10 @@ let filterGenerator = function(filterableList, data) {
     let $collapseAll = $('#collapseAll');
     // button for collapse/expand filter catalog
     $collapseAll.on('click', function() {
-        $('#filterBox .collapse').collapse('hide');
+        $('.filterBox .collapse').collapse('hide');
     });
     $('#expandAll').on('click', function() {
-        $('#filterBox .collapse').collapse('show');
+        $('.filterBox .collapse').collapse('show');
     });
     // Unknown bug for fail first time, so force click it twice.
     $collapseAll.trigger('click');
@@ -371,7 +397,7 @@ let setAllLv = function(field, LvMax) {
 let showRange = (self) => {
     BootstrapDialog.show({
         size: BootstrapDialog.SIZE_LARGE,
-        title: 'Range',
+        title: loadHeaderLocale('Range'),
         message: hex2binMap(self.getAttribute("data-bmp")),
         cssClass: 'centerModal',
         buttons: [{

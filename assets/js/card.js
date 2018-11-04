@@ -119,6 +119,7 @@ $(function () {
         let keys = Object.keys(data[0]);
         let columns = [];
         for (let key of keys) {
+            fieldList.push(key);
             let column = {
                 field: key,
                 title: loadHeaderLocale(fillTitle(key)),
@@ -129,7 +130,6 @@ $(function () {
             };
             switch(key.valueOf()) {
                 case "ID":
-                    column.title = "Image";
                     column.formatter = function(value, row) {
                         let rarity = rarityFormatter(row["rarity"], row);
                         return `<div class="cell-container"><div class="bottom-right">${rarity}</div></div>`;

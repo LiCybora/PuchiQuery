@@ -1,7 +1,7 @@
 {
   "msg": {
     "what is this": "Introduction text told user how to use",
-    "text": "",
+    "text": "(翻訳要求) Click Image to view further details. Click range figure can enlarge. Click empty star to evolve, click again to devolve",
     "error": "このメッセージが引き続き表示される場合、ブラウザーはサポートされていません。 他のブラウザを使用してください, 例えば: Firefox"
   },
 
@@ -16,7 +16,41 @@
   },
 
   "header": {
-    "what is this": "This is localization for table header, keep as short as possible"
+    "what is this": "This is localization for table header, keep as short as possible",
+    "Image":"画像",
+    "Costume":"衣裳",
+    "Char":"部員",
+    "Group":"",
+    "Unit":"ユニット",
+    "Class":"学級",
+    "Lv":"",
+    "Score":"スコア",
+    "Score/Lv":"スコア/レベル",
+    "Skill":"スキル",
+    "Active Skill":"スキル",
+    "Active Effect":"スキル効果",
+    "Condition":"発動条件",
+    "Rate":"発動率",
+    "Skill Lv":"特技<br/>Lv",
+    "Puchi Need":"必要<br/>ぷち数",
+    "Skill Type":"スキル種類",
+    "Passive Skill":"特技",
+    "Passive Effect":"特技効果",
+    "Range": "範囲",
+    "Next Exp.": "次のレベル",
+    "Total Exp.": "Exp累積",
+    "Card Name":"カード名",
+    "Category":"図鑑",
+    "Rarity":"レア",
+    "Min rarity":"最小レア",
+    "Max rarity":"最大レア",
+    "Effect":"効果",
+    "Trigger":"発動",
+    "Target":"条件",
+    "SS Type":"SS種類",
+    "SS":"",
+    "SS Effect":"SS効果",
+    "CT": ""
   },
 
   "quantity": {

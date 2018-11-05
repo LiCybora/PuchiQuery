@@ -1,6 +1,7 @@
 {
   "msg": {
     "what is this": "Introduction text told user how to use",
+    "title": "ぷちクエリ",
     "text": "(翻訳要求) Click Image to view further details. Click range figure can enlarge. Click empty star to evolve, click again to devolve",
     "error": "このメッセージが引き続き表示される場合、ブラウザーはサポートされていません。 他のブラウザを使用してください, 例えば: Firefox"
   },

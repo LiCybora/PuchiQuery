@@ -75,6 +75,9 @@ let refreshLocale = (lang, filterable)=> {
         let UI = $(this);
         UI.text(loadLocaleGeneral(UI.data('v'), "UI"));
     });
+    let $localHead = $('#localeHead');
+    $localHead.text(`${loadLocaleGeneral('title', 'msg')} - ${loadLocaleGeneral($localHead.data('v'), "UI")}`);
+    $(document).prop('title', $localHead.text());
 };
 
 

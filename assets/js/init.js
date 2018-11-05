@@ -111,7 +111,7 @@ $(function () {
     // UI localize
     // FIXME: These are all hardcoded!
     let $localHead = $('#localeHead');
-    $localHead.text(loadLocaleGeneral($localHead.data('v'), "UI"));
+    $localHead.text(`${loadLocaleGeneral('title', 'msg')} - ${loadLocaleGeneral($localHead.data('v'), "UI")}`);
     $('#topBtn').html(`
         <a type="button" href="index.html" target="_parent" class="btn btn-primary .btn-lg" role="button">
             <img class="logo" src="assets/img/puchi.png"> <span class="UI" data-v="Puchi">${loadLocaleGeneral('Puchi', 'UI')}</span>
@@ -154,5 +154,6 @@ $(function () {
             <span class="glyphicon glyphicon-remove"></span> <span data-v="Close" class="UI">${loadLocaleGeneral('Close', 'UI')}</span>
         </button>
     `);
+    $(this).attr('title', $localHead.text());
 
 });

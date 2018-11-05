@@ -1,6 +1,7 @@
 {
   "msg": {
     "what is this": "Introduction text told user how to use",
+    "title": "趴趴查詢器",
     "text": "點擊圖片以取得詳細趴趴/卡片資料，點擊範圍可放大。點擊空心星星以進化卡片，再次點擊則可退化",
     "error": "如果你一直看到此信息，你的瀏覽器並不支援顯示此網頁，請嘗試改用其他瀏覽器，如FireFox。"
   },

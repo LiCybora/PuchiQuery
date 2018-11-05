@@ -1,6 +1,7 @@
 {
   "msg": {
     "what is this": "Introduction text told user how to use",
+    "text": "",
     "text": "<Add your language description on how to use the web page>",
     "error": "<what should user see if their browser fail to render page"
   },

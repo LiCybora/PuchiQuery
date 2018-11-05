@@ -1,6 +1,7 @@
 {
   "msg": {
     "what is this": "Introduction text told user how to use",
+    "title": "PuchiQuery",
     "text": "Click Image to view further details. Click range figure can enlarge. Click empty star to evolve, click again to devolve.",
     "error": "If you keep seeing this message, your browser is not supported, please use other browser, e.g.: Firefox"
   },

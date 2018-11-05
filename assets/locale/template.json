@@ -1,7 +1,7 @@
 {
   "msg": {
-    "what is this": "Introduction text told user how to use",
-    "text": "",
+    "what is this": "Introduction text told user how to use, note that this part cannot be empty",
+    "title": "<The title PuchiQuery that is correspond to your language>",
     "text": "<Add your language description on how to use the web page>",
     "error": "<what should user see if their browser fail to render page"
   },

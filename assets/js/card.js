@@ -199,9 +199,9 @@ $(function () {
                     column.formatter = loadLocaleQuan;
                     break;
                 case "SSEffect":
-                    column.width = "1px";
                     column.formatter = paramsFormatterGraphical;
                     column.sortFormatter = paramsFormatter;
+                    column.cellStyle = ()=>({css:{"max-width": "145px"}});
                     break;
                 case "SpecialSkillType":
                     column.visible = false;

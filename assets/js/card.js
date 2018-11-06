@@ -310,8 +310,10 @@ $(function () {
                     makeTable += `<div class="col-md-4"><table id="detailTable${i}"></table></div>`;
                 }
                 let btnAttr = `data-toggle="collapse" data-target="#levelTable" aria-expanded="false" aria-controls="levelTable"`;
-                let btn = `<button class="btn btn-info btn-block menu UI" data-v="Show level exp. table" ${btnAttr}>${loadLocaleGeneral("Show level exp. table", "UI")}</button>`;
-                $detailContent.append(`${btn}<br/><div class="collapse" id="levelTable">${makeTable}</div>`);
+                let fieldName = `<div class="lefter">${loadLocaleGeneral("Show level exp. table", "UI")}</div>`;
+                let menuSym = `<div class="righter"><span class="glyphicon glyphicon-chevron-right"></span></div>`;
+                let btn = `<button class="btn btn-info btn-block menu UI" data-v="Show level exp. table" ${btnAttr} onclick="rotateArrow(this)">${fieldName}${menuSym}</button>`;
+                $detailContent.append(`<p>${btn}<div class="collapse" id="levelTable">${makeTable}</div></p>`);
                 let keys = Object.keys(LvData[0]);
                 let columns = [];
                 for (let key of keys) {

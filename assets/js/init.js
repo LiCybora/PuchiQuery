@@ -130,7 +130,7 @@ $(function () {
     );
     $('#filterBtnTop').html(`
          <button class="btn btn-default" id="collapseAll">
-            <span class="glyphicon glyphicon-collapse-up"></span> <span class="UI" data-v="Collapse All">${loadLocaleGeneral('Collapse All', 'UI')}</span>
+            <span class="glyphicon glyphicon-expand"></span> <span class="UI" data-v="Collapse All">${loadLocaleGeneral('Collapse All', 'UI')}</span>
         </button>
         <button class="btn btn-default" id="expandAll">
             <span class="glyphicon glyphicon-collapse-down"></span> <span class="UI" data-v="Expand All">${loadLocaleGeneral('Expand All', 'UI')}</span>

@@ -155,7 +155,6 @@ $(function () {
             switch (key.valueOf()) {
                 case "ID":
                     column.formatter = imageFormatter;
-                    column.sortable = false;
                     break;
                 case "group": case "unit": case "class": case "costume": case "name": case "score/lv":
                     column.visible = false;

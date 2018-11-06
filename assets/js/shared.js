@@ -80,6 +80,13 @@ let refreshLocale = (lang, filterable)=> {
     $(document).prop('title', $localHead.text());
 };
 
+let rotateArrow = (self)=> {
+    let hidden = self.parentElement.nextSibling.className;
+    if (hidden !== 'collapsing') {
+        self.getElementsByClassName("righter")[0].innerHTML =
+            `<span class="glyphicon glyphicon-chevron-${hidden === 'collapse' ? 'down' : 'right'}"></span>`;
+    }
+};
 
 let capitalize = function(word) {
     return word.charAt(0).toUpperCase()+word.substr(1);
@@ -303,10 +310,10 @@ let filterGenerator = function(filterableList, data) {
         // Spawn catalog dropdown
         let titleName = fillTitle(field).replace('<br/>',' ');
         let fieldName = `<div class="lefter" id="${titleName}">${loadHeaderLocale(titleName)}</div>`;
-        let menuSym = `<div class="righter"><span class="glyphicon glyphicon-chevron-down"></span></div>`;
+        let menuSym = `<div class="righter"><span class="glyphicon glyphicon-chevron-right"></span></div>`;
         let collapse = `<div class="collapse" id="${field}"><div id="${field}Container" class="autoBr"></div></div>`;
         let btnAttr = `data-toggle="collapse" data-target="#${field}" aria-expanded="false" aria-controls="${field}"`;
-        let btn = `<button class="btn btn-info btn-block" ${btnAttr}>${fieldName}${menuSym}</button>`;
+        let btn = `<button class="btn btn-info btn-block" ${btnAttr} onclick="rotateArrow(this)">${fieldName}${menuSym}</button>`;
         let catalog = `<div class="filterBox"><p>${btn}${collapse}</p></div>`;
         $('#filterContent').append(catalog);
         // Spawn checkbox
@@ -347,9 +354,11 @@ let filterGenerator = function(filterableList, data) {
     // button for collapse/expand filter catalog
     $collapseAll.on('click', function() {
         $('.filterBox .collapse').collapse('hide');
+        $('.filterBox .btn .righter').html(`<span class="glyphicon glyphicon-chevron-right"></span>`);
     });
     $('#expandAll').on('click', function() {
         $('.filterBox .collapse').collapse('show');
+        $('.filterBox .btn .righter').html(`<span class="glyphicon glyphicon-chevron-down"></span>`);
     });
     // Unknown bug for fail first time, so force click it twice.
     $collapseAll.trigger('click');

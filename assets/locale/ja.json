@@ -76,7 +76,10 @@
   },
 
   "data": {
-    "what is this": "All original data are in japanese and not required, just for placeholder"
+    "what is this": "All original data are in japanese and not required, just for placeholder",
+    "ショータイム": "ショータイム中",
+    "ラストボーナス": "ラストボーナス中",
+    "ショータイム時": "ショータイム突入時"
   }
 
 }

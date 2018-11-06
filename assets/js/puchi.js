@@ -6,7 +6,7 @@ let selectedScoreRise = 0;
 let selectedScoreBase = 0;
 // constant
 const detailACol = ['skillLevel', 'next exp.', 'total exp.', 'effect value', 'cost', 'range'];
-const detailPCol = ['level', 'effect'];
+const detailPCol = ['level', 'effect', "rate"];
 const puchiFilterable = [
     'costume', 'name', 'class', 'group', 'unit',
     'passiveSkill', 'condition', 'skillType', 'activeSkill'
@@ -15,7 +15,8 @@ const imageSrc = "https://images.weserv.nl/?url=puchi-xet.loveliv.es/sprawlpict/
 const formatter = {
     "range": rangeFormatter,
     "effect value": paramsFormatter,
-    "effect": passiveFormatter,
+    "effect": passiveEffectFormatter,
+    "rate": passiveRateFormatter,
 };
 
 let scoreDependent = (value, row) => value + (row["lv"] - 1) * row["score/lv"];
@@ -68,7 +69,11 @@ let renderScoreTable = (base, rise) =>  {
 
 let renderActiveTable = (row, detailCol, lvDependent, table)=> {
     const extraData = LvData.find(entry => entry.ID === row.ID);   // Get correct record
-    const lvSize = extraData[detailCol[1]] === undefined ? row[detailCol[1]].length : extraData[detailCol[1]].length;
+    let lvSize = extraData[detailCol[1]] === undefined ? row[detailCol[1]].length : extraData[detailCol[1]].length;
+    if (detailCol[1].valueOf() === "effect")  {
+        // FIXME:hardcoded
+        lvSize = row[detailCol[2]].length;
+    }
     const skillLevel = [...Array(lvSize).keys()].map(x => ++x);
     let totalExp = [];
     if (detailCol.includes("total exp.")) {
@@ -96,7 +101,7 @@ let renderActiveTable = (row, detailCol, lvDependent, table)=> {
                 });
             }
             let record = (row[field] === undefined) ?
-                (extraData[field] === undefined ?  totalExp : extraData[field] ) : row[field];
+                (extraData[field] === undefined ?  totalExp : extraData[field]) : row[field];
             if (field.valueOf() === detailCol[0]) {
                 record = skillLevel;
             }

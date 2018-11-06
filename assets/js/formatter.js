@@ -17,28 +17,39 @@ let scoreFormatter = function(value) {
     return `${value}<br/><span class="blinking">${parseInt(value*1.1)}${up}</span><br/><span class="blinking">${parseInt(value*1.2)}${Dup}</span>`;
 };
 
-let passiveFormatter = function(params) {
-    params = JSON.parse(params);
-    // update passive skill effect
-    let v1 = params["value1"], v2 = params["value2"];
-    let effectAmount, postStr;
-    // TODO: This is not safe!
-    if (v1 < 1000) {
-        postStr = "個";
+let passiveFormatter = function(param, row) {
+    let params = param, type = 0;
+    if (Number.isInteger(param)) {
+        params = JSON.parse(PLvDependent(row["rate"], row));
+        // update passive skill effect
+        let v1 = params["value1"], v2 = params["value2"];
+        type = param;
+        let effectAmount, postStr;
+        if (type === 12 || type === 2 || type === 3) {
+            postStr = "個";
+        } else {
+            v1 = (v1 - 1000) / 10;
+            postStr = "%";
+        }
+        if (v1 === v2 || v2 === 10000) {
+            effectAmount = `${v1}`;
+        } else {
+            effectAmount = `${v1}~${v2}`;
+        }
+        let effect = loadLocaleQuan(effectAmount + postStr);
+        // FIXME: unsafe hardcoded for English 個 ambiguous between puchi and bomb
+        if (type === 12) {
+            effect = effect.replace(' puchi', ' bomb(s)');
+        }
+        return `${effect}`;
     } else {
-        v1 = (v1 - 1000) / 10;
-        postStr = "%";
+        return `${(JSON.parse(params)["rate"] / 10)}%`;
     }
-    if (v1 === v2 || v2 === 10000) {
-        effectAmount = `${v1}`;
-    } else {
-        effectAmount = `${v1}~${v2}`;
-    }
-    return `${loadLocaleQuan(effectAmount + postStr)} / ${(params["rate"] / 10)}%`;
+
 };
 
-let passiveEffectFormatter = (params) => passiveFormatter(params).split(' / ')[0];
-let passiveRateFormatter = (params) => passiveFormatter(params).split(' / ')[1];
+let passiveEffectFormatter = (params, row) => passiveFormatter(params, row);
+let passiveRateFormatter = (params, row) => passiveFormatter(params, row);
 
 let logoFormatter = (value) => {
     let html = '';
@@ -118,7 +129,9 @@ let paramsFormatter = (params, img = false) => {
     text.forEach((e, i, a) => {
         try {
             let special = e.split(' (');
-            a[i] = loadLocaleQuan(special[0]) + (special.length > 1 ? `(${special[1]})` : '');
+            a[i] = loadLocaleQuan(special[0]) + (special.length > 1 ? ` (${special[1]})` : '');
+            // hardcoded for 個 in English describe bomb and puchi
+            a[i].includes(' bomb') ? a[i] = a[i].replace("puchi", "") : a[i];
         } catch (notImportant) {}
     });
     return text.join(' / ');

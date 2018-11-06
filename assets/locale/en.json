@@ -38,8 +38,8 @@
     "個目": "The ...MISC one",
     "秒": " sec",
     "回目": "At ...MISC time",
-    "個": " ",
-    "種類": " type",
+    "個": " puchi",
+    "種類": " type(s)",
     "misc": "(num) => !num || num > 3 ? 'th' : num === 3 ? 'rd' : num === 2 ? 'nd' : 'st'"
   },
 

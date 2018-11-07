@@ -154,7 +154,7 @@ let save = () => {
     alert(locale["msg"]["warning"]);
     let obj = $table.bootstrapTable('getData', false);
     const fileName = location.pathname.split("/").slice(-1)[0].replace(".html", "") + "Level.txt";
-    let blob = new Blob([JSON.stringify(obj)], {type: `application/octet-stream;headers=Content-Disposition: attachment; filename=${fileName}; charset=utf-8`});
+    let blob = new Blob([JSON.stringify(obj)], {type: `Content-Disposition: attachment; filename=${fileName}; charset=utf-8`});
     saveAs(blob, fileName);
     // let url = URL.createObjectURL(blob);
     // let elem = document.createElement("a");

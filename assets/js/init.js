@@ -107,7 +107,7 @@ $(function () {
         async: false
     });
     readLang();
-    $('#intro').html(locale["msg"]["text"]);
+    $('#intro').html(`${locale["msg"]["text"]}<br/>${locale["msg"]["features"]}<br/>`);
     // UI localize
     // FIXME: These are all hardcoded!
     let $localHead = $('#localeHead');
@@ -126,6 +126,16 @@ $(function () {
     $('#filter-bar').html(`
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#filter">
             <span class="glyphicon glyphicon-filter"></span> <span class="UI" data-v="Filter">${loadLocaleGeneral('Filter', 'UI')}</span>
+        </button>`
+    );
+    $('#filter-bar').append(`
+        <button type="button" class="btn btn-Basic" onclick="save()">
+            <span class="glyphicon glyphicon-save"></span> <span class="UI" data-v="Save">${loadLocaleGeneral('Save', 'UI')}</span>
+        </button>`
+    );
+    $('#filter-bar').append(`
+        <button type="button" class="btn btn-default" onclick="load()">
+            <span class="glyphicon glyphicon-open"></span> <span class="UI" data-v="Load">${loadLocaleGeneral('Load', 'UI')}</span>
         </button>`
     );
     $('#filterBtnTop').html(`

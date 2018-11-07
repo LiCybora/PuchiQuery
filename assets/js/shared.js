@@ -69,7 +69,7 @@ let refreshLocale = (lang, filterable)=> {
     changeTableLocale(lang);
     $table.bootstrapTable("changeTitle", obj);
     // update text
-    $('#intro').html(locale["msg"]["text"]);
+    $('#intro').html(`${locale["msg"]["text"]}<br/>${locale["msg"]["features"]}<br/>`);
     // update UI
     $( ".UI" ).each( function () {
         let UI = $(this);
@@ -149,6 +149,64 @@ let loadHeaderLocale = (value) => {
     return rst === value.replace('<br/>', ' ') ? value : rst;
 };
 
+let save = () => {
+    //Saving string to file using html clicking trick
+    alert(locale["msg"]["warning"]);
+    let obj = $table.bootstrapTable('getData', false);
+    let blob = new Blob([JSON.stringify(obj)], {type: "application/json;charset=utf-8"});
+    let url = URL.createObjectURL(blob);
+    let elem = document.createElement("a");
+    elem.href = url;
+    elem.download = location.pathname.split("/").slice(-1)[0].replace(".html", "") + "Level.txt";
+    document.body.appendChild(elem);
+    elem.click();
+    document.body.removeChild(elem);
+};
+
+let handleFiles = (files) => {
+    let reader = new FileReader();
+    const curPage = location.pathname.split("/").slice(-1)[0].replace(".html", "");
+    reader.onload = ((reader) => {
+        return () => {
+            try {
+                let contents = reader.result;
+                let saved = eval(contents);
+                let data = $table.bootstrapTable('getData', false);
+                const dataType = 'rarity' in saved[0] ? 'card' : 'S.Lv' in saved[0] ? 'puchi' : 'illegal';
+                if ((curPage === 'puchi' && dataType === 'card') ||
+                    (curPage === 'card' && dataType === 'puchi')) {
+                    let alertMsg = locale["msg"]["mistake"];
+                    alertMsg = alertMsg.replace('HOLDER1', dataType).replace('HOLDER2', curPage);
+                    alert(alertMsg);
+                    return;
+                } else if (dataType === 'illegal') throw -1;
+                for (const each of saved) {
+                    let row = data.find(entry => JSON.stringify(entry.ID) === JSON.stringify(each.ID));
+                    row["lv"] = each["lv"];
+                    if (dataType === 'puchi') {
+                        row["S.Lv"] = each["S.Lv"];
+                    } else {
+                        row["rarity"] = each["rarity"];
+                    }
+                }
+                $table.bootstrapTable('updateByUniqueId', {id: 0});    // refresh table
+            } catch (e) {
+                alert(locale["msg"]["error"]);
+            }
+        }
+    })(reader);
+    reader.readAsText(files[0]);
+
+};
+
+let load = () => {
+    alert(locale["msg"]["warning"]);
+    let elem = document.createElement("INPUT");
+    elem.setAttribute("type", "file");
+    elem.setAttribute("accept", ".txt");
+    elem.setAttribute("onchange", "handleFiles(this.files)");
+    elem.click();
+};
 
 // Without santizer, sth cannot pass through HTML name.
 let sanitize = function(obj) {

@@ -3,7 +3,10 @@
     "what is this": "Introduction text told user how to use",
     "title": "趴趴查詢器",
     "text": "點擊圖片以取得詳細趴趴/卡片資料，點擊範圍可放大。點擊空心星星以進化卡片，再次點擊則可退化",
-    "error": "如果你一直看到此信息，你的瀏覽器並不支援顯示此網頁，請嘗試改用其他瀏覽器，如FireFox。"
+    "error": "檔案損毀或無效!",
+    "mistake": "你錯誤地把HOLDER1載入至HOLDER2!",
+    "features": "新功能! 儲存你的等級數據至檔案，以便你再次使用時可載入該數據。",
+    "warning": "於儲存/載入前請重置篩選，否則被篩走的數據將無法被記錄"
   },
 
   "UI": {
@@ -24,7 +27,9 @@
     "Select All": "全選",
     "Deselect All": "全不選",
     "Toggle All": "反選",
-    "Show level exp. table":"顯示等級經驗表"
+    "Show level exp. table":"顯示等級經驗表",
+    "Save": "儲存",
+    "Load": "載入"
   },
 
   "words": {

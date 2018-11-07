@@ -3,7 +3,10 @@
     "what is this": "Introduction text told user how to use",
     "title": "ぷちクエリ",
     "text": "(翻訳要求) Click Image to view further details. Click range figure can enlarge. Click empty star to evolve, click again to devolve",
-    "error": "このメッセージが引き続き表示される場合、ブラウザーはサポートされていません。 他のブラウザを使用してください, 例えば: Firefox"
+    "error": "破損または不正なファイル!",
+    "mistake": "You wrongly load HOLDER1 file to HOLDER2 page!",
+    "features": "NEW! Save all your set level to file and load them back for next time you come back!",
+    "warning": "Reset all filters before save/load, otherwise all filtered out data will be missed in file!"
   },
 
   "UI": {
@@ -24,7 +27,9 @@
     "Select All": "全部の選択",
     "Deselect All": "全部の選択を解除",
     "Toggle All": "反選択",
-    "Show level exp. table":"レベルExpテーブルの表示"
+    "Show level exp. table":"レベルExpテーブルの表示",
+    "Save": "保存",
+    "Load": "読む"
   },
 
   "words": {

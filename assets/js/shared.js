@@ -151,11 +151,13 @@ let loadHeaderLocale = (value) => {
 
 let save = () => {
     //Saving string to file using html clicking trick
-    alert(locale["msg"]["warning"]);
-    let obj = $table.bootstrapTable('getData', false);
-    const fileName = location.pathname.split("/").slice(-1)[0].replace(".html", "") + "Level.txt";
-    let blob = new Blob([JSON.stringify(obj)], {type: `Content-Disposition: attachment; filename=${fileName}; charset=utf-8`});
-    saveAs(blob, fileName);
+    if (confirm(locale["msg"]["warning"])) {
+        let obj = $table.bootstrapTable('getData', false);
+        const fileName = location.pathname.split("/").slice(-1)[0].replace(".html", "") + "Level.txt";
+        let blob = new Blob([JSON.stringify(obj)], {type: `Content-Disposition: attachment; filename=${fileName}; charset=utf-8`});
+        saveAs(blob, fileName);
+    }
+
     // let url = URL.createObjectURL(blob);
     // let elem = document.createElement("a");
     // elem.href = url;
@@ -202,12 +204,13 @@ let handleFiles = (files) => {
 };
 
 let load = () => {
-    alert(locale["msg"]["warning"]);
-    let elem = document.createElement("INPUT");
-    elem.setAttribute("type", "file");
-    elem.setAttribute("accept", ".txt");
-    elem.setAttribute("onchange", "handleFiles(this.files)");
-    elem.click();
+    if (confirm(locale["msg"]["warning"])) {
+        let elem = document.createElement("INPUT");
+        elem.setAttribute("type", "file");
+        elem.setAttribute("accept", ".txt");
+        elem.setAttribute("onchange", "handleFiles(this.files)");
+        elem.click();
+    }
 };
 
 // Without santizer, sth cannot pass through HTML name.

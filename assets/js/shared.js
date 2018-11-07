@@ -153,7 +153,7 @@ let save = () => {
     //Saving string to file using html clicking trick
     alert(locale["msg"]["warning"]);
     let obj = $table.bootstrapTable('getData', false);
-    let blob = new Blob([JSON.stringify(obj)], {type: "application/json;charset=utf-8"});
+    let blob = new Blob([JSON.stringify(obj)], {type: "application/octet-stream;charset=utf-8"});
     let url = URL.createObjectURL(blob);
     let elem = document.createElement("a");
     elem.href = url;

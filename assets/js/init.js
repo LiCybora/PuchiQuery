@@ -113,7 +113,7 @@ $(function () {
     let $localHead = $('#localeHead');
     $localHead.text(`${loadLocaleGeneral('title', 'msg')} - ${loadLocaleGeneral($localHead.data('v'), "UI")}`);
     $('#topBtn').html(`
-        <a type="button" href="index.html" target="_parent" class="btn btn-primary .btn-lg" role="button">
+        <a type="button" href="puchi.html" target="_parent" class="btn btn-primary .btn-lg" role="button">
             <img class="logo" src="assets/img/puchi.png"> <span class="UI" data-v="Puchi">${loadLocaleGeneral('Puchi', 'UI')}</span>
         </a>
         <a type="button"  href="card.html" target="_parent" class="btn btn-primary .btn-lg" role="button">

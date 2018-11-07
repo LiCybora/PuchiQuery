@@ -153,8 +153,16 @@ let save = () => {
     //Saving string to file using html clicking trick
     alert(locale["msg"]["warning"]);
     let obj = $table.bootstrapTable('getData', false);
-    let blob = new Blob([JSON.stringify(obj)], {type: "application/octet-stream;charset=utf-8"});
-    saveAs(blob, location.pathname.split("/").slice(-1)[0].replace(".html", "") + "Level.txt");
+    const fileName = location.pathname.split("/").slice(-1)[0].replace(".html", "") + "Level.txt";
+    let blob = new Blob([JSON.stringify(obj)], {type: `application/octet-stream;headers=Content-Disposition: attachment; filename=${fileName}; charset=utf-8`});
+    saveAs(blob, fileName);
+    // let url = URL.createObjectURL(blob);
+    // let elem = document.createElement("a");
+    // elem.href = url;
+    // elem.download = location.pathname.split("/").slice(-1)[0].replace(".html", "") + "Level.txt";
+    // document.body.appendChild(elem);
+    // elem.click();
+    // document.body.removeChild(elem);
 };
 
 let handleFiles = (files) => {

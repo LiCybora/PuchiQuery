@@ -1,8 +1,8 @@
 const cardFilterable = [
     'minRarity', 'maxRarity', 'rarity', 'skill', 'trigger', 'match', 'SpecialSkillType', 'SpecialSkill', 'category'
 ];
-const cardImageSrc = "https://images.weserv.nl/?url=puchi-xet.loveliv.es/cardsmall/cardsmallHOLDER.png&w=128&h=128&crop=128,72,0,28";
-const cardImageSrcL = "https://images.weserv.nl/?url=puchi-xet.loveliv.es/cardsmall/cardsmallHOLDER.png&crop=256,144,0,56";
+const cardImageSrc = "https://at7j5fltn.cloudimg.io/crop_px/0,56,256,200-128x72/n/_imgsrc_/cardsmallHOLDER.png";
+const cardImageSrcL = "https://at7j5fltn.cloudimg.io/crop_px/0,56,256,200-256x144/n/_imgsrc_/cardsmallHOLDER.png";
 const rarityList = {
     '1': 'N',
     '2': 'N',

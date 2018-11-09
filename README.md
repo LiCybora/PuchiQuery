@@ -18,3 +18,7 @@ submit pull request with filled `assets/locale/template.json` and rename it to
 your locale code then I will merge it. You may also direct edit the existing json
  if you think the existing translation is wrong, and I will look for it. All 
  translated works will be credited by your GitHub name.
+ 
+## License
+The project (code) is released under AGPLv3.0, while all image resources are 
+copyrighted and not owned by me are excluded from the free license. 

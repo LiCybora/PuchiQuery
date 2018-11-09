@@ -355,7 +355,7 @@ $(function () {
                     });
                 }
                 let last = LvData[parseInt(row["maxRarity"]) * 10 - 1];
-                last["next"] = "MAX";
+                last["next exp."] = "MAX";
                 $(`#detailTable${parseInt(row["maxRarity"]) - 1}`).bootstrapTable('append', last);
                 $('#detail').modal('show');
             }

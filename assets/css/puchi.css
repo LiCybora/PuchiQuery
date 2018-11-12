@@ -17,8 +17,10 @@
     text-align: center;
 }
 
-.modal-dialog {
-    height: 101%;
+.modal-open {
+    overflow: scroll;
+    -webkit-overflow-scrolling: touch;
+    z-index: 10;
 }
 
 .lefter {

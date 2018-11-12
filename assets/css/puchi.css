@@ -17,11 +17,38 @@
     text-align: center;
 }
 
+.modal {
+    overflow-y: disabled !important;
+}
+
+.modal-dialog {
+
+}
+
+.modal-content {
+    width: 100% !important;
+}
+
+.modal-header {
+    position: fixed;
+    width: inherit;
+    height: 4.25em !important;
+}
+
+.modal-body {
+    width: inherit;
+    margin-top: 6.25em;
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+
 .lefter {
     font-size: 150%;
     float: left;
 }
 .righter {
+    margin-top: -0.125em;
     font-size: 150%;
     float: right;
 }
@@ -30,6 +57,7 @@
     margin: auto;
 }
 .lefter2{
+    margin-top: -1.25em !important;
     float: left;
     width: 54%;
     margin-left: 0.5%;

@@ -36,6 +36,8 @@ const fieldTitle = {
     name: "Char",
     match: "Char",
     SSEffect: "SS Effect",
+    "total candy": "Total<br/>Candy",
+    "total ticket": "Total<br/>Ticket",
     "score/lv": "Score/Lv"
 };
 
@@ -78,6 +80,13 @@ let refreshLocale = (lang, filterable)=> {
     let $localHead = $('#localeHead');
     $localHead.text(`${loadLocaleGeneral('title', 'msg')} - ${loadLocaleGeneral($localHead.data('v'), "UI")}`);
     $(document).prop('title', $localHead.text());
+    let expField = {};
+    for (let each in LvData[0]) {
+        expField[each] = loadHeaderLocale(fillTitle(each));
+    }
+    for (let i = 0; i < LvData.length / 10; ++i) {
+        $(`#LvTable${i}`).bootstrapTable("changeTitle", expField);
+    }
 };
 
 let rotateArrow = (self)=> {

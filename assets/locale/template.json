@@ -27,7 +27,9 @@
     "Select All": "",
     "Deselect All": "",
     "Toggle All": "",
-    "Show level exp. table": "",
+    "Show Lv Exp. Table": "",
+    "Level Experience Table": "",
+    "Show Level Score Table": "",
     "Save": "",
     "Load": ""
   },
@@ -81,7 +83,9 @@
     "SS Type":"",
     "SS":"",
     "SS Effect":"",
-    "CT": ""
+    "CT": "",
+    "Total Candy": "",
+    "Total Ticket": ""
   },
 
   "quantity": {

@@ -18,7 +18,7 @@ const formatter = {
     "effect": passiveEffectFormatter,
     "rate": passiveRateFormatter,
 };
-
+let skillLvData = {};
 let scoreDependent = (value, row) => value + (row["lv"] - 1) * row["score/lv"];
 let ALvDependent = (value, row) => generalLvDependent(value, row, (row) => row["S.Lv"] - 1);
 let PLvDependent = (value, row) => generalLvDependent(value, row, (row) => ~~(row["lv"] / 10));
@@ -68,7 +68,7 @@ let renderScoreTable = (base, rise) =>  {
 };
 
 let renderActiveTable = (row, detailCol, lvDependent, table)=> {
-    const extraData = LvData.find(entry => entry.ID === row.ID);   // Get correct record
+    const extraData = skillLvData.find(entry => entry.ID === row.ID);   // Get correct record
     let lvSize = extraData[detailCol[1]] === undefined ? row[detailCol[1]].length : extraData[detailCol[1]].length;
     if (detailCol[1].valueOf() === "effect")  {
         // FIXME:hardcoded
@@ -133,10 +133,48 @@ $(function () {
         <button type="button" class="btn btn-success UI" data-v="Set All Lv" onclick="setAllLv('lv', 50)">${loadLocaleGeneral('Set All Lv', "UI")}</button>
         <button type="button" class="btn btn-warning UI" data-v="Set All Skill Lv" onclick="setAllLv('S.Lv', 10)">${loadLocaleGeneral('Set All Skill Lv', "UI")}</button>
     `);
+    // Load lv-dependent data
+    $.getJSON("json/puchiLevel.json", function (data) {
+        let tmpData = [];
+        data.forEach((row, index, array) => {
+            let currLv = {};
+            currLv["level"] = row["level"];
+            currLv["next exp."] = index < data.length - 1 ? array[index + 1]["experience"] : 'MAX';
+            currLv["total exp."] = 0;
+            for (let i = 0; i <= index; ++i) {
+                currLv["total exp."] += array[i]["experience"];
+            }
+            currLv["total candy"] = currLv["total exp."] / 2000;
+            currLv["gold"] = row["gold"];
+            tmpData.push(currLv);
+        });
+        LvData = tmpData;
 
+        let divideTable = '';
+        for (let i = 0; i < LvData.length / 10; ++i) {
+            divideTable += `<div class="col-xs-6 col-md-4"><table id="LvTable${i}"></table></div>`;
+        }
+        $(`#LvTableLabel`).html(loadLocaleGeneral('Level Experience Table', 'UI'));
+        $(`#LvTableContent`).html(divideTable);
+        let keys = Object.keys(LvData[0]);
+        let columns = [];
+        for (let key of keys) {
+            let column = {
+                field: key,
+                title: loadHeaderLocale(fillTitle(key)),
+            };
+            columns.push(column);
+        }
+        for (let i = 0; i < LvData.length / 10; ++i) {
+            $(`#LvTable${i}`).bootstrapTable({
+                columns: columns,
+                data: LvData.slice(i * 10, (i + 1) * 10),
+            });
+        }
+    });
     // Load lv-dependent data
     $.getJSON("json/puchiDetail.json", function (skillData) {
-        LvData = skillData;
+        skillLvData = skillData;
     });
     // Load display data
     $.getJSON("json/puchiTable.json", function (data) {

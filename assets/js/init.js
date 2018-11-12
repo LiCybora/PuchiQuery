@@ -126,18 +126,15 @@ $(function () {
     $('#filter-bar').html(`
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#filter">
             <span class="glyphicon glyphicon-filter"></span> <span class="UI" data-v="Filter">${loadLocaleGeneral('Filter', 'UI')}</span>
-        </button>`
-    );
-    $('#filter-bar').append(`
+        </button>
         <button type="button" class="btn btn-Basic" onclick="save()">
             <span class="glyphicon glyphicon-save"></span> <span class="UI" data-v="Save">${loadLocaleGeneral('Save', 'UI')}</span>
-        </button>`
-    );
-    $('#filter-bar').append(`
+        </button>
         <button type="button" class="btn btn-default" onclick="load()">
             <span class="glyphicon glyphicon-open"></span> <span class="UI" data-v="Load">${loadLocaleGeneral('Load', 'UI')}</span>
-        </button>`
-    );
+        </button>
+        <button type="button" class="btn btn-info UI" data-toggle="modal" data-target="#LvTable" data-v="Show Lv Exp. Table">${loadLocaleGeneral('Show Lv Exp. Table', 'UI')}</button>
+    `);
     $('#filterBtnTop').html(`
          <button class="btn btn-default" id="collapseAll">
             <span class="glyphicon glyphicon-expand"></span> <span class="UI" data-v="Collapse All">${loadLocaleGeneral('Collapse All', 'UI')}</span>
@@ -160,6 +157,11 @@ $(function () {
     );
     $('#filterHead').html(`<h2 class="modal-title UI" data-v="Filter" id="filterLabel">${loadLocaleGeneral('Filter', 'UI')}</h2>`);
     $('#detailBtn').html(`
+        <button type="button" class="btn btn-danger" data-dismiss="modal">
+            <span class="glyphicon glyphicon-remove"></span> <span data-v="Close" class="UI">${loadLocaleGeneral('Close', 'UI')}</span>
+        </button>
+    `);
+    $('#LvBtn').html(`
         <button type="button" class="btn btn-danger" data-dismiss="modal">
             <span class="glyphicon glyphicon-remove"></span> <span data-v="Close" class="UI">${loadLocaleGeneral('Close', 'UI')}</span>
         </button>

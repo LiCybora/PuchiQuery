@@ -27,7 +27,9 @@
     "Select All": "全部の選択",
     "Deselect All": "全部の選択を解除",
     "Toggle All": "反選択",
-    "Show level exp. table":"レベルExpテーブルの表示",
+    "Show Lv Exp. Table":"レベルExpテーブルの表示",
+    "Level Experience Table":"レベルExpテーブル",
+    "Show Level Score Table": "レベルスコアテーブルの表示",
     "Save": "保存",
     "Load": "読む"
   },
@@ -61,7 +63,7 @@
     "Passive Effect":"特技効果",
     "Range": "範囲",
     "Next Exp.": "次のレベル",
-    "Total Exp.": "Exp累積",
+    "Total Exp.": "経験<br/>累積",
     "Card Name":"カード名",
     "Category":"図鑑",
     "Rarity":"レア",
@@ -73,7 +75,9 @@
     "SS Type":"SS種類",
     "SS":"",
     "SS Effect":"SS効果",
-    "CT": ""
+    "CT": "",
+    "Total Candy": "キャンディ<br/>累積",
+    "Total Ticket": "チケット<br/>累積"
   },
 
   "quantity": {

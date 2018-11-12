@@ -103,8 +103,8 @@ $(function () {
     $('#filter-bar').append(`
             <button type="button" class="btn btn-success UI" data-v="Set All Lv" onclick="setAllLv('lv', 60)">${loadLocaleGeneral('Set All Lv', "UI")}</button>
             <button type="button" class="btn btn-warning UI" data-v="Evolve All" onclick="evolveAll(true)">${loadLocaleGeneral('Evolve All', "UI")}</button>
-            <button type="button" class="btn btn-danger UI" data-v="Devolve All" onclick="evolveAll(false)">${loadLocaleGeneral('Devolve All', "UI")}</button>`
-    );
+            <button type="button" class="btn btn-danger UI" data-v="Devolve All" onclick="evolveAll(false)">${loadLocaleGeneral('Devolve All', "UI")}</button>
+    `);
     $.getJSON("json/cardDetail.json", function (data) {
         let tmpData = [];
         data.forEach((row, index, array) => {
@@ -115,10 +115,41 @@ $(function () {
             for (let i = 0; i <= index; ++i) {
                 currLv["total exp."] += array[i]["experience"];
             }
+            currLv["total ticket"] = currLv["total exp."] / 100;
             currLv["scoreGrowthRate"] = row["scoreGrowthRate"];
             tmpData.push(currLv);
         });
         LvData = tmpData;
+
+        let divideTable = '';
+        for (let i = 0; i < LvData.length / 10; ++i) {
+            divideTable += `<div class="col-xs-6 col-md-4"><table id="LvTable${i}"></table></div>`;
+        }
+        $(`#LvTableLabel`).html(loadLocaleGeneral('Level Experience Table', 'UI'));
+        $(`#LvTableContent`).html(divideTable);
+        let keys = Object.keys(LvData[0]);
+        let columns = [];
+        for (let key of keys) {
+            let column = {
+                field: key,
+                title: loadHeaderLocale(fillTitle(key)),
+            };
+            switch (key.valueOf()) {
+                case "scoreGrowthRate":
+                    column.formatter = (value) => {
+                        return value / 10 + '%';
+                    };
+                    break;
+            }
+            columns.push(column);
+        }
+        for (let i = 0; i < LvData.length / 10; ++i) {
+            $(`#LvTable${i}`).bootstrapTable({
+                columns: columns,
+                data: LvData.slice(i * 10, (i + 1) * 10),
+            });
+        }
+
     });
     $.getJSON("json/cardTable.json", function (data) {
         // Make columns
@@ -307,20 +338,20 @@ $(function () {
                 $detailContent.html(Description);
                 let makeTable = '';
                 for (let i = 0; i < parseInt(row["maxRarity"]); ++i) {
-                    makeTable += `<div class="col-md-4"><table id="detailTable${i}"></table></div>`;
+                    makeTable += `<div class="col-xs-4 col-md-2"><table id="detailTable${i}"></table></div>`;
                 }
                 let btnAttr = `data-toggle="collapse" data-target="#levelTable" aria-expanded="false" aria-controls="levelTable"`;
-                let fieldName = `<div class="lefter">${loadLocaleGeneral("Show level exp. table", "UI")}</div>`;
+                let fieldName = `<div class="lefter">${loadLocaleGeneral("Show Level Score Table", "UI")}</div>`;
                 let menuSym = `<div class="righter"><span class="glyphicon glyphicon-chevron-right"></span></div>`;
-                let btn = `<button class="btn btn-info btn-block menu UI" data-v="Show level exp. table" ${btnAttr} onclick="rotateArrow(this)">${fieldName}${menuSym}</button>`;
+                let btn = `<button class="btn btn-info btn-block menu UI" data-v="Show Level Score Table" ${btnAttr} onclick="rotateArrow(this)">${fieldName}${menuSym}</button>`;
                 $detailContent.append(`<p>${btn}<div class="collapse" id="levelTable">${makeTable}</div></p>`);
                 let keys = Object.keys(LvData[0]);
                 let columns = [];
                 for (let key of keys) {
+                    if (key === "next exp." || key === "total exp." || key === "total ticket") continue;
                     let column = {
                         field: key,
                         title: loadHeaderLocale(fillTitle(key)),
-                        width: key === "scoreGrowthRate" ? "40%" : "1px",
                         formatter: (value, curRow) => {
                             if (curRow["level"] > parseInt(row["minRarity"]) * 10) {
                                 return `<div class="evolved">${value}</div>`
@@ -351,12 +382,9 @@ $(function () {
                 for (let i = 0; i < parseInt(row["maxRarity"]); ++i) {
                     $(`#detailTable${i}`).bootstrapTable({
                         columns: columns,
-                        data: LvData.slice(i * 10, ((i + 1) * 10) + (i < parseInt(row["maxRarity"]) - 1 ? 0 : -1)),
+                        data: LvData.slice(i * 10, (i + 1) * 10),
                     });
                 }
-                let last = LvData[parseInt(row["maxRarity"]) * 10 - 1];
-                last["next exp."] = "MAX";
-                $(`#detailTable${parseInt(row["maxRarity"]) - 1}`).bootstrapTable('append', last);
                 $('#detail').modal('show');
             }
         });

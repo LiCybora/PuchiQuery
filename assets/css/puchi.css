@@ -6,19 +6,12 @@
     margin-bottom: -2em;
 }
 
-.modal-open .modal.fade .modal-dialog {
-    -webkit-overflow-scrolling: touch;
-    -webkit-transform: translate3d(0, 0, 0);
-    overflow-y: scroll;
-}
-
 .container {
     max-width: 1200px;
     width: 95%;
 }
 
 .centerModal .modal-dialog {
-    top: 25% !important;
     width: 25em;
     max-width: 100%;
     text-align: center;

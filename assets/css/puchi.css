@@ -6,6 +6,10 @@
     margin-bottom: -2em;
 }
 
+.modal-open .modal.fade .modal-dialog {
+    -webkit-overflow-scrolling: touch;
+}
+
 .container {
     max-width: 1200px;
     width: 95%;

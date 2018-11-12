@@ -3,7 +3,8 @@ A table for easy query of Puchiguru game data
 
 Project site: [https://puchiquery.dynu.net](https://puchiquery.dynu.net). Report 
 issue if anything goes wrong. If you see nothing, try browsing it with Firefox/
-Chrome or Safari on iOS. These are tested and works, but untested any other.
+Chrome. For iOS, scrolling problem is unsolvable even you use Chrome or Firefox. 
+Please go complaint fucking Apple instead. The only workaround is portrait view.
 
 Inspired by [ieb project](https://puchi-next.loveliv.es/), with filter/sorting 
 for easy data query.

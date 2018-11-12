@@ -17,6 +17,10 @@
     text-align: center;
 }
 
+.modal-dialog {
+    height: 101%;
+}
+
 .lefter {
     font-size: 150%;
     float: left;

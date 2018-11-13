@@ -213,3 +213,7 @@
 .icon {
     height: 3em;
 }
+
+.compact {
+    padding-right: 0.25em !important;
+}

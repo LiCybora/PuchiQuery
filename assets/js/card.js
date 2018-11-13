@@ -164,7 +164,7 @@ $(function () {
                 sorter: regexSorter,
                 dependency: evolveDependent,
                 formatter: translateFormatter,
-                cellStyle : () => ({css: {"padding-right": "0.25em"}}),
+                cellStyle : () => ({classes: "compact"}),
         };
             switch(key.valueOf()) {
                 case "ID":
@@ -210,7 +210,7 @@ $(function () {
                     column.filterFormatter = rarityFilterFormatter;
                     break;
                 case "score":
-                    column.cellStyle = () => ({css: {"padding-right": "0.25em", "width": "4.25em"}});
+                    column.cellStyle = () => ({classes: "compact", css: {"width": "4.125em"}});
                     column.dependency = cardScoreDependent;
                     column.formatter = cardScoreFormatter;
                     column.visible = key.valueOf() === "score";
@@ -232,7 +232,7 @@ $(function () {
                 case "SSEffect":
                     column.formatter = paramsFormatterGraphical;
                     column.sortFormatter = paramsFormatter;
-                    column.cellStyle = ()=>({css:{"max-width": "17em"}});
+                    column.cellStyle = ()=>({classes: "compact", css:{"max-width": "17em"}});
                     break;
                 case "SpecialSkillType":
                     column.visible = false;

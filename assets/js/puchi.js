@@ -189,7 +189,7 @@ $(function () {
                 sortable: true,
                 sorter: regexSorter,
                 formatter: translateFormatter,
-                cellStyle : () => ({css: {"padding-right": "0.25em"}}),
+                cellStyle : () => ({classes: "compact"}),
             };
             switch (key.valueOf()) {
                 case "ID":
@@ -209,7 +209,7 @@ $(function () {
                 case "score":
                     column.dependency = scoreDependent;
                     column.formatter = scoreFormatter;
-                    column.cellStyle = () => ({css: {"padding-right": "0.25em", "width": "4.5em"}});
+                    column.cellStyle = () => ({classes: "compact", css: {"width": "4.5em"}});
                     break;
                 case "passiveSkill":
                 case "condition":

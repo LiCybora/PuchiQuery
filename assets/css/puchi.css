@@ -35,8 +35,8 @@
 }
 .lefter2{
     float: left;
-    width: 54%;
-    margin-left: 0.5%;
+    width: 53%;
+    margin-left: 2%;
 }
 .righter2{
     float: right;
@@ -44,7 +44,6 @@
     margin-right: 2%;
 }
 .detailATableContainer/*, .detailPTableContainer*/ {
-    width: 85%;
     margin: auto;
 }
 

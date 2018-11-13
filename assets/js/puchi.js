@@ -203,7 +203,6 @@ $(function () {
                         mode: "inline",
                         showbuttons: "bottom",
                     };
-                    column.sortable = false;
                     column.width = '1px';
                     break;
                 case "score":

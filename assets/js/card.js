@@ -190,7 +190,6 @@ $(function () {
                     break;
                 case "lv":
                     column.width = "1px";
-                    column.sortable = false;
                     column.formatter = lvLimitFormatter;
                     column.editable = {
                         tpl: makeLvInput(60),   // not important: maxLv overwrite at runtime

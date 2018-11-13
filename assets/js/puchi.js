@@ -209,7 +209,7 @@ $(function () {
                 case "score":
                     column.dependency = scoreDependent;
                     column.formatter = scoreFormatter;
-                    column.cellStyle = () => ({classes: "compact", css: {"width": "4.5em", "padding-right": "0"}});
+                    column.cellStyle = () => ({classes: "compact", css: {"width": "4.5em", "padding-right": "0 !important"}});
                     break;
                 case "passiveSkill":
                 case "condition":

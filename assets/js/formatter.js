@@ -167,3 +167,21 @@ let translateFormatter = (value) => {
         return value;
     }
 };
+
+let rangeSorter = (A, B, RA, RB) => {
+    let ha = hamming(A), hb = hamming(B);
+    if (ha > hb) {
+        return 1;
+    } else if (hb > ha) {
+        return -1;
+    }
+    let shapeSort = regexSorter(A, B);
+    if (shapeSort) {
+        return shapeSort;
+    }
+    if ("activeSkill" in RA) {
+        return regexSorter(ALvDependent(RA["activeSkill"]), ALvDependent(RB["activeSkill"]));
+    } else if ("SS" in RA) {
+        return regexSorter(evolveDependent(RA["SS"]), evolveDependent(RB["SS"]));
+    }
+};

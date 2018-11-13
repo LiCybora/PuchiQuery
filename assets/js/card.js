@@ -210,7 +210,7 @@ $(function () {
                     column.filterFormatter = rarityFilterFormatter;
                     break;
                 case "score":
-                    column.width = "1px";
+                    column.cellStyle = () => ({css: {"width": "4.5em"}});
                     column.dependency = cardScoreDependent;
                     column.formatter = cardScoreFormatter;
                     column.visible = key.valueOf() === "score";
@@ -232,7 +232,7 @@ $(function () {
                 case "SSEffect":
                     column.formatter = paramsFormatterGraphical;
                     column.sortFormatter = paramsFormatter;
-                    column.cellStyle = ()=>({css:{"max-width": "145px"}});
+                    column.cellStyle = ()=>({css:{"max-width": "17em"}});
                     break;
                 case "SpecialSkillType":
                     column.visible = false;
@@ -242,7 +242,7 @@ $(function () {
                     break;
                 case "binaryMap":
                     column.width = "1px";
-                    column.sortable = false;
+                    column.sortter = rangeSorter;
                     column.formatter = rangeFormatter;
                     break;
                     // hidden

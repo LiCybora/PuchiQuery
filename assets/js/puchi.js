@@ -209,6 +209,7 @@ $(function () {
                 case "score":
                     column.dependency = scoreDependent;
                     column.formatter = scoreFormatter;
+                    column.cellStyle = () => ({css: {"width": "5em"}});
                     break;
                 case "passiveSkill":
                 case "condition":
@@ -244,19 +245,7 @@ $(function () {
                 case "range":
                     column.formatter = rangeFormatter;
                     column.width = "1px";
-                    column.sorter = (A, B, RA, RB) => {
-                        let ha = hamming(A), hb = hamming(B);
-                        if (ha > hb) {
-                            return 1;
-                        } else if (hb > ha) {
-                            return -1;
-                        }
-                        let shapeSort = regexSorter(A, B);
-                        if (shapeSort) {
-                            return shapeSort;
-                        }
-                        return regexSorter(ALvDependent(RA["activeSkill"]), ALvDependent(RB["activeSkill"]));
-                    };
+                    column.sorter = rangeSorter;
                     column.dependency = ALvDependent;
                     break;
             }

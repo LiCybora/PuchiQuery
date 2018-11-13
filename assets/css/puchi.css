@@ -17,6 +17,10 @@
     text-align: center;
 }
 
+.fixed-table-container thead th .sortable {
+    padding: 0.5em 1.125em 0.5em 0.5em;
+}
+
 .lefter {
     font-size: 150%;
     float: left;

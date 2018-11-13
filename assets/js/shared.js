@@ -478,11 +478,27 @@ let setAllLv = function(field, LvMax) {
     });
 };
 
+let hamming = (hex) => {
+    let set = 0;
+    try {
+        for (let i = 0, l = hex.length, step = 8; i < l; i+=step) {
+            let cur = parseInt(hex.slice(i, i+step), 16);
+            cur = cur - ((cur >>> 1) & 0x55555555);
+            cur = (cur & 0x33333333) + ((cur >>> 2) & 0x33333333);
+            set += (((cur + (cur >>> 4)) & 0x0F0F0F0F) * 0x01010101) >>> 24;
+        }
+        return isNaN(set) ? 0 : set / (hex.length * 4);
+    } catch (e) {
+        return 0;
+    }
+};
+
 let showRange = (self) => {
+    let data = self.getAttribute("data-bmp");
     BootstrapDialog.show({
         size: BootstrapDialog.SIZE_LARGE,
-        title: loadHeaderLocale('Range'),
-        message: hex2binMap(self.getAttribute("data-bmp")),
+        title: `${loadHeaderLocale('Range')} ${hamming(data) * 100}%`,
+        message: hex2binMap(data),
         cssClass: 'centerModal',
         buttons: [{
             label: loadLocaleGeneral('Close', 'UI'),

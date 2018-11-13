@@ -244,7 +244,19 @@ $(function () {
                 case "range":
                     column.formatter = rangeFormatter;
                     column.width = "1px";
-                    column.sortable = false;
+                    column.sorter = (A, B, RA, RB) => {
+                        let ha = hamming(A), hb = hamming(B);
+                        if (ha > hb) {
+                            return 1;
+                        } else if (hb > ha) {
+                            return -1;
+                        }
+                        let shapeSort = regexSorter(A, B);
+                        if (shapeSort) {
+                            return shapeSort;
+                        }
+                        return regexSorter(ALvDependent(RA["activeSkill"]), ALvDependent(RB["activeSkill"]));
+                    };
                     column.dependency = ALvDependent;
                     break;
             }

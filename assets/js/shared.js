@@ -233,11 +233,70 @@ let hex2binMap = function(hex) {
         bin += '<tr>';
         let cur = parseInt(hex.slice(i, i+step), 16).toString(2).padStart(16, '0');
         cur.split('').forEach((c) => {
-            bin += `<td class="${c === '0' ? "white" : "dark"}"></td>`;
+            bin += `<td class="${c === '0' ? "white" : "red"}"></td>`;
         });
         bin += '<tr/>'
     }
     return bin + '</table>';
+};
+
+let hex2binMapv2 = function(hex) {
+    let bin = [];
+    for (let i = 0, l = hex.length, step = 4; i < l; i+=step) {
+        let cur = parseInt(hex.slice(i, i+step), 16).toString(2).padStart(16, '0');
+        bin.push(cur);
+    }
+    let newBin = [];
+    bin.forEach((row, y, arr)=> {
+        let newStr = [];
+        let oldStr = row.split('');
+        oldStr.forEach((value, x, ent)=> {
+            // assume puchi sized in 2x2.
+            // assume penalty for the upper case due to gravity, 0.5 for upper layer, + 0.05 for each layer.
+            // assume reward for middle layer, from upper until 1.2 for each layer (1.3 for middlest 2)
+            // assume no reward for bottom
+            let w = 0;
+            let curVal = 0;
+
+            // left top
+            if (y !== 0 && x !== 0) {
+                curVal += Math.max(parseInt(arr[y-1][x-1]), parseInt(arr[y-1][x]), parseInt(arr[y][x-1]), parseInt(arr[y][x]));
+                ++w;
+            }
+            // left bottom
+            if (y !== arr.length - 1 && x !== 0) {
+                curVal += Math.max(parseInt(arr[y + 1][x - 1]), parseInt(arr[y + 1][x]), parseInt(arr[y][x - 1]), parseInt(arr[y][x]));
+                ++w;
+            }
+            // right top
+            if (y !== 0 && x !== arr.length - 1) {
+                curVal += Math.max(parseInt(arr[y - 1][x + 1]), parseInt(arr[y - 1][x]), parseInt(arr[y][x + 1]), parseInt(arr[y][x]));
+                ++w;
+            }
+            // right bottom
+            if (y !== arr.length - 1 && x !== arr.length - 1) {
+                curVal += Math.max(parseInt(arr[y + 1][x + 1]), parseInt(arr[y + 1][x]), parseInt(arr[y][x + 1]), parseInt(arr[y][x]));
+                ++w;
+            }
+            curVal /= w;
+            newStr.push(curVal);
+        });
+        newBin.push(newStr);
+    });
+    let expRate = 0;
+    let maxRate = 0;
+    let tab = '<table class="bmpt">';
+    newBin.forEach((each, y) => {
+        tab += '<tr>';
+        each.forEach((c) => {
+            tab += `<td ${c === 1 ? "class='red'" : `style="background-color: rgb(${(1-c)*255}, ${(1-c)*255}, ${255})"`}></td>`;
+            let penalty = (0.5 + 0.1 * (y <= 8 ? y : y <= 9 ? 8 : y < 13 ? 7 : 5));
+            expRate += c * penalty;
+            maxRate += Math.ceil(c) * penalty;
+        });
+        tab += '<tr/>'
+    });
+    return [tab + '</table>', expRate / 256, maxRate / 256];
 };
 
 // Sorting
@@ -495,11 +554,22 @@ let hamming = (hex) => {
 
 let showRange = (self) => {
     let data = self.getAttribute("data-bmp");
+    let shown = hex2binMapv2(data);
+    let msg = '';
+    msg += `${loadLocaleGeneral('Absolute Range', 'words')}: ${hamming(data) * 100}%<br/>`;
+    msg += `${loadLocaleGeneral('Estimated Range', 'words')}: ${(shown[1]*100).toFixed(2)}~${(shown[2]*100).toFixed(2)}%<br/>`;
+    msg += `${loadLocaleGeneral('Estimated # of Puchi', 'words')}: ${Math.round(45*shown[1])}~${Math.ceil(45*shown[2])}<br/>`;
+    msg += `(${loadLocaleGeneral('Estimation just for reference', 'words')})`;
+    msg += shown[0];
+    msg += `${loadLocaleGeneral('Red', 'words')}: ${loadLocaleGeneral('Real', 'words')}, `;
+    msg += `${loadLocaleGeneral('Blue', 'words')}: ${loadLocaleGeneral('Marginal', 'words')}`;
+    msg += `<br/><a href="range.html">More Info</a> (English Only)`;
+
     BootstrapDialog.show({
         size: BootstrapDialog.SIZE_LARGE,
-        title: `${loadHeaderLocale('Range')} ${hamming(data) * 100}%`,
-        message: hex2binMap(data),
-        cssClass: 'centerModal',
+        title: `${loadHeaderLocale('Range')} (Beta)`,
+        message: msg,
+        cssClass: 'ranger',
         buttons: [{
             label: loadLocaleGeneral('Close', 'UI'),
             cssClass: 'btn-primary',

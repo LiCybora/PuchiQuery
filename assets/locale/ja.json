@@ -36,8 +36,16 @@
 
   "words": {
     "what is this": "All original data are in japanese and not required, but msg from me may be wrong translated and corrected here",
-      "通常ボム": "通常のボム",
-      "消去数>=11時に...出現確定": ""
+    "通常ボム": "通常のボム",
+    "消去数>=11時に...出現確定": "",
+    "Absolute Range": "絶対範囲",
+    "Estimated Range": "予想の範囲",
+    "Estimated # of Puchi": "予想のぷち数",
+    "Estimation just for reference": "推定値は参照用です",
+    "Real": "真箇範囲",
+    "Marginal": "境界範囲",
+    "Red": "赤",
+    "Blue": "青"
   },
 
   "header": {

@@ -17,6 +17,12 @@
     text-align: center;
 }
 
+.ranger .modal-dialog {
+    width: 25em;
+    max-width: 100%;
+    text-align: justify;
+}
+
 .fixed-table-container thead th .sortable {
     padding: 0.5em 1.125em 0.5em 0.5em;
 }
@@ -176,24 +182,41 @@
     border: none;
 }
 
-.centerModal .bmpt {
+.ranger .bmpt {
     table-layout: fixed !important;
     width: 16em !important;
     margin: auto !important;
 }
 
-.centerModal .bmpt > tbody > tr > td {
+.ranger .bmpt > tbody > tr > td {
     width: 1em !important;
     height: 1em !important;
 }
 
 .dark {
+    background-color: black;
+}
+
+.red {
     background-color: red;
 }
 
 .white {
     background-color: white;
 }
+
+.blue {
+    background-color: blue;
+}
+
+.green {
+    background-color: green;
+}
+
+.yellow {
+    background-color: yellow;
+}
+
 
 .editor {
     width: 6.25em !important;

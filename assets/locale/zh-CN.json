@@ -45,7 +45,15 @@
     "センター以外": "Center除外",
     "未進化": "未进化",
     "進化済": "已进化",
-    "消去数>=11時に...出現確定": "消除量>=11时生成的炸弹种类必为"
+    "消去数>=11時に...出現確定": "消除量>=11时生成的炸弹种类必为",
+    "Absolute Range": "绝对范围",
+    "Estimated Range": "估算范围",
+    "Estimated # of Puchi": "估算范围影响趴趴数",
+    "Estimation just for reference": "估算只供参考",
+    "Real": "真确范围",
+    "Marginal": "擦边范围",
+    "Red": "红",
+    "Blue": "蓝"
   },
 
   "header": {

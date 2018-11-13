@@ -1,0 +1,73 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PuchiQuery - Puchi</title>
+    <meta charset="utf-8">
+    <meta name="description" content="A table for easy query of game Puchiguru Lovelive! data, such as card and puchi skill">
+    <meta name="keywords" content="puchi, puchiguru, lovelive, love live, ぷちグル, ぷち, 趴趴, query, ぷちクエリ, 查詢器, 查询器" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/puchi.css">
+    <script
+            src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js" crossorigin="anonymous"></script>
+</head>
+<body style="background-color: lightgrey; font-size: 18px; text-align: justify">
+<div class="container">
+    <h1 id="range-approximation">Range Approximation</h1>
+    <p>As the letter range does not truly reveal the real range, you may rely on the range map like this:</p>
+    <div class="figure">
+        <img src="assets/img/Range0.PNG">
+    </div>
+    <p>However, the range only told you affected area, but not mention how many Puchi is affected. Of course with given
+        range-to-screen ratio, and we know maximum number of Puchi on screen is 45, we can directly calculated by
+        ratio x 45.</p>
+    <p>Let's take Raincoat Yoshiko and Pirate Hanayo at Lv 10 as example:</p>
+    <div class="figure">
+        <img src="assets/img/Range0.PNG">
+        <img src="assets/img/Range1.PNG">
+    </div>
+    <p>Cleared by Yoshiko = 0.14 x 45 = <span style="color:red">6.3</span><br/>Cleared by Hanayo = 0.5 x 45 = 22.5</p>
+    <p>You may get shocked. If you have Yoshiko, you know at Lv 10 she at least clear 21, and even more. So what's wrong?
+        The given range only represent the affected area. Any Puchi touching that area will take effect, not necessarily
+        inside the area. Yoshiko's range is scattered many place, it make no sense for a large Puchi within the tiny grid.
+        Therefore, we need to consider boundary case.</p>
+    <p>For simplicity, assume all Puchi are 2x2 grids, the screen is 16x16 grids. Then, we take 2x2 maximal filter over
+        the 16x16 grids and normalize it. This means for each grid, there are at most 4 possible cases that a Puchi
+        occupying this grid. Therefore, we get probability to normalize each grid. Thus, we have this:</p>
+    <div class="figure">
+        <img src="assets/img/Range2.PNG">
+        <img src="assets/img/Range3.PNG">
+    </div>
+    <p>With some modification, the range looks more close to Yoshiko's real range. The blue indicate the marginal case
+        where a Puchi may touch the red grid boundary instead of inside it. The darker of blue, the higher probability
+        it touch the red. The new expeceted clear is 13~23. Without taking probability, 23 is close to real. It looks
+        good? No, Also perform the same to Hanayo, she now get expected 53.125% range and at most 56.25%, after
+        multiplication, she is expected to clear 23~26 Puchi. Again if you have Hanayo, you know it is slightly
+        overestimated. What's wrong now?</p>
+    <p>We omitted the gravity issue. Due to gravitation, Puchi are not equally distributed everywhere on screen.
+        Denser in the middle, and less on top and bottom (due to round angle shaped for bottom). To simply deal with
+        this, we just apply penalty for the top, and gradually decrease penalty and becomes rewards at center, and none
+        at bottom. For example:</p>
+    <p>Top: 50%, +10% per level until 120% reach <br/>Middle 2: 130% <br/>Bottom 3 levels: 100% <br/>
+        Others: 120% <br/>Total layers: 16</p>
+    Result:
+    <div class="figure">
+        <img src="assets/img/Capture.PNG">
+        <img src="assets/img/Capture1.PNG">
+    </div>
+    <p>Using new approach, Pirate Hanayo expected clear 21~23 Puchi. It is somehow more accurate. For Yoshiko,
+        its expected value goes 14~24. Still underestimated too much for the lower bound, but at least improved.</p>
+    <p>What can we do more? Perhaps upsampling both Puchi and screen to higher resolution grid may help, but
+        it take too much time to compute.</p>
+    <p> I am still looking for an elegant solution. Feel free to open an issue to propose your idea!
+        You may open new issue in here:</p>
+    <a href="https://github.com/LiCybora/PuchiQuery/issues">GitHub Page</a>
+</div>
+<br/>
+<br/>
+<br/>
+</body>
+</html>

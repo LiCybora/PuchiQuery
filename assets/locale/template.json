@@ -45,7 +45,15 @@
     "センター以外": "",
     "未進化": "",
     "進化済": "",
-    "消去数>=11時に...出現確定": ""
+    "消去数>=11時に...出現確定": "",
+    "Absolute Range": "",
+    "Estimated Range": "",
+    "Estimated # of Puchi": "",
+    "Estimation just for reference": "",
+    "Real": "",
+    "Marginal": "",
+    "Red": "",
+    "Blue": ""
   },
 
   "header": {

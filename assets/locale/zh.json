@@ -44,7 +44,15 @@
     "大きな": "大型",
     "センター以外": "Center除外",
     "進化済": "已進化",
-    "消去数>=11時に...出現確定": "消除量>=11時生成的炸彈種類必為..."
+    "消去数>=11時に...出現確定": "消除量>=11時生成的炸彈種類必為...",
+    "Absolute Range": "絕對範圍",
+    "Estimated Range": "估算範圍",
+    "Estimated # of Puchi": "估算範圍影響趴趴數",
+    "Estimation just for reference": "估算只供參考",
+    "Real": "真確範圍",
+    "Marginal": "擦邊範圍",
+    "Red": "紅",
+    "Blue": "藍"
   },
 
   "header": {

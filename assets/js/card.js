@@ -164,7 +164,8 @@ $(function () {
                 sorter: regexSorter,
                 dependency: evolveDependent,
                 formatter: translateFormatter,
-            };
+                cellStyle : () => ({css: {"padding-right": "0.25em"}}),
+        };
             switch(key.valueOf()) {
                 case "ID":
                     column.formatter = function(value, row) {
@@ -209,7 +210,7 @@ $(function () {
                     column.filterFormatter = rarityFilterFormatter;
                     break;
                 case "score":
-                    column.cellStyle = () => ({css: {"width": "4.5em"}});
+                    column.cellStyle = () => ({css: {"padding-right": "0.25em", "width": "4.25em"}});
                     column.dependency = cardScoreDependent;
                     column.formatter = cardScoreFormatter;
                     column.visible = key.valueOf() === "score";

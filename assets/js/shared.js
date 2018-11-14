@@ -50,9 +50,18 @@ const inTextlogo = 't_logo';
 const UIlogo = 't_logo-lg';
 
 // general function
+let updateTableHeader = (tid) => {
+    let $rt = $(tid);
+    const rtData = $rt.bootstrapTable("getData", false);
+    let rtField = {};
+    for (let each in rtData[0]) {
+        rtField[each] = loadHeaderLocale(fillTitle(each));
+    }
+    $rt.bootstrapTable("changeTitle", rtField);
+};
+
 let refreshLocale = (lang, filterable)=> {
     setLocale(lang);
-    $table.bootstrapTable('updateByUniqueId', {id: 0});    // refresh table
     // update filter
     for (const field of filterable) {
         filterOption[field].forEach(function(value) {
@@ -64,39 +73,29 @@ let refreshLocale = (lang, filterable)=> {
         });
         $(`div[id="${fillTitle(field).replace('<br/>', ' ')}"]`).text(loadHeaderLocale(fillTitle(field)).replace('<br/>', ' '));
     }
-    let obj = {};
-    for (const each of fieldList) {
-        obj[each] = loadHeaderLocale(fillTitle(each));
-    }
+    // update tables
+    updateTableHeader('#table');
     changeTableLocale(lang);
-    $table.bootstrapTable("changeTitle", obj);
+    for (let i = 0; i < LvData.length / 10; ++i) {
+        updateTableHeader(`#LvTable${i}`);
+    }
+    try {
+        updateTableHeader(`#rarityTable`);
+    } catch (e) {
+        // nothing, just in case Puchi page has no this table.
+    }
+    $table.bootstrapTable('updateByUniqueId', {id: 0});    // refresh table
     // update text
     $('#intro').html(`${locale["msg"]["text"]}<br/>${locale["msg"]["features"]}<br/>`);
-    // update UI
+    // update UIs
     $( ".UI" ).each( function () {
         let UI = $(this);
         UI.text(loadLocaleGeneral(UI.data('v'), "UI"));
     });
+    // update page title
     let $localHead = $('#localeHead');
     $localHead.text(`${loadLocaleGeneral('title', 'msg')} - ${loadLocaleGeneral($localHead.data('v'), "UI")}`);
     $(document).prop('title', $localHead.text());
-    let expField = {};
-    for (let each in LvData[0]) {
-        expField[each] = loadHeaderLocale(fillTitle(each));
-    }
-    for (let i = 0; i < LvData.length / 10; ++i) {
-        $(`#LvTable${i}`).bootstrapTable("changeTitle", expField);
-    }
-
-    let $rt = $(`#rarityTable`);
-    const rtData = $rt.bootstrapTable("getData", false);
-    let rtField = {};
-    for (let each in rtData[0]) {
-        rtField[each] = loadHeaderLocale(fillTitle(each));
-    }
-    for (let i = 0; i < LvData.length / 10; ++i) {
-        $rt.bootstrapTable("changeTitle", rtField);
-    }
 };
 
 let rotateArrow = (self)=> {

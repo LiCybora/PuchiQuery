@@ -27,11 +27,12 @@
     "Select All": "全选",
     "Deselect All": "全不选",
     "Toggle All": "反选",
-    "Show Lv Exp. Table":"显示等级经验表",
+    "Lv Exp. Table":"等级经验表",
     "Level Experience Table":"等级经验表",
     "Show Level Score Table": "显示等级分数表",
     "Save": "储存",
-    "Load": "载入"
+    "Load": "载入",
+    "Trade/Enhance": "交换/强化"
   },
 
   "words": {
@@ -94,7 +95,10 @@
     "CT": "冷却",
     "Total Candy": "累积<br/>糖果",
     "Total Ticket": "累积<br/>强化券",
-    "Gold": "金币"
+    "Gold": "金币",
+    "Exp. Gain": "获得经验",
+    "Price": "价格",
+    "MaxLv": "最大等级"
   },
 
   "quantity": {

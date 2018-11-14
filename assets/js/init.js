@@ -133,7 +133,7 @@ $(function () {
         <button type="button" class="btn btn-default" onclick="load()">
             <span class="glyphicon glyphicon-open"></span> <span class="UI" data-v="Load">${loadLocaleGeneral('Load', 'UI')}</span>
         </button>
-        <button type="button" class="btn btn-info UI" data-toggle="modal" data-target="#LvTable" data-v="Show Lv Exp. Table">${loadLocaleGeneral('Show Lv Exp. Table', 'UI')}</button>
+        <button type="button" class="btn btn-info UI" data-toggle="modal" data-target="#LvTable" data-v="Lv Exp. Table">${loadLocaleGeneral('Lv Exp. Table', 'UI')}</button>
     `);
     $('#filterBtnTop').html(`
          <button class="btn btn-default" id="collapseAll">
@@ -166,6 +166,7 @@ $(function () {
             <span class="glyphicon glyphicon-remove"></span> <span data-v="Close" class="UI">${loadLocaleGeneral('Close', 'UI')}</span>
         </button>
     `);
+
     $(this).attr('title', $localHead.text());
 
 });

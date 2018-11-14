@@ -87,6 +87,16 @@ let refreshLocale = (lang, filterable)=> {
     for (let i = 0; i < LvData.length / 10; ++i) {
         $(`#LvTable${i}`).bootstrapTable("changeTitle", expField);
     }
+
+    let $rt = $(`#rarityTable`);
+    const rtData = $rt.bootstrapTable("getData", false);
+    let rtField = {};
+    for (let each in rtData[0]) {
+        rtField[each] = loadHeaderLocale(fillTitle(each));
+    }
+    for (let i = 0; i < LvData.length / 10; ++i) {
+        $rt.bootstrapTable("changeTitle", rtField);
+    }
 };
 
 let rotateArrow = (self)=> {

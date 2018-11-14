@@ -27,11 +27,12 @@
     "Select All": "全選",
     "Deselect All": "全不選",
     "Toggle All": "反選",
-    "Show Lv Exp. Table":"顯示等級經驗表",
+    "Lv Exp. Table":"等級經驗表",
     "Level Experience Table":"等級經驗表",
     "Show Level Score Table": "顯示等級分數表",
     "Save": "儲存",
-    "Load": "載入"
+    "Load": "載入",
+    "Trade/Enhance": "交換/強化"
   },
 
   "words": {
@@ -93,7 +94,10 @@
     "CT": "冷卻",
     "Total Candy": "累積<br/>糖果",
     "Total Ticket": "累積<br/>強化券",
-    "Gold": "金幣"
+    "Gold": "金幣",
+    "Exp. Gain": "獲得經驗",
+    "Price": "價格",
+    "MaxLv": "最大等級"
   },
 
   "quantity": {

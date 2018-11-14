@@ -101,10 +101,46 @@ let cardScoreFormatter = (value) => `${value}<br/><span class="blinking">${parse
 $(function () {
     // FIXME: Hardcoded UI button
     $('#filter-bar').append(`
+            <button type="button" class="btn btn-info UI" data-toggle="modal" data-target="#rarityModal" data-v="Trade/Enhance">${loadLocaleGeneral('Trade/Enhance', 'UI')}</button>
             <button type="button" class="btn btn-success UI" data-v="Set All Lv" onclick="setAllLv('lv', 60)">${loadLocaleGeneral('Set All Lv', "UI")}</button>
             <button type="button" class="btn btn-warning UI" data-v="Evolve All" onclick="evolveAll(true)">${loadLocaleGeneral('Evolve All', "UI")}</button>
             <button type="button" class="btn btn-danger UI" data-v="Devolve All" onclick="evolveAll(false)">${loadLocaleGeneral('Devolve All', "UI")}</button>
     `);
+    $('#rarityBtn').html(`
+        <button type="button" class="btn btn-danger" data-dismiss="modal">
+            <span class="glyphicon glyphicon-remove"></span> <span data-v="Close" class="UI">${loadLocaleGeneral('Close', 'UI')}</span>
+        </button>
+    `);
+    $('#rarityTableLabel').html(`${loadLocaleGeneral('Trade/Enhance', 'UI')}`);
+
+    $.getJSON("json/cardRarity.json", function (data) {
+        let columns = [];
+        for (let key in data[0]) {
+            let column = {
+                field: key,
+                title: loadHeaderLocale(fillTitle(key))
+            };
+            if (key === 'rarity') {
+                column.formatter = (value) => {
+                    if (parseInt(value) < 3 || parseInt(value) === 6) {
+                        return maxRarityFormatter(value);
+                    } else if (parseInt(value) === 3) {
+                        return forceEvolvableFormatter(value);
+                    } else if (parseInt(value) < 7) {
+                        return `${forceEvolvableFormatter(value)} / ${maxRarityFormatter(value)}`;
+                    } else {
+                        return value + '???';
+                    }
+                }
+            }
+            columns.push(column);
+        }
+        $('#rarityTable').bootstrapTable({
+            columns: columns,
+            data: data,
+        });
+    });
+
     $.getJSON("json/cardDetail.json", function (data) {
         let tmpData = [];
         data.forEach((row, index, array) => {

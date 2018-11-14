@@ -27,11 +27,12 @@
     "Select All": "",
     "Deselect All": "",
     "Toggle All": "",
-    "Show Lv Exp. Table": "",
+    "Lv Exp. Table": "",
     "Level Experience Table": "",
     "Show Level Score Table": "",
     "Save": "",
-    "Load": ""
+    "Load": "",
+    "Trade/Enhance": ""
   },
 
   "words": {
@@ -94,7 +95,10 @@
     "CT": "",
     "Total Candy": "",
     "Total Ticket": "",
-    "Gold": ""
+    "Gold": "",
+    "Exp. Gain": "",
+    "Price": "",
+    "MaxLv": ""
   },
 
   "quantity": {

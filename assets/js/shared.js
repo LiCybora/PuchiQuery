@@ -288,8 +288,8 @@ let hex2binMapv2 = function(hex) {
     let tab = '<table class="bmpt">';
     newBin.forEach((each, y) => {
         tab += '<tr>';
-        each.forEach((c) => {
-            tab += `<td ${c === 1 ? "class='red'" : `style="background-color: rgb(${Math.round((1-c)*255)}, ${Math.round((1-c)*255)}, ${255})"`}></td>`;
+        each.forEach((c, x) => {
+            tab += `<td ${c === 1 && bin[y][x] === '1' ? "class='red'" : `style="background-color: rgb(${Math.round((1-c)*255)}, ${Math.round((1-c)*255)}, ${255})"`}></td>`;
             let penalty = (0.5 + 0.1 * (y <= 8 ? y : y <= 9 ? 8 : y < 13 ? 7 : 5));
             expRate += c * penalty;
             maxRate += Math.ceil(c) * penalty;

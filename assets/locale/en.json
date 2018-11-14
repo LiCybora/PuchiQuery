@@ -221,7 +221,7 @@
     "十字状にぷちぐるをまとめて消すよ": "Jointly clear Puchi within cross shape",
     "少しの間なぞった範囲のぷちぐるを消すよ": "Clear Puchi within traced area for a while",
     "少しの間ぷちぐるをタップするとまわりを巻き込むよ": "Explode all clicked Puchi and jointly clear with Puchi nearby for a while",
-    "少しの間サポート1ぷちぐるがいなくなるよ": "Jointly clear all 1st support (left) and disappear for a while",
+    "少しの間サポート1ぷちぐるがいなくなるよ": "Jointly clear all 1st support (left) Puchi and disappear for a while",
     "少しの間センターがいなくなるよ": "Jointly clear all center Puchi and disappear for a while",
     "少しの間センターが自動で消えるよ追加でボムが出現するよ": "Auto and jointly clear center Puchi for a while, and spawn extra bomb(s)",
     "少しの間ボムの出現に必要なつながりが減るよ": "Decrease number of required Puchi in chain for bomb creation for a while",

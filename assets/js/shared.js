@@ -570,8 +570,8 @@ let showRange = (self) => {
     msg += `${loadLocaleGeneral('Estimated # of Puchi', 'words')}: ${Math.round(45*shown[1])}~${Math.ceil(45*shown[2])}<br/>`;
     msg += `(${loadLocaleGeneral('Estimation just for reference', 'words')})`;
     msg += shown[0];
-    msg += `${loadLocaleGeneral('Red', 'words')}: ${loadLocaleGeneral('Real', 'words')}, `;
-    msg += `${loadLocaleGeneral('Blue', 'words')}: ${loadLocaleGeneral('Marginal', 'words')}`;
+    msg += `<svg width="1em" height="1em"><rect width="1em" height="1em" style="fill:rgb(255,0,0);"></rect></svg>: ${loadLocaleGeneral('Real', 'words')}, `;
+    msg += `<svg width="1em" height="1em"><rect width="1em" height="1em" style="fill:rgb(0,0,255);"></rect></svg>: ${loadLocaleGeneral('Marginal', 'words')}`;
     msg += `<br/><a href="range.html">More Info</a> (English Only)`;
 
     BootstrapDialog.show({

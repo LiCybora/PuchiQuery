@@ -98,7 +98,7 @@
 }
 
 .imgButton input[type=checkbox]:checked + label img{
-    filter:brightness(120%) contrast(80%);
+    filter:none;
     opacity: 1;
 }
 

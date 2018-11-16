@@ -63,16 +63,19 @@ let updateTableHeader = (tid) => {
 let refreshLocale = (lang, filterable)=> {
     setLocale(lang);
     // update filter
+    // let debugStr = '';
     for (const field of filterable) {
         filterOption[field].forEach(function(value) {
             let $label = $(`label[for="${field+value}"]`);
             if ($label.text()) {
-                // console.log(JSON.stringify($label.text()));
-                $label.text(loadLocale(value));
+                $label.text(loadLocale(value).replace('<br/>', ' '));
+                // debugStr += `${JSON.stringify($label.text())}: "",\n`
             }
+
         });
         $(`div[id="${fillTitle(field).replace('<br/>', ' ')}"]`).text(loadHeaderLocale(fillTitle(field)).replace('<br/>', ' '));
     }
+    // console.log(debugStr);
     // update tables
     updateTableHeader('#table');
     changeTableLocale(lang);
@@ -474,7 +477,7 @@ let filterGenerator = function(filterableList, data) {
             let checkbox =
                 `<input name="${field}" value="${value}" type="checkbox" onclick="filterEvent(this)" id="${field+value}"/>`;
             let checkboxObj = pict ? `<div class="imgButton">${checkbox}<label for="${field + value}">${pict}</label></div>`
-                : `<div>${checkbox}<label for="${field + value}">${loadLocale(value)}</label></div>`;
+                : `<div>${checkbox}<label for="${field + value}">${loadLocale(value).replace('<br/>', ' ')}</label></div>`;
             $('#' + field + 'Container').append(checkboxObj);
             $(`input[id="${field + value}"]`).trigger('click');
         });

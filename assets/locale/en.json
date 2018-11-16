@@ -48,6 +48,7 @@
 
   "data": {
     "what is this": "All filterable data, the core of translation. This need to update when new entry after update",
+
     "ゴールドUP": "Gold UP",
     "ショータイムUP": "Showtime gauge UP",
     "スキルゲージUP": "Skill gauge UP",
@@ -71,6 +72,7 @@
     "赤以上のつながり消去時": "When clear red or above chain(s) ",
     "青以上のつながり消去時": "When clear blue or above chain(s) ",
     "黃色以上のつながり消去時": "When clear yellow or above chain(s) ",
+
     "まとめてぷちぐるを消去": "Jointly clear Puchi",
     "まとめてぷちぐるを消去＋追加ボム出現": "Jointly clear Puchi + spawn extra bomb(s)",
     "ショータイム開始＋画面上部に大きなボムが": "Showtime start + spawn wide bomb(s) on top",
@@ -79,7 +81,10 @@
     "ショータイム開始＋高得点ぷちぐるが出現": "Showtime start + spawn high score Puchi",
     "センターぷちぐるが出現": "Spawn center Puchi",
     "画面中央に大きなボムが出現": "Spawn wide bomb(s) in the middle",
+    "縦ライン内に大きなボムが出現": "Spawn wide bomb(s) within vertical line",
     "高得点ぷちぐるが出現": "Spawn High score Puchi",
+
+    "ショータイムが始まって\nサポート1,2ぷちぐるをまとめて消すよ": "Showtime start, and jointly clear all 1st, 2nd support (left, right) Puchi",
     "ショータイムが始まって\nランダムでセンターぷちぐるが出現するよ": "Showtime start, and randomly spawn center Puchi ",
     "ショータイムが始まって\n左右に高得点センターぷちぐるが出現するよ": "Showtime start, and spawn high score center Puchi on left and right sides",
     "ショータイムが始まって\n数か所に高得点センターぷちぐるが出現するよ": "Showtime start, and spawn high score center Puchi within several regions",
@@ -87,11 +92,14 @@
     "ショータイムが始まってランダムでまわりを\n巻き込むセンターぷちぐるが出現するよ": "Showtime start, and randomly spawn explosive center Puchi",
     "センター以外のぷちぐるをまとめて消すよ\n追加でボムが出現するよ": "Jointly clear all Puchi except center, and spawn extra bomb(s)",
     "全てのぷちぐるをまとめて消すよ\n追加でボムが出現するよ": "Jointly clear all Puchi, and spawn extra bomb(s)",
+    "大きなリング状に\n高得点センターぷちぐるが出現するよ": "Spawn high score center Puchi on circumference of wide ring shape",
     "数が多いぷちぐるが\nセンターぷちぐるになるよ": "Convert several type(s) of majority Puchi to center Puchi",
     "数が多いぷちぐるが\n高得点センターぷちぐるになるよ": "Convert several type(s) of majority Puchi to high score center Puchi",
     "画面上部と下部のぷちぐるをまとめて消すよ": "Jointly clear Puchi on top and bottom",
     "画面上部と下部のぷちぐるをまとめて消すよ\n追加でボムが出現するよ": "Jointly clear Puchi on top and bottom, and spawn extra bomb(s)",
     "画面中央に大きなボムが出現するよ": "Spawn wide bomb(s) in the middle",
+    "縦ライン内に大きなタイムボムが出現するよ": "Spawn wide time bomb(s) within vertical line",
+
     "μ'sスペシャルスキル": "",
     "μ'sぷちぐるオリジナルイラスト": "",
     "μ'sサンリオキャラコラボ": "",

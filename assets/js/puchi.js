@@ -91,6 +91,8 @@ let renderActiveTable = (row, detailCol, lvDependent, table)=> {
         let thisEntry = {};
         for (const field of detailCol) {
             if (field.valueOf() === 'range' && !Array.isArray(row[field]) && row[field].length < 64) break;
+            if (field.valueOf() === 'effect value' && !Array.isArray(row[field]) && paramsFormatter(row[field]) === "")
+                continue;
             if (i === 0) {
                 // init col
                 col.push({

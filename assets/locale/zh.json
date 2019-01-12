@@ -37,6 +37,7 @@
 
   "words": {
     "what is this": "This is localization for item name, such as bomb",
+    "No penalty in charging skill gauge": "消去時視為一般趴趴算入技能槽",
     "ランダムな種類のボム": "隨機種類的炸彈",
     "通常ボム": "普通炸彈",
     "ゴールドボム": "金幣炸彈",

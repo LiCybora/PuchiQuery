@@ -126,6 +126,12 @@ let paramsFormatter = (params, img = false) => {
         text.push(bomb);
     }
 
+    if (("toHighScore" in params && params["toHighScore"]) || ("toCausingAttr" in params && params["toCausingAttr"])) {
+        if (!("skillValue" in params) || params["skillValue"] === 0) {
+            text.push(loadLocaleGeneral("No penalty in charging skill gauge", "words"));
+        }
+    }
+
     text.forEach((e, i, a) => {
         try {
             let special = e.split(' (');

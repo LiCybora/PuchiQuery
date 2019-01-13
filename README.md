@@ -6,10 +6,10 @@ issue if anything goes wrong. If you see nothing, try browsing it with Firefox/
 Chrome. For iOS, scrolling problem is unsolvable even you use Chrome or Firefox. 
 The only workaround is portrait view. Save data for iOS also problematic (e.g.: 
 filename). Please go complaint fucking Apple instead, changing browser is 
-meaningless in iOS as all browsers are webkit.
+meaningless in iOS as all browsers are Webkit based.
 
-Inspired by [ieb project](https://puchi-next.loveliv.es/), with filter/sorting 
-for easy data query.
+Inspired by [ieb project](https://puchiguru.loveliv.es/), with filter/sorting 
+for easy data query idea from [LLSIF Card Explorer](https://card.llsif.moe/).
 
 Most codes are hardcoded and the quality is horrible without any planning. Just 
 for easy query, so please don't have too much expectation on feature request, 

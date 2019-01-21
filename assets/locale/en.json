@@ -22,10 +22,15 @@
     "タイムボム": " time bomb(s)",
     "スコアボム": " score bomb(s)",
     "大きな": "wide ",
-    "センター以外": "except center",
+    "...以外": "except ...",
+    "センター": "center",
+    "サポート1": "support 1",
+    "サポート2": "support 2",
     "未進化": "Devolved",
     "進化済": "Evolved",
-    "消去数>=11時に...出現確定": "When clear >= 11, the spawned bomb must be ..."
+    "消去数>=11時に...出現確定": "When clear >= 11, the spawned bomb must be ...",
+    "...のみ": "... only",
+    "...は変化しない": "Not convert ..."
   },
 
   "header": {

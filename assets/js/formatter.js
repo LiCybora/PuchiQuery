@@ -1,5 +1,7 @@
 // Formatter
 // Default formatter
+const TARGET_TEXT = ["センター", "サポート1", "サポート2"];
+
 let idleFormatter = (value) => value;
 
 let generalLvDependent = (value, row, func) => { return Array.isArray(value) ? eval(value)[func(row)] : value };
@@ -63,6 +65,45 @@ let logoFormatter = (value) => {
     return `<div class="flexer">${html}</div>`;
 };
 
+let specialTarget = (params, curText) => {
+    if (params["pickupType"] !== 8 &&
+        (params["skillType"] === 0 || params["skillType"] === 1 || params["skillType"] === 9)) {
+        let postText;
+        postText = loadLocaleGeneral((params["pickupType"] === 9 ? "...のみ" :
+            params["skillType"] === 1 ? "...は変化しない" : "...以外"), "words");
+        if (!("skillTargetMulti" in params)) {
+            // Handle target exception
+            if (!("skillTarget" in params)) {
+                params["skillTarget"] = 0;
+            }
+            if (params["skillTarget"] >= 0 && params["skillTarget"] < TARGET_TEXT.length) {
+                curText += ` (${postText.replace('...',
+                    loadLocaleGeneral(TARGET_TEXT[params["skillTarget"]], "words"))}`;
+            }
+        } else {
+            // Handle multiple target
+            let targetText = [];
+            for (let targetIndex of params["skillTargetMulti"]) {
+                if (targetIndex >= 0 && targetIndex < TARGET_TEXT.length) {
+                    targetText.push(loadLocaleGeneral(TARGET_TEXT[targetIndex], "words"));
+                }
+            }
+            if (targetText.length > 1) {
+                curText += ` (${postText.replace('...', targetText.join(', '))}`;
+            }
+        }
+    } else if (params["skillType"] === 1) {
+
+    }
+    return curText;
+};
+
+// Note:
+// skillType: 0-clear, 1-spawn Puchi, 2-spawn bomb, 3-drop bomb, 4-time freeze, 5-reorganize, 6-disappear,
+//            7-bomb creation need-, 8-clear traced, 9-freeze and link, 10-explode click, 13-center to majority
+//            14-clear majority 15-majority to center 16-autoClear
+// skillTarget: 0-center, 1/2-support, 3-all, -1:unknown
+// pickupType: 6-random, 8-unconnected, 9-whole type of Puchi, 10-given area
 let paramsFormatter = (params, img = false) => {
     //not translate bomb name as it will shown as image
     let imgFunc = img === true ? ((v)=>v) : loadLocaleGeneral;
@@ -72,15 +113,8 @@ let paramsFormatter = (params, img = false) => {
     let text = [];
     if ("text" in params) {
         let curText = params["text"].replace('minus', '-').replace('plus', '+');
-        // clear exclude center
-        if (params["skillType"] === 0 &&
-            (!("skillTarget" in params) || params["skillTarget"] === 0)) {
-            curText += ` (${loadLocaleGeneral("センター以外", "words")}`;
-        }
-        text.push(curText);
-
+        text.push(specialTarget(params, curText));
     }
-
     if ("skillRandomMin" in params) {
         let curText = '';
         if (params["skillRandomMin"] === params["skillRandomMax"]) {
@@ -88,13 +122,7 @@ let paramsFormatter = (params, img = false) => {
         } else {
             curText = `${params["skillRandomMin"]}~${params["skillRandomMax"]}個`;
         }
-        if ("pickupType" in params && params["skillType"] === 0) {
-            // random exclude center
-            if (params["pickupType"] === 6 &&
-                (!("skillTarget" in params) || params["skillTarget"] === 0)) {
-                curText += ` (${loadLocaleGeneral("センター以外", "words")}`;
-            }
-        }
+        curText = specialTarget(params, curText);
         if ("forceBombType" in params && (!('makeBombType' in params)) || params["skillType"] === 2) {
             // random bomb generate
             curText = imgFuncQuan(curText);
@@ -106,6 +134,7 @@ let paramsFormatter = (params, img = false) => {
         }
         text.push(curText);
     }
+
     if ("skillTime" in params) {
         text.push(`${params["skillTime"]}秒`);
     }

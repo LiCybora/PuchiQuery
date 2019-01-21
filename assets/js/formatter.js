@@ -71,8 +71,16 @@ let paramsFormatter = (params, img = false) => {
     params = JSON.parse(params);
     let text = [];
     if ("text" in params) {
-        text.push(params["text"].replace('minus', '-').replace('plus', '+'));
+        let curText = params["text"].replace('minus', '-').replace('plus', '+');
+        // clear exclude center
+        if (params["skillType"] === 0 &&
+            (!("skillTarget" in params) || params["skillTarget"] === 0)) {
+            curText += ` (${loadLocaleGeneral("センター以外", "words")}`;
+        }
+        text.push(curText);
+
     }
+
     if ("skillRandomMin" in params) {
         let curText = '';
         if (params["skillRandomMin"] === params["skillRandomMax"]) {
@@ -83,7 +91,7 @@ let paramsFormatter = (params, img = false) => {
         if ("pickupType" in params && params["skillType"] === 0) {
             // random exclude center
             if (params["pickupType"] === 6 &&
-                (!("skillTarget" in params) || params["skillTarget"] !== 3)) {
+                (!("skillTarget" in params) || params["skillTarget"] === 0)) {
                 curText += ` (${loadLocaleGeneral("センター以外", "words")}`;
             }
         }
@@ -133,13 +141,18 @@ let paramsFormatter = (params, img = false) => {
     }
 
     text.forEach((e, i, a) => {
+        let special = e.split(' (');
+        let quan = '';
         try {
-            let special = e.split(' (');
-            a[i] = loadLocaleQuan(special[0]) + (special.length > 1 ? ` (${special[1]})` : '');
-            // hardcoded for 個 in English describe bomb and puchi
-            a[i].includes(' bomb') ? a[i] = a[i].replace("puchi", "") : a[i];
-        } catch (notImportant) {}
+            quan = loadLocaleQuan(special[0]);
+        } catch (notImportant) {
+            quan = special[0];
+        }
+        a[i] = quan + (special.length > 1 ? ` (${special[1]})` : '');
+        // hardcoded for 個 in English describe bomb and puchi
+        a[i].includes(' bomb') ? a[i] = a[i].replace("puchi", "") : a[i];
     });
+
     return text.join(' / ');
 };
 

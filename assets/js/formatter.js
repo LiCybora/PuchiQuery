@@ -106,13 +106,26 @@ let specialTarget = (params, curText) => {
 };
 
 // Note:
+// Ref: https://www.reddit.com/r/Puchiguru/comments/8thzps/parameters_in_the_skill_effect_data/
+// afterWait, effectWait, pickupWait: Time freeze duration when/during/after skill activated, not important here
 // skillType: 0-clear, 1-spawn Puchi, 2-spawn bomb, 3-drop bomb, 4-time freeze, 5-reorganize, 6-disappear,
 //            7-bomb creation need-, 8-clear traced, 9-freeze and link, 10-explode click, 13-center to majority
 //            14-clear majority 15-majority to center 16-autoClear
-// skillTarget: 0-center, 1/2-support, 3-all, -1:unknown
+// allCombo: false-combo count as # of chain, true-combo count as # of clear Puchi. Default: false
+// causingRange: explosive range, currently 130 for explosive click, 150 for explosive Puchi, unused for non-explosive
+// chainDivide: false-all clear chains are independent, true-all clear counted as 1 chain. Default: false
+// enableCount: # of Puchi reduced for chain creation, unused for other still
+// enterFever: whether skill activation enter showtime. Default: false
+// forceBombNum, forceBombType: Forced bomb spawned, 0-random, 1-normal, 2-gold, 3-time, 4-score. Default: 0, 0
+// makeBomb, makeBombType: whether unlink clear make bomb, same as above except 0 as auto type (depends on # of clear)
+//                          Default: false, 0
+// makeWideBomb: whether it is wide bomb. Default: false
+// skillTarget: 0-center, 1/2-support1/2, 3-all, -1:not sure (maybe random among center & support? e.g.:HSN Riko)
 // pickupType: 6-random, 8-unconnected, 9-whole type of Puchi, 10-given area
-// toCompatible: whether penalty in charged
-// skillValue: when toCompaitlbe, (skillValue / 10)% counted towards skill gauge. Default value: 1000
+// toCompatible: whether penalty in charged (?...not sure, but Borara Nico prove the penalty level is much little)
+//              Default: false
+// skillValue: when spawned puchi clear,  (skillValue / 10)% counted towards skill gauge. Default value: 1000
+//              not sure how it take effect when toCompatible unset (e.g.: Borara Nico).
 let paramsFormatter = (params, img = false) => {
     //not translate bomb name as it will shown as image
     let imgFunc = img === true ? ((v)=>v) : loadLocaleGeneral;
@@ -174,12 +187,15 @@ let paramsFormatter = (params, img = false) => {
 
     if (("toHighScore" in params && params["toHighScore"]) || ("toCausingAttr" in params && params["toCausingAttr"])) {
         let spawned = "toCausingAttr" in params ? "Explosive " : "High score ";
-        if (!("toCompatible" in params)) {
-            text.push(loadLocaleGeneral(spawned, "words") + loadLocaleGeneral("puchi full towards skill gauge", "words"));
-        } else if ("skillValue" in params) {
+        // if (!("toCompatible" in params)) {
+        //     text.push(loadLocaleGeneral(spawned, "words") + loadLocaleGeneral("puchi full towards skill gauge", "words"));
+        // } else
+        if ("skillValue" in params) {
             let curText = loadLocaleGeneral(spawned, "words") + loadLocaleGeneral("puchi ... towards skill gauge", "words");
             if (curText.indexOf('...') === -1) curText += '...';
             text.push(curText.replace('...', params["skillValue"] / 10 + '%'));
+        } else {
+            text.push(loadLocaleGeneral(spawned, "words") + loadLocaleGeneral("puchi full towards skill gauge", "words"));
         }
     }
 

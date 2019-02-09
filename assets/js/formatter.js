@@ -43,6 +43,13 @@ let passiveFormatter = function(param, row) {
         if (type === 12) {
             effect = effect.replace(' puchi', ' bomb(s)');
         }
+        // BI Kotori
+        if ("skillValue" in params) {
+            // FIXME: hardcoded for now, maybe the params 'type' somehow useful?
+            let curText = loadLocaleGeneral("High score ", "words") + loadLocaleGeneral("puchi ... towards skill gauge", "words");
+            if (curText.indexOf('...') === -1) curText += '...';
+            effect += ` (${curText.replace('...', params["skillValue"] / 10 + '%')})`;
+        }
         return `${effect}`;
     } else {
         return `${(JSON.parse(params)["rate"] / 10)}%`;

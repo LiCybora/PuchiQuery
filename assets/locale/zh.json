@@ -37,7 +37,6 @@
 
   "words": {
     "what is this": "This is localization for item name, such as bomb",
-    "No penalty in charging skill gauge": "消去時視為一般趴趴算入技能槽",
     "ランダムな種類のボム": "隨機種類的炸彈",
     "通常ボム": "普通炸彈",
     "ゴールドボム": "金幣炸彈",
@@ -52,6 +51,10 @@
     "消去数>=11時に...出現確定": "消除量>=11時生成的炸彈種類必為...",
     "...のみ": "只限...",
     "...は変化しない": "不轉換...",
+    "High score ": "高得分",
+    "Explosive ": "爆炸",
+    "puchi full towards skill gauge": "趴趴視為一般趴趴算入技能槽",
+    "puchi ... towards skill gauge": "趴趴...算入技能槽",
     "Absolute Range": "絕對範圍",
     "Estimated Range": "估算範圍",
     "Estimated # of Puchi": "估算範圍影響趴趴數",

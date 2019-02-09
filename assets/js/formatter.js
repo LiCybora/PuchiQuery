@@ -104,6 +104,8 @@ let specialTarget = (params, curText) => {
 //            14-clear majority 15-majority to center 16-autoClear
 // skillTarget: 0-center, 1/2-support, 3-all, -1:unknown
 // pickupType: 6-random, 8-unconnected, 9-whole type of Puchi, 10-given area
+// toCompatible: whether penalty in charged
+// skillValue: when toCompaitlbe, (skillValue / 10)% counted towards skill gauge. Default value: 1000
 let paramsFormatter = (params, img = false) => {
     //not translate bomb name as it will shown as image
     let imgFunc = img === true ? ((v)=>v) : loadLocaleGeneral;
@@ -164,8 +166,13 @@ let paramsFormatter = (params, img = false) => {
     }
 
     if (("toHighScore" in params && params["toHighScore"]) || ("toCausingAttr" in params && params["toCausingAttr"])) {
-        if (!("skillValue" in params) || params["skillValue"] === 0) {
-            text.push(loadLocaleGeneral("No penalty in charging skill gauge", "words"));
+        let spawned = "toCausingAttr" in params ? "Explosive " : "High score ";
+        if (!("toCompatible" in params)) {
+            text.push(loadLocaleGeneral(spawned, "words") + loadLocaleGeneral("puchi full towards skill gauge", "words"));
+        } else if ("skillValue" in params) {
+            let curText = loadLocaleGeneral(spawned, "words") + loadLocaleGeneral("puchi ... towards skill gauge", "words");
+            if (curText.indexOf('...') === -1) curText += '...';
+            text.push(curText.replace('...', params["skillValue"] / 10 + '%'));
         }
     }
 

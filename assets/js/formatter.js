@@ -27,7 +27,7 @@ let passiveFormatter = function(param, row) {
         let v1 = params["value1"], v2 = params["value2"];
         type = param;
         let effectAmount, postStr;
-        if (type === 12 || type === 2 || type === 3) {
+        if (type === 14 || type === 12 || type === 2 || type === 3) {
             postStr = "個";
         } else {
             v1 = (v1 - 1000) / 10;
@@ -49,6 +49,9 @@ let passiveFormatter = function(param, row) {
             let curText = loadLocaleGeneral("High score ", "words") + loadLocaleGeneral("puchi ... towards skill gauge", "words");
             if (curText.indexOf('...') === -1) curText += '...';
             effect += ` (${curText.replace('...', params["skillValue"] / 10 + '%')})`;
+        }
+        if (type === 2) {
+            effect += ` (${loadLocaleGeneral("...以外", "words").replace('...', loadLocaleGeneral("センター", "words"))})`;
         }
         return `${effect}`;
     } else {
@@ -122,7 +125,7 @@ let specialTarget = (params, curText) => {
 // makeWideBomb: whether it is wide bomb. Default: false
 // skillTarget: 0-center, 1/2-support1/2, 3-all, -1:not sure (maybe random among center & support? e.g.:HSN Riko)
 // pickupType: 6-random, 8-unconnected, 9-whole type of Puchi, 10-given area
-// toCompatible: whether penalty in charged (?...not sure, but Borara Nico prove the penalty level is much little)
+// toCompatible: whether chain bonus should not apply (true for no chain bonus). Chain bonus always full count
 //              Default: false
 // skillValue: when spawned puchi clear,  (skillValue / 10)% counted towards skill gauge. Default value: 1000
 //              not sure how it take effect when toCompatible unset (e.g.: Borara Nico).
@@ -193,10 +196,14 @@ let paramsFormatter = (params, img = false) => {
         if ("skillValue" in params) {
             let curText = loadLocaleGeneral(spawned, "words") + loadLocaleGeneral("puchi ... towards skill gauge", "words");
             if (curText.indexOf('...') === -1) curText += '...';
-            text.push(curText.replace('...', params["skillValue"] / 10 + '%'));
+            text.push(curText.replace('...', `~${params["skillValue"] / (!("toCompatible" in params) ? 2 : 10)}%`));
         } else {
             text.push(loadLocaleGeneral(spawned, "words") + loadLocaleGeneral("puchi full towards skill gauge", "words"));
         }
+    }
+    // debug
+    if (("toCompatible" in params) && !("skillValue" in params)) {
+        text.push("debug");
     }
 
     text.forEach((e, i, a) => {

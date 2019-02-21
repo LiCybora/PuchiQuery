@@ -201,10 +201,6 @@ let paramsFormatter = (params, img = false) => {
             text.push(loadLocaleGeneral(spawned, "words") + loadLocaleGeneral("puchi full towards skill gauge", "words"));
         }
     }
-    // debug
-    if (("toCompatible" in params) && !("skillValue" in params)) {
-        text.push("debug");
-    }
 
     text.forEach((e, i, a) => {
         let special = e.split(' (');

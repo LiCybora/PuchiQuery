@@ -1,11 +1,11 @@
-# PuchiQuery (Retired)
+# PuchiQuery (µ'sic Forever!)
 A table for easy query of Puchiguru game data
 
-**IMPORTANT: [The game server will be closed in the end of May in 2019!!!](https://lovelive-puchiguru.jp/campaign/5c89a6c6.html)**
+**IMPORTANT: [The game server will be closed at the end of May 2019!!!](https://lovelive-puchiguru.jp/campaign/5c89a6c6.html)**
 
-It is sad, I personally like the game very much. I will keep the site updated 
-until the end. The site will be archived after that day.
+It is sad, I personally like the game very much, but that is reality.
 
+The site will be maintained until that day. After that, it will be archived.
 
 Project site: [https://puchiquery.dynu.net](https://puchiquery.dynu.net). Report 
 issue if anything goes wrong. If you see nothing, try browsing it with Firefox/
@@ -16,10 +16,6 @@ meaningless in iOS as all browsers are Webkit based.
 
 Inspired by [ieb project](https://puchiguru.loveliv.es/), with filter/sorting 
 for easy data query idea from [LLSIF Card Explorer](https://card.llsif.moe/).
-
-Most codes are hardcoded and the quality is horrible without any planning. Just 
-for easy query, so please don't have too much expectation on feature request, 
-but feel free to open issue maybe I will like and implement it at all costs.
 
 ## Translation
 If you think the translation is wrong or cannot find your language(s), you may 

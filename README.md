@@ -1,5 +1,11 @@
-# PuchiQuery
+# PuchiQuery (Retired)
 A table for easy query of Puchiguru game data
+
+**IMPORTANT: [The game server will be closed in the end of May in 2019!!!](https://lovelive-puchiguru.jp/campaign/5c89a6c6.html)**
+
+It is sad, I personally like the game very much. I will keep the site updated 
+until the end. The site will be archived after that day.
+
 
 Project site: [https://puchiquery.dynu.net](https://puchiquery.dynu.net). Report 
 issue if anything goes wrong. If you see nothing, try browsing it with Firefox/

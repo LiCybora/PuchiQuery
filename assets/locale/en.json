@@ -239,6 +239,7 @@
     "つながっていないぷちぐるをまとめて消すよ": "Jointly clear all disconnected Puchi",
     "アーチ状にぷちぐるをまとめて消すよ": "Jointly clear Puchi within arch shape",
     "サポート1、2ぷちぐるが高得点センターになるよ": "Convert 1st, 2nd support (left, right) Puchi to high score center Puchi",
+    "ショータイムが始まってサポート1、2ぷちぐるが高得点センターになるよ": "Showtime start, and convert 1st, 2nd support (left, right) Puchi to high score center Puchi",
     "ショータイムが始まってセンターとサポート1、2ぷちぐるをまとめて消すよ": "Showtime start, and jointly clear all center and 1st, 2nd support (left, right) Puchi",
     "ショータイムが始まってランダムでぷちぐるを消すよ": "Showtime start, and randomly clear Puchi",
     "ショータイムが始まってランダムでセンターとつながる高得点パールちゃんが出現するよ": "Showtime start, and randomly spawn high score Paru-chan which can link with center Puchi",

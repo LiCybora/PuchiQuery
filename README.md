@@ -1,7 +1,7 @@
 # PuchiQuery (µ'sic Forever!)
 A table for easy query of Puchiguru game data
 
-**IMPORTANT: [The game server will be closed at the end of May 2019!!!](https://lovelive-puchiguru.jp/campaign/5c89a6c6.html)**
+**IMPORTANT: [The game server is closed at the end of May 2019!!!](https://lovelive-puchiguru.jp/campaign/5c89a6c6.html)**
 
 It is sad, I personally like the game very much, but that is reality.
 
